@@ -56,7 +56,7 @@ def read_filenames_set(datain_path):
 # CHange so it doesn't chop, pass to feature gen instead
 def import_data(filepath, vis_path, sr, clip_duration, plot=False):
 
-	plot_rawaudio = 0;
+	plot_rawaudio = 1;
 	plot_magspec = 1;
 
 	# Output details
@@ -116,7 +116,7 @@ def mag_spec(raw_audio, sr):
 
 	return librosa.stft(raw_audio);
 	w_len = 0.02*sr;
-	return librosa.stft(raw_audio,n_fft=w_len,hop_length=floor((w_len-1)/4),window='hamming');
+	return librosa.stft(raw_audio,n_fft=w_len,hop_length=np.floor(w_len/2),window='hamming');
 
 ##############################
 # MAIN CODE
@@ -130,7 +130,7 @@ vis_out = 'graphics/'; # path to output visuals
 
 # Define audio params
 sr = 44100; # sampling rate
-clip_duration = 1; # audio clips will split into segments of this duration (in seconds)
+clip_duration = 2; # audio clips will split into segments of this duration (in seconds)
 
 ### EXTRACT FILENAMES CODE
 # Construct pathways
