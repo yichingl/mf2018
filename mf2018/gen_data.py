@@ -54,11 +54,7 @@ def read_filenames_set(datain_path):
 # Output:
 #
 # CHange so it doesn't chop, pass to feature gen instead
-def import_data(filepath, vis_path, sr, clip_duration, plot=True):
-
-	# Add subfolder to vis path
-	vis_path = vis_path+'clips/';
-	print(vis_path);
+def import_data(filepath, vis_path, sr, clip_duration, plot=False):
 
 	# Output details
 	filename = filepath.split('/');
@@ -86,14 +82,14 @@ def import_data(filepath, vis_path, sr, clip_duration, plot=True):
 			fig = plt.figure();
 			librosa.display.waveplot(raw_audio, sr=sr);
 			plt.title(filepath);
-			plt.savefig(vis_path+filename+'_'+str(n)+'.png');
+			plt.savefig(vis_path+'raw_audio/'+filename+'_'+str(n)+'.png');
 			plt.close(fig);
 			fig = plt.figure();
 			librosa.display.specshow(librosa.amplitude_to_db(specgram,ref=np.max),y_axis='log',x_axis='time');
 			plt.title('Power spectrogram');
 			plt.colorbar(format='%+2.0f dB');
 			plt.tight_layout();
-			plt.savefig(vis_path+filename+'_specgram_'+str(n)+'.png');
+			plt.savefig(vis_path+'mag_spec/'+filename+'_magspec_'+str(n)+'.png');
 			plt.close(fig);
 
 		
