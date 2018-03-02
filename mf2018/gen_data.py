@@ -10,6 +10,11 @@ import sys #system-specific parameters and functions
 import numpy as np
 from os import listdir # to get file names from a particular dir
 
+##############################
+# GLOBALS
+##############################
+B_LABEL = 1;
+H_LABEL = 2;
 
 ##############################
 # IMPORT DATAPATHS SEGMENT
@@ -37,31 +42,81 @@ def read_filenames_set(datain_path):
 	return dataset;
 
 ##############################
-# EXTRACT AUDIO SEGMENT
+# EXTRACT AUDIO DATA SEGMENT
 ##############################
-# import_wav: imports audio file as raw data
-def import_wav(filepath, vis_path, sr, plot=False):
-    # Import raw data
-    try:
-        raw_data, sr = librosa.load(filepath, sr=sr, mono=True);
-    except:
-        raise IOError('Give me an audio file which I can read!!');
-    
-    # Only use one channel
-    #if len(raw_data[0].shape) > 1:
-    #    raw_data = (raw_data[0][0], raw_data[1])
-    
-    if plot:
-    	filename = filepath.split('/');
-    	filename = filename[-1]; # get the last item on list, which should be filename
-    	print('reading and saving figure for: '+filename);
-        plt.figure();
-        librosa.display.waveplot(raw_data, sr=sr);
-        plt.title(filepath);
-        plt.savefig(vis_path+filename+'read_audio.png');
-        #plt.show()
+# import_data: top level call to import and segment files
+# Inputs:
+#	filepath - source of data
+#	vis_path - path to output all graphs
+#	sr - samp rate to convert all audio to
+#	clip_duration - length in seconds to segment audio to
+#	plot - toggle on visualization
+# Output:
+#
+# CHange so it doesn't chop, pass to feature gen instead
+def import_data(filepath, vis_path, sr, clip_duration, plot=True):
 
-    return raw_data
+	# Add subfolder to vis path
+	vis_path = vis_path+'clips/';
+	print(vis_path);
+
+	# Output details
+	filename = filepath.split('/');
+	filename = filename[-1]; # get the last item on list, which should be filename
+	print('Reading file: '+filename);
+
+	# Check audio file's length in seconds (float) directly from file
+	file_duration = librosa.get_duration(filename=filepath);
+	print('	file duration: '+ str(file_duration));
+
+	# Calculate number of clips audio will be segmented into
+	num_clips = int(np.floor(file_duration/clip_duration));
+	print('	num clips: '+ str(num_clips));
+
+	# Loop and segment
+	start_sec = 0;
+	for n in range(num_clips):
+		raw_audio = librosa_load_audio(filepath,sr,start_sec=start_sec,duration_sec=clip_duration);
+		start_sec += clip_duration;
+
+		# Generate magnitude spectrogram data
+		specgram = mag_spec(raw_audio,sr);
+
+		if plot:
+			fig = plt.figure();
+			librosa.display.waveplot(raw_audio, sr=sr);
+			plt.title(filepath);
+			plt.savefig(vis_path+filename+'_'+str(n)+'.png');
+			plt.close(fig);
+			fig = plt.figure();
+			librosa.display.specshow(librosa.amplitude_to_db(specgram,ref=np.max),y_axis='log',x_axis='time');
+			plt.title('Power spectrogram');
+			plt.colorbar(format='%+2.0f dB');
+			plt.tight_layout();
+			plt.savefig(vis_path+filename+'_specgram_'+str(n)+'.png');
+			plt.close(fig);
+
+		
+
+# librosa_load_audio: imports single audio file and return single raw data
+def librosa_load_audio(filepath, sr, start_sec=0.0, duration_sec=None):
+	# Import raw data
+	try:
+		raw_audio, sr = librosa.load(filepath, sr=sr, offset=start_sec, duration=duration_sec, mono=True);
+	except:
+		raise IOError('Give me an audio file which I can read!!');
+	return raw_audio;
+
+##############################
+# FEATURE GENERATION SEGMENT
+##############################
+# mag_spec: generate magnitude spectrogram given audio
+def mag_spec(raw_audio, sr):
+
+	return librosa.stft(raw_audio);
+	w_len = 0.02*sr;
+	return librosa.stft(raw_audio,n_fft=w_len,hop_length=w_len/2,window='hamming');
+
 ##############################
 # MAIN CODE
 ##############################
@@ -74,13 +129,13 @@ vis_out = 'graphics/'; # path to output visuals
 
 # Define audio params
 sr = 44100; # sampling rate
-clip_duration = None # audio clips will split into segments of this duration
+clip_duration = 1; # audio clips will split into segments of this duration (in seconds)
 
 ### EXTRACT FILENAMES CODE
 # Construct pathways
 datain_path = navi_out + 'data/' + dataset_name + '/'; # data input path
 dataout_path = navi_out + 'data_out/' + dataset_name + '/'; # data exported here
-vis_path = vis_out + dataset_name; # graphics exported here within repo
+vis_path = vis_out + dataset_name+'/'; # graphics exported here within repo
 
 print('Reading data from: '+ datain_path);
 print('Exporting data to: '+ dataout_path);
@@ -91,15 +146,8 @@ filepaths_set = read_filenames_set(datain_path);
 keys = ['boattest', 'boattrain', 'helitest', 'helitrain'];
 
 ### EXTRACT AUDIO CODE
-
-
-# y,sr = librosa.load(librosa.util.example_audio_file(),sr=sr,mono=True);
-# plt.figure()
-# librosa.display.waveplot(y, sr=sr)
-# plt.title('Monophonic')
-
 for key in keys:
 	filepaths_list = filepaths_set[key];
 	for filepath in filepaths_list:
-		import_wav(filepath, vis_path, sr, 1);
+		import_data(filepath, vis_path, sr, clip_duration, plot=True); # append a ,True if want to plot
 
