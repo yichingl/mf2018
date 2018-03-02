@@ -56,6 +56,9 @@ def read_filenames_set(datain_path):
 # CHange so it doesn't chop, pass to feature gen instead
 def import_data(filepath, vis_path, sr, clip_duration, plot=False):
 
+	plot_rawaudio = 0;
+	plot_magspec = 1;
+
 	# Output details
 	filename = filepath.split('/');
 	filename = filename[-1]; # get the last item on list, which should be filename
@@ -79,18 +82,20 @@ def import_data(filepath, vis_path, sr, clip_duration, plot=False):
 		specgram = mag_spec(raw_audio,sr);
 
 		if plot:
-			fig = plt.figure();
-			librosa.display.waveplot(raw_audio, sr=sr);
-			plt.title(filepath);
-			plt.savefig(vis_path+'raw_audio/'+filename+'_'+str(n)+'.png');
-			plt.close(fig);
-			fig = plt.figure();
-			librosa.display.specshow(librosa.amplitude_to_db(specgram,ref=np.max),y_axis='log',x_axis='time');
-			plt.title('Power spectrogram');
-			plt.colorbar(format='%+2.0f dB');
-			plt.tight_layout();
-			plt.savefig(vis_path+'mag_spec/'+filename+'_magspec_'+str(n)+'.png');
-			plt.close(fig);
+			if plot_rawaudio:
+				fig = plt.figure();
+				librosa.display.waveplot(raw_audio, sr=sr);
+				plt.title(filepath);
+				plt.savefig(vis_path+'raw_audio/'+filename+'_'+str(n)+'.png');
+				plt.close(fig);
+			if plot_magspec:
+				fig = plt.figure();
+				librosa.display.specshow(librosa.amplitude_to_db(specgram,ref=np.max),y_axis='log',x_axis='time');
+				plt.title('Power spectrogram');
+				plt.colorbar(format='%+2.0f dB');
+				plt.tight_layout();
+				plt.savefig(vis_path+'mag_spec/'+filename+'_magspec_'+str(n)+'.png');
+				plt.close(fig);
 
 		
 
@@ -111,7 +116,7 @@ def mag_spec(raw_audio, sr):
 
 	return librosa.stft(raw_audio);
 	w_len = 0.02*sr;
-	return librosa.stft(raw_audio,n_fft=w_len,hop_length=w_len/2,window='hamming');
+	return librosa.stft(raw_audio,n_fft=w_len,hop_length=floor((w_len-1)/4),window='hamming');
 
 ##############################
 # MAIN CODE
