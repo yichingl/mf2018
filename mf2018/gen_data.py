@@ -54,74 +54,84 @@ def read_filenames_set(datain_path):
 # Output:
 #
 # CHange so it doesn't chop, pass to feature gen instead
-def import_data(filepath, vis_path, sr, clip_duration, plot=False):
+def import_data(key, filepaths_list, vis_path, sr, clip_duration, plot=False):
 
 	rawaudio = 1;
 	magspec = 1;
 
-	# Output details
-	filename = filepath.split('/');
-	filename = filename[-1]; # get the last item on list, which should be filename
-	print('Reading file: '+filename);
+	for filepath in filepaths_list:
 
-	# Check audio file's length in seconds (float) directly from file
-	file_duration = librosa.get_duration(filename=filepath);
-	print('	file duration: '+ str(file_duration));
+		# Output details
+		filename = filepath.split('/');
+		filename = filename[-1]; # get the last item on list, which should be filename
+		print('Reading file: '+filename);
 
-	# Calculate number of clips audio will be segmented into
-	num_clips = int(np.floor(file_duration/clip_duration));
-	print('	num clips: '+ str(num_clips));
+		# Check audio file's length in seconds (float) directly from file
+		file_duration = librosa.get_duration(filename=filepath);
+		print('	file duration: '+ str(file_duration));
 
-	# This section loops through the provided dataset purely for visualization of the raw data. 
-	# Do not run if unneeded.
-	if rawaudio:
-		# Loop and segment
-		start_sec = 0;
-		for n in range(num_clips):
-			raw_audio = librosa_load_audio(filepath,sr,start_sec=start_sec,duration_sec=clip_duration);
-			start_sec += clip_duration;
+		# Calculate number of clips audio will be segmented into
+		num_clips = int(np.floor(file_duration/clip_duration));
+		print('	num clips: '+ str(num_clips));
 
-			if plot:
-				fig = plt.figure();
-				librosa.display.waveplot(raw_audio, sr=sr);
-				plt.title(filename);
-				plt.savefig(vis_path+'raw_audio/'+filename+'_'+str(n)+'.png');
-				plt.close(fig);
+		# This section loops through the provided dataset purely for visualization of the raw data. 
+		# Do not run if unneeded.
+		if rawaudio:
+			# Loop and segment
+			start_sec = 0;
+			for n in range(num_clips):
+				raw_audio = librosa_load_audio(filepath,sr,start_sec=start_sec,duration_sec=clip_duration);
+				start_sec += clip_duration;
 
-	# This section generates a magnitude spectrogram for each input audio clip.
-	if magspec:
-		start_sec = 0;
-		#magspec_out = [];
-		for n in range(num_clips):
-			raw_audio = librosa_load_audio(filepath,sr,start_sec=start_sec,duration_sec=clip_duration);
+				if plot:
+					fig = plt.figure();
+					librosa.display.waveplot(raw_audio, sr=sr);
+					plt.title(filename);
+					plt.savefig(vis_path+'rawaudio/'+filename+'_'+str(n)+'.png');
+					plt.close(fig);
 
-			# Generate magnitude spectrogram data
-			specgram = mag_spec(raw_audio,sr);
-			#magspec_out.append(specgram);
+		# This section generates a magnitude spectrogram for each input audio clip.
+		if magspec:
 
-			# Get start time for next clip
-			start_sec += clip_duration;
+			# Initialize matrix size
+			magspec_shape = np.shape(mag_spec(librosa_load_audio(filepath,sr,start_sec=0,duration_sec=clip_duration), sr));
+			magspec_out = np.empty((magspec_shape[0],0), dtype=float);
 
-			if plot:
-				fig = plt.figure();
-				librosa.display.specshow(librosa.amplitude_to_db(specgram, ref=np.max),y_axis='log',x_axis='time');
-				plt.title(filename);
-				plt.colorbar(format='%+2.0f dB');
-				plt.tight_layout();
-				plt.savefig(vis_path+'mag_spec/'+filename+'_'+str(n)+'.png');
-				plt.close(fig);
+			# Initialize start time
+			start_sec = 0;
 
-		# # Convert list to np array with features along rows
-		# magspec_out = np.transpose(np.asarray(magspec_out));
+			for n in range(num_clips):
+				raw_audio = librosa_load_audio(filepath,sr,start_sec=start_sec,duration_sec=clip_duration);
+				# raw_audio is np.array type
 
-		# fig = plt.figure();
-		# librosa.display.specshow(librosa.amplitude_to_db(magspec_out[0:2000,:], ref=np.max),y_axis='log',x_axis='time');
-		# plt.title(filename);
-		# plt.colorbar(format='%+2.0f dB');
-		# plt.tight_layout();
-		# plt.title("magspec out lines 0 to 2000");
-		# plt.savefig(vis_path+'magspec_out.png');
-		# plt.close(fig);
+				# Generate magnitude spectrogram data
+				specgram = mag_spec(raw_audio,sr);
+				magspec_out = np.concatenate((magspec_out, specgram), axis=1);
+
+				# Get start time for next clip
+				start_sec += clip_duration;
+
+				if plot:
+					fig = plt.figure();
+					librosa.display.specshow(librosa.amplitude_to_db(specgram, ref=np.max),y_axis='log',x_axis='time');
+					plt.title(filename);
+					plt.colorbar(format='%+2.0f dB');
+					plt.tight_layout();
+					plt.savefig(vis_path+'magspec/'+filename+'_'+str(n)+'.png');
+					plt.close(fig);
+
+			# Save with features along rows instead of columns
+			magspec_out = np.transpose(magspec_out);
+
+
+			fig = plt.figure();
+			librosa.display.specshow(librosa.amplitude_to_db(magspec_out[0:2000,:], ref=np.max),y_axis='log',x_axis='time');
+			plt.title(filename);
+			plt.colorbar(format='%+2.0f dB');
+			plt.tight_layout();
+			plt.title("magspec out lines 0 to 2000");
+			plt.savefig(vis_path+key+'_magspec_out.png');
+			plt.close(fig);
 
 
 # librosa_load_audio: imports single audio file and return single raw data
@@ -141,7 +151,7 @@ def mag_spec(raw_audio, sr):
 
 	return librosa.stft(raw_audio);
 	w_len = 0.02*sr;
-	return librosa.stft(raw_audio,n_fft=w_len,hop_length=floor(w_len/2),window='hamming');
+	return librosa.stft(raw_audio,n_fft=w_len,hop_length=round(w_len/2),window='hamming');
 
 ##############################
 # MAIN CODE
@@ -155,7 +165,7 @@ vis_out = 'graphics/'; # path to output visuals
 
 # Define audio params
 sr = 44100; # sampling rate
-clip_duration = 2; # audio clips will split into segments of this duration (in seconds)
+clip_duration = 1; # audio clips will split into segments of this duration (in seconds)
 
 ### EXTRACT FILENAMES CODE
 # Construct pathways
@@ -174,6 +184,6 @@ keys = ['boattest', 'boattrain', 'helitest', 'helitrain'];
 ### EXTRACT AUDIO CODE
 for key in keys:
 	filepaths_list = filepaths_set[key];
-	for filepath in filepaths_list:
-		import_data(filepath, vis_path, sr, clip_duration, plot=True); # append a ,True if want to plot
-
+	print('*** Currently extracting for ' + key);
+	import_data(key, filepaths_list, vis_path, sr, clip_duration, plot=True); # append a ,True if want to plot
+	print('\n');
