@@ -56,8 +56,8 @@ def read_filenames_set(datain_path):
 # CHange so it doesn't chop, pass to feature gen instead
 def import_data(filepath, vis_path, sr, clip_duration, plot=False):
 
-	plot_rawaudio = 1;
-	plot_magspec = 1;
+	rawaudio = 1;
+	magspec = 1;
 
 	# Output details
 	filename = filepath.split('/');
@@ -72,32 +72,57 @@ def import_data(filepath, vis_path, sr, clip_duration, plot=False):
 	num_clips = int(np.floor(file_duration/clip_duration));
 	print('	num clips: '+ str(num_clips));
 
-	# Loop and segment
-	start_sec = 0;
-	for n in range(num_clips):
-		raw_audio = librosa_load_audio(filepath,sr,start_sec=start_sec,duration_sec=clip_duration);
-		start_sec += clip_duration;
+	# This section loops through the provided dataset purely for visualization of the raw data. 
+	# Do not run if unneeded.
+	if rawaudio:
+		# Loop and segment
+		start_sec = 0;
+		for n in range(num_clips):
+			raw_audio = librosa_load_audio(filepath,sr,start_sec=start_sec,duration_sec=clip_duration);
+			start_sec += clip_duration;
 
-		# Generate magnitude spectrogram data
-		specgram = mag_spec(raw_audio,sr);
-
-		if plot:
-			if plot_rawaudio:
+			if plot:
 				fig = plt.figure();
 				librosa.display.waveplot(raw_audio, sr=sr);
-				plt.title(filepath);
+				plt.title(filename);
 				plt.savefig(vis_path+'raw_audio/'+filename+'_'+str(n)+'.png');
 				plt.close(fig);
-			if plot_magspec:
+
+	# This section generates a magnitude spectrogram for each input audio clip.
+	if magspec:
+		start_sec = 0;
+		#magspec_out = [];
+		for n in range(num_clips):
+			raw_audio = librosa_load_audio(filepath,sr,start_sec=start_sec,duration_sec=clip_duration);
+
+			# Generate magnitude spectrogram data
+			specgram = mag_spec(raw_audio,sr);
+			#magspec_out.append(specgram);
+
+			# Get start time for next clip
+			start_sec += clip_duration;
+
+			if plot:
 				fig = plt.figure();
-				librosa.display.specshow(librosa.amplitude_to_db(specgram,ref=np.max),y_axis='log',x_axis='time');
-				plt.title('Power spectrogram');
+				librosa.display.specshow(librosa.amplitude_to_db(specgram, ref=np.max),y_axis='log',x_axis='time');
+				plt.title(filename);
 				plt.colorbar(format='%+2.0f dB');
 				plt.tight_layout();
-				plt.savefig(vis_path+'mag_spec/'+filename+'_magspec_'+str(n)+'.png');
+				plt.savefig(vis_path+'mag_spec/'+filename+'_'+str(n)+'.png');
 				plt.close(fig);
 
-		
+		# # Convert list to np array with features along rows
+		# magspec_out = np.transpose(np.asarray(magspec_out));
+
+		# fig = plt.figure();
+		# librosa.display.specshow(librosa.amplitude_to_db(magspec_out[0:2000,:], ref=np.max),y_axis='log',x_axis='time');
+		# plt.title(filename);
+		# plt.colorbar(format='%+2.0f dB');
+		# plt.tight_layout();
+		# plt.title("magspec out lines 0 to 2000");
+		# plt.savefig(vis_path+'magspec_out.png');
+		# plt.close(fig);
+
 
 # librosa_load_audio: imports single audio file and return single raw data
 def librosa_load_audio(filepath, sr, start_sec=0.0, duration_sec=None):
@@ -116,7 +141,7 @@ def mag_spec(raw_audio, sr):
 
 	return librosa.stft(raw_audio);
 	w_len = 0.02*sr;
-	return librosa.stft(raw_audio,n_fft=w_len,hop_length=np.floor(w_len/2),window='hamming');
+	return librosa.stft(raw_audio,n_fft=w_len,hop_length=floor(w_len/2),window='hamming');
 
 ##############################
 # MAIN CODE
