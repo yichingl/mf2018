@@ -1,3 +1,8 @@
+# gen_data.py: code prototype
+# the data to use is defined in the main code segment
+# this file reads in all the provided data and creates magnitude spectrogram features
+# and outputs plots if requested
+
 # for generating and saving graphics without needing display
 # 	NOTE: this MUST be at the beginning of the file
 # 	see: https://stackoverflow.com/questions/15713279/calling-pylab-savefig-without-display-in-ipython
@@ -8,7 +13,11 @@ import matplotlib.pyplot as plt
 import librosa, librosa.display
 import sys #system-specific parameters and functions
 import numpy as np
+import scipy as sp
+import sklearn
 from os import listdir # to get file names from a particular dir
+import anurag_cnn.feat_extractor as cnn # to import cnn
+from anurag_cnn.feat_extractor import usegpu
 
 ##############################
 # GLOBALS
@@ -53,8 +62,8 @@ def read_filenames_set(datain_path):
 #	plot - toggle on visualization
 # Output:
 #
-# CHange so it doesn't chop, pass to feature gen instead
-def import_data(key, filepaths_list, vis_path, sr, clip_duration, plot=False):
+# Change so it doesn't chop, pass to feature gen instead
+def import_data(key, filepaths_list, vis_path, sr, clip_duration, dataout_path, plot=False):
 
 	rawaudio = 1;
 	magspec = 1;
@@ -92,46 +101,29 @@ def import_data(key, filepaths_list, vis_path, sr, clip_duration, plot=False):
 
 		# This section generates a magnitude spectrogram for each input audio clip.
 		if magspec:
-
-			# Initialize matrix size
-			magspec_shape = np.shape(mag_spec(librosa_load_audio(filepath,sr,start_sec=0,duration_sec=clip_duration), sr));
-			magspec_out = np.empty((magspec_shape[0],0), dtype=float);
-
-			# Initialize start time
-			start_sec = 0;
-
-			for n in range(num_clips):
-				raw_audio = librosa_load_audio(filepath,sr,start_sec=start_sec,duration_sec=clip_duration);
-				# raw_audio is np.array type
-
-				# Generate magnitude spectrogram data
-				specgram = mag_spec(raw_audio,sr);
-				magspec_out = np.concatenate((magspec_out, specgram), axis=1);
-
-				# Get start time for next clip
-				start_sec += clip_duration;
-
-				if plot:
-					fig = plt.figure();
-					librosa.display.specshow(librosa.amplitude_to_db(specgram, ref=np.max),y_axis='log',x_axis='time');
-					plt.title(filename);
-					plt.colorbar(format='%+2.0f dB');
-					plt.tight_layout();
-					plt.savefig(vis_path+'magspec/'+filename+'_'+str(n)+'.png');
-					plt.close(fig);
+			magspec_out = run_mag_spec(filepath, sr, clip_duration, num_clips, vis_path, filename, plot);
 
 			# Save with features along rows instead of columns
 			magspec_out = np.transpose(magspec_out);
-
+			n_features = np.shape(magspec_out)[0];
 
 			fig = plt.figure();
-			librosa.display.specshow(librosa.amplitude_to_db(magspec_out[0:2000,:], ref=np.max),y_axis='log',x_axis='time');
+			librosa.display.specshow(librosa.amplitude_to_db(magspec_out[300:2300,:], ref=np.max),y_axis='log',x_axis='time');
 			plt.title(filename);
 			plt.colorbar(format='%+2.0f dB');
 			plt.tight_layout();
-			plt.title("magspec out lines 0 to 2000");
-			plt.savefig(vis_path+key+'_magspec_out.png');
+			plt.savefig(vis_path+'magspec/magspec_'+key+'.png');
 			plt.close(fig);
+
+			# Store outputs
+			if ((key == 'boattest') or (key == 'boattrain')):
+				# boat label: 0
+				magspec_out = np.concatenate((np.zeros((n_features,1)),magspec_out), axis=1);
+				np.savetxt(dataout_path+'magspec/magspec_'+key+'.csv', magspec_out, delimiter=',');
+			if ((key == 'helitest') or (key == 'helitrain')):
+				# heli label: 1
+				magspec_out = np.concatenate((np.ones((n_features,1)),magspec_out), axis=1);
+				np.savetxt(dataout_path+'magspec/magspec_'+key+'.csv', magspec_out, delimiter=',');
 
 
 # librosa_load_audio: imports single audio file and return single raw data
@@ -146,6 +138,44 @@ def librosa_load_audio(filepath, sr, start_sec=0.0, duration_sec=None):
 ##############################
 # FEATURE GENERATION SEGMENT
 ##############################
+# run_mag_spec: loop through all files to call mag_spec
+def run_mag_spec(filepath, sr, clip_duration, num_clips, vis_path, filename, plot=False):
+
+	# Initialize matrix size
+	magspec_shape = np.shape(mag_spec(librosa_load_audio(filepath,sr,start_sec=0,duration_sec=clip_duration), sr));
+	magspec_out = np.empty((magspec_shape[0],0), dtype=float);
+
+	# Initialize start time
+	start_sec = 0;
+
+	for n in range(num_clips):
+		raw_audio = librosa_load_audio(filepath,sr,start_sec=start_sec,duration_sec=clip_duration);
+		# raw_audio is np.array type
+
+		# Generate magnitude spectrogram data
+		specgram = mag_spec(raw_audio,sr);
+		magspec_out = np.concatenate((magspec_out, specgram), axis=1);
+
+		# Get start time for next clip
+		start_sec += clip_duration;
+
+		if plot:
+			fig = plt.figure();
+			librosa.display.specshow(librosa.amplitude_to_db(specgram, ref=np.max),y_axis='log',x_axis='time');
+			plt.title(filename);
+			plt.colorbar(format='%+2.0f dB');
+			plt.tight_layout();
+			plt.savefig(vis_path+'magspec/'+filename+'_'+str(n)+'.png');
+			plt.close(fig);
+	return magspec_out;
+
+# gen_cnn: use a pre-trained CNN to extract features
+def gen_cnn(raw_audio, use_gpu=True):
+    
+    features = cnn.main(raw_audio[0], use_gpu);
+    
+    return features;
+
 # mag_spec: generate magnitude spectrogram given audio
 def mag_spec(raw_audio, sr):
 
@@ -185,5 +215,5 @@ keys = ['boattest', 'boattrain', 'helitest', 'helitrain'];
 for key in keys:
 	filepaths_list = filepaths_set[key];
 	print('*** Currently extracting for ' + key);
-	import_data(key, filepaths_list, vis_path, sr, clip_duration, plot=True); # append a ,True if want to plot
+	import_data(key, filepaths_list, vis_path, sr, clip_duration, dataout_path, plot=True); # append a ,True if want to plot
 	print('\n');
