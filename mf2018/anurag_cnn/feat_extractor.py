@@ -39,7 +39,7 @@ def getFeat(extractor,inpt, pool=False):
         indata = indata.cuda()
 
     pred = extractor(indata)
-    print(pred.size())
+    #print(pred.size())  # ORIGINAL OUTPUT
     if pool:
         if len(pred.size()) > 2:
             gpred = globalpoolfn(pred,kernel_size=pred.size()[2:])

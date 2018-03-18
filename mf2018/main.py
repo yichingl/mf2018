@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 from os import listdir # to get file names from a particular dir
 import numpy as np
 import classifier_helpers as ch
+import matlab.engine
 
 ##############################
 # GLOBALS
@@ -64,10 +65,17 @@ vis_out = 'graphics/'; # path to output visuals
 
 # Define audio params
 sr = 44100; # sampling rate
-clip_duration = 1; # audio clips will split into segments of this duration (in seconds)
+clip_duration = 2; # audio clips will split into segments of this duration (in seconds)
 
 # Define training params
-max_epochs = 2; # maximum number of epochs for sgd
+max_epochs = 1; # maximum number of epochs for sgd
+
+### START MATLAB ENGINE CODE
+# This has to be in top-level file so it only has to start up once.. It takes a while
+print('Starting MATLAB engine...');
+mtl_eng = matlab.engine.start_matlab();
+mtl_eng.addpath(mtl_eng.genpath("matlab_toolboxes/"));
+print('Done importing MATLAB engine...');
 
 ### EXTRACT FILENAMES CODE
 # Construct pathways
@@ -84,7 +92,7 @@ print('Exporting data to: '+ dataout_path);
 # TODO: see if this setup generates correctly, then add valid set before moving past file extraction
 filepaths_dict = read_filenames_set(datain_path);
 
-### TRAINING CLASSIFIER CODE
+# ### TRAINING CLASSIFIER CODE
 # Use training set to build classifier
 train_filenames = filepaths_dict['train_filenames'];
 train_labels = filepaths_dict['train_labels'];
@@ -94,12 +102,23 @@ valid_labels = filepaths_dict['valid_labels'];
 # Generate array containing classes
 classes = np.array([B_LABEL, H_LABEL]);
 print('*** Currently building classifier using training set');
-clf_dict = ch.train_classifier(train_filenames, train_labels, valid_filenames, valid_labels, classes, max_epochs, sr, clip_duration);
-
+clf_dict = ch.train_classifier(train_filenames, train_labels, valid_filenames, valid_labels, classes, max_epochs, sr, clip_duration, mtl_eng);
+# Read output data and print
 clf = clf_dict["clf"]; 
 train_acc = clf_dict["train_acc"];
 valid_acc = clf_dict["valid_acc"];
-
+print(' ** final train accuracy: ');
 print(train_acc);
+print(' ** final validation accuracy: ');
 print(valid_acc);
+
+### EVALUATION CODE
+# Use testing set to evaluate classifier
+test_filenames = filepaths_dict['test_filenames'];
+test_labels = filepaths_dict['test_labels'];
+print('*** Currently evaluating classifier using testing set');
+test_acc = ch.calc_accuracy(clf, test_filenames, test_labels, sr, clip_duration, mtl_eng);
+print(' ** final test accuracy: ');
+print(test_acc);
+
 

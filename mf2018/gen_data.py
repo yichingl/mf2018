@@ -1,4 +1,4 @@
-# gen_data.py: code prototype
+# gen_data.py: CODE PROTOTYPE - use main.py for the official version
 # the data to use is defined in the main code segment
 # this file reads in all the provided data and creates magnitude spectrogram features
 # and outputs plots if requested
