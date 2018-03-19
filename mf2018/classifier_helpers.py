@@ -29,15 +29,15 @@ def run_epoch(clf, train_filenames, train_labels, valid_filenames, valid_labels,
 		clf = fit_data(clf, cur_features, cur_labels, classes);
 
 	# use classifier to get accuracy on training and validation sets
-	print('   ** calculating training accuracy');
-	train_acc = calc_accuracy(clf, train_filenames, train_labels, sr, clip_duration, mtl_eng); # TODO don't continue to use this
+	#print('   ** calculating training accuracy');
+	#train_acc = calc_accuracy(clf, train_filenames, train_labels, sr, clip_duration, mtl_eng); # TODO don't continue to use this
 	print('   ** calculating valid accuracy');
 	valid_acc = calc_accuracy(clf, valid_filenames, valid_labels, sr, clip_duration, mtl_eng);
 
 	# store data
 	clf_dict = {};
 	clf_dict["clf"] = clf;
-	clf_dict["train_acc"] = train_acc;
+	#clf_dict["train_acc"] = train_acc;
 	clf_dict["valid_acc"] = valid_acc;
 
 	return clf_dict;
@@ -80,25 +80,26 @@ def train_classifier(train_filenames, train_labels, valid_filenames, valid_label
 		print('*** Running epoch ' + str(ne));
 
 		# Stop training if performance is good enough
-		if (train_acc_ne <= 0.70) or (valid_acc_ne <= 0.60):
+		if (valid_acc_ne <= 0.63) or (ne <= 5):
 
 			# Run sgd and update classifier
 			epoch_dict = run_epoch(clf, train_filenames, train_labels, valid_filenames, valid_labels, classes, sr, clip_duration, mtl_eng);
 			clf = epoch_dict["clf"];
-			train_acc_ne = epoch_dict["train_acc"];
+			#train_acc_ne = epoch_dict["train_acc"];
 			valid_acc_ne = epoch_dict["valid_acc"];
 
-			train_acc[ne] = train_acc_ne;
+			#train_acc[ne] = train_acc_ne;
 			valid_acc[ne] = valid_acc_ne;
 
-			print(' ** training accuarcy ' + str(train_acc_ne));
+			#print(' ** training accuarcy ' + str(train_acc_ne));
 			print(' ** validation accuarcy ' + str(valid_acc_ne));
 
 		else:
-			print('*** Stopping training at early epoch ' + str(ne) + ' (train accuracy = ' + str(train_acc_ne) + ', valid accuracy = ' + str(valid_acc_ne) + ')');
+			#print('*** Stopping training at early epoch ' + str(ne) + ' (train accuracy = ' + str(train_acc_ne) + ', valid accuracy = ' + str(valid_acc_ne) + ')');
+			print('*** Stopping training at early epoch ' + str(ne) + ' (valid accuracy = ' + str(valid_acc_ne) + ')');
 
 	clf_dict = {};
 	clf_dict["clf"] = clf; 
-	clf_dict["train_acc"] = train_acc;
+	#clf_dict["train_acc"] = train_acc;
 	clf_dict["valid_acc"] = valid_acc;
 	return clf_dict;

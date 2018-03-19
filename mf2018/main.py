@@ -59,7 +59,7 @@ def read_filenames_set(datain_path):
 
 ### USER INPUT
 # Define file use params
-dataset_name = 'miniset'; # which dataset to use
+dataset_name = 'audio_used'; # which dataset to use
 navi_out = '../../'; # path to get out of github directory
 vis_out = 'graphics/'; # path to output visuals
 
@@ -68,7 +68,8 @@ sr = 44100; # sampling rate
 clip_duration = 2; # audio clips will split into segments of this duration (in seconds)
 
 # Define training params
-max_epochs = 1; # maximum number of epochs for sgd
+max_epochs = 11; # maximum number of epochs for sgd
+min_epochs = 5; # minimum number of epochs for sgd
 
 ### START MATLAB ENGINE CODE
 # This has to be in top-level file so it only has to start up once.. It takes a while
@@ -105,10 +106,10 @@ print('*** Currently building classifier using training set');
 clf_dict = ch.train_classifier(train_filenames, train_labels, valid_filenames, valid_labels, classes, max_epochs, sr, clip_duration, mtl_eng);
 # Read output data and print
 clf = clf_dict["clf"]; 
-train_acc = clf_dict["train_acc"];
+#train_acc = clf_dict["train_acc"];
 valid_acc = clf_dict["valid_acc"];
-print(' ** final train accuracy: ');
-print(train_acc);
+#print(' ** final train accuracy: ');
+#print(train_acc);
 print(' ** final validation accuracy: ');
 print(valid_acc);
 
@@ -121,4 +122,10 @@ test_acc = ch.calc_accuracy(clf, test_filenames, test_labels, sr, clip_duration,
 print(' ** final test accuracy: ');
 print(test_acc);
 
-
+### PRINT CODE
+metrics_path = dataout_path+"metrics.txt";
+np.savetxt(metrics_path, valid_acc, delimiter="\n",fmt='%f');
+fid = open(metrics_path, 'a');
+out_str = "testing accuracy = " + str(test_acc);
+fid.write(out_str);
+fid.close();
