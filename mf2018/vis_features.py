@@ -31,7 +31,7 @@ filepath_heli = datain_path+'heli/test/72qNna11Znw_045.wav';
 raw_data_heli = ah.load_audio(filepath_heli,sr=sr,start_sec=0,duration_sec=clip_duration);
 
 # Generate magnitude spectrogram image
-feat = fh.gen_magspec(raw_data_boat,sr);
+feat = np.transpose(fh.gen_magspec(raw_data_boat,sr));
 fig = plt.figure();
 librosa.display.specshow(librosa.amplitude_to_db(feat, ref=np.max),x_axis='time');
 plt.title('Magnitude Spectrogram of Boat');
@@ -39,7 +39,7 @@ plt.colorbar(format='%+2.0f dB');
 plt.tight_layout();
 plt.savefig(vis_path+'magspec__boat_v55hojInS9c_011.png');
 plt.close(fig);
-feat = fh.gen_magspec(raw_data_heli,sr);
+feat = np.transpose(fh.gen_magspec(raw_data_heli,sr));
 fig = plt.figure();
 librosa.display.specshow(librosa.amplitude_to_db(feat, ref=np.max),x_axis='time');
 plt.title('Magnitude Spectrogram of Heli');
@@ -49,7 +49,7 @@ plt.savefig(vis_path+'magspec__heli_72qNna11Znw_045.png');
 plt.close(fig);
 
 # Generate constantQ spectrogram image
-feat = fh.gen_constantQ(raw_data_boat,sr);
+feat = np.transpose(fh.gen_constantQ(raw_data_boat,sr));
 fig = plt.figure();
 librosa.display.specshow(librosa.amplitude_to_db(feat, ref=np.max),x_axis='time');
 plt.title('ConstantQ Spectrogram of Boat');
@@ -57,7 +57,7 @@ plt.colorbar(format='%+2.0f dB');
 plt.tight_layout();
 plt.savefig(vis_path+'constantq__boat_v55hojInS9c_011.png');
 plt.close(fig);
-feat = fh.gen_constantQ(raw_data_heli,sr);
+feat = np.transpose(fh.gen_constantQ(raw_data_heli,sr));
 fig = plt.figure();
 librosa.display.specshow(librosa.amplitude_to_db(feat, ref=np.max),x_axis='time');
 plt.title('ConstantQ Spectrogram of Heli');
@@ -67,7 +67,7 @@ plt.savefig(vis_path+'constantq__heli_72qNna11Znw_045.png');
 plt.close(fig);
 
 # Generate correlogram image
-feat = fh.gen_correlogram(raw_data_boat,sr);
+feat = np.transpose(fh.gen_correlogram(raw_data_boat,sr));
 fig = plt.figure();
 librosa.display.specshow(librosa.amplitude_to_db(feat, ref=np.max),x_axis='time');
 plt.title('Correlogram of Boat');
@@ -75,7 +75,7 @@ plt.colorbar(format='%+2.0f dB');
 plt.tight_layout();
 plt.savefig(vis_path+'correlogram__boat_v55hojInS9c_011.png');
 plt.close(fig);
-feat = fh.gen_correlogram(raw_data_heli,sr);
+feat = np.transpose(fh.gen_correlogram(raw_data_heli,sr));
 fig = plt.figure();
 librosa.display.specshow(librosa.amplitude_to_db(feat, ref=np.max),x_axis='time');
 plt.title('Correlogram of Heli');
