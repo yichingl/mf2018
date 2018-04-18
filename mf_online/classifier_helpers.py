@@ -42,6 +42,58 @@ def run_epoch(clf, train_filenames, train_labels, valid_filenames, valid_labels,
 
 	return clf_dict;
 
+# train_final: train final classifier
+def train_final(clf, train_filenames, train_labels, valid_filenames, valid_labels, classes, sr, clip_duration, mtl_eng, stop_ne):
+	filenames = train_filenames+valid_filenames;
+	labels = np.append(train_labels,valid_labels);
+
+	n_examples = len(labels);
+
+	
+
+
+	valid_acc = np.zeros((stop_ne+1));
+	print stop_ne;
+	print valid_acc;
+
+	for ne in range(stop_ne+1):
+
+		# for every random example
+		n_shuffle = range(n_examples);
+		random.shuffle(n_shuffle);
+		for n in n_shuffle:
+
+			# select current example
+			cur_filename = filenames[n];
+			cur_label = labels[n];
+
+			print('   ** running example ' + str(n));
+			print('      * filename: ' + cur_filename);
+			print('      * label: ' + str(cur_label));
+
+			# generate feature matrix and labels
+			cur_data_dict = fh.gen_features_single(cur_filename, cur_label, sr, clip_duration, mtl_eng);
+			cur_features = cur_data_dict["features"];
+			cur_labels = cur_data_dict["labels"]; 
+
+			# do a partial fit of weights to that feature (SGD)
+			clf = fit_data(clf, cur_features, cur_labels, classes);
+
+			# use classifier to get accuracy on training and validation sets
+			#print('   ** calculating training accuracy');
+			#train_acc = calc_accuracy(clf, train_filenames, train_labels, sr, clip_duration, mtl_eng); # TODO don't continue to use this
+		print('   ** calculating valid accuracy');
+		valid_acc[ne] = calc_accuracy(clf, valid_filenames, valid_labels, sr, clip_duration, mtl_eng);
+
+	print valid_acc;
+	# store data
+	clf_dict = {};
+	clf_dict["clf"] = clf;
+	#clf_dict["train_acc"] = train_acc;
+	clf_dict["valid_acc"] = valid_acc;
+
+	return clf_dict;
+
 # fit_data: performs sgd partial fit
 def fit_data(clf, features, labels, classes):
 	clf.partial_fit(features, labels, classes);
@@ -63,7 +115,7 @@ def classify(clf, features):
 	return predicted_labels;
 
 # train_classifier: run algorithm for provided number of epochs
-def train_classifier(train_filenames, train_labels, valid_filenames, valid_labels, classes, n_epochs, sr, clip_duration, mtl_eng):
+def train_classifier(train_filenames, train_labels, valid_filenames, valid_labels, classes, n_epochs, min_epochs, sr, clip_duration, mtl_eng):
 
 	# Initialize classifier
 	clf = linear_model.SGDClassifier();
@@ -80,7 +132,7 @@ def train_classifier(train_filenames, train_labels, valid_filenames, valid_label
 		print('*** Running epoch ' + str(ne));
 
 		# Stop training if performance is good enough
-		if (valid_acc_ne <= 0.63) or (ne <= 5):
+		if (valid_acc_ne <= 0.60) or (ne <= min_epochs):
 
 			# Run sgd and update classifier
 			epoch_dict = run_epoch(clf, train_filenames, train_labels, valid_filenames, valid_labels, classes, sr, clip_duration, mtl_eng);
@@ -94,12 +146,20 @@ def train_classifier(train_filenames, train_labels, valid_filenames, valid_label
 			#print(' ** training accuarcy ' + str(train_acc_ne));
 			print(' ** validation accuarcy ' + str(valid_acc_ne));
 
+			stop_ne = ne;
+
 		else:
 			#print('*** Stopping training at early epoch ' + str(ne) + ' (train accuracy = ' + str(train_acc_ne) + ', valid accuracy = ' + str(valid_acc_ne) + ')');
-			print('*** Stopping training at early epoch ' + str(ne) + ' (valid accuracy = ' + str(valid_acc_ne) + ')');
+			print('*** Stopping training at early epoch ' + str(stop_ne) + ' (valid accuracy = ' + str(valid_acc_ne) + ')');
 
+	# Train final classifier using selected params
+	print('*** Using epoch ' + str(stop_ne) + ' to train final classifier');
+	final_dict = train_final(clf, train_filenames, train_labels, valid_filenames, valid_labels, classes, sr, clip_duration, mtl_eng, stop_ne);
+
+	clf_out = final_dict["clf"];
+	valid_acc_out = final_dict["valid_acc"];
 	clf_dict = {};
-	clf_dict["clf"] = clf; 
+	clf_dict["clf"] = clf_out; 
 	#clf_dict["train_acc"] = train_acc;
-	clf_dict["valid_acc"] = valid_acc;
+	clf_dict["valid_acc"] = valid_acc_out;
 	return clf_dict;
