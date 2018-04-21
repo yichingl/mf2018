@@ -54,8 +54,6 @@ def train_final(clf, train_filenames, train_labels, valid_filenames, valid_label
 
 
 	valid_acc = np.zeros((stop_ne+1));
-	print stop_ne;
-	print valid_acc;
 
 	for ne in range(stop_ne+1):
 
@@ -88,7 +86,7 @@ def train_final(clf, train_filenames, train_labels, valid_filenames, valid_label
 		print(valid_acc_t);
 		valid_acc[ne] = valid_acc_t;
 
-	print valid_acc;
+	print(valid_acc);
 	# store data
 	clf_dict = {};
 	clf_dict["clf"] = clf;
