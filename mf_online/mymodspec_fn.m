@@ -5,10 +5,12 @@ function modspecout = mymodspec(raw_audio_pylist, fs_py )
     x = cell2mat(raw_audio_pylist);
     fs = double(fs_py);
 
-    SR = 16000;
+    SR = 16000.0;
+    dec_fac = 92;
 
-    x = mean(x,2);% col vector
-    x = resample(x,SR,fs);
+    if fs~=SR
+        x = resample(x,SR,fs);
+    end
     fs = SR;
 
     % Resample to around 8KHz
@@ -27,7 +29,7 @@ function modspecout = mymodspec(raw_audio_pylist, fs_py )
 
     %% Create Gammatone Filterbank
     % Make the center frequency vector
-    numChannels = 128;
+    numChannels = 136;%128;
     lowFreq = 0; %?
     fcoefs = MakeERBFilters(fs,numChannels,lowFreq);
 
@@ -44,7 +46,7 @@ function modspecout = mymodspec(raw_audio_pylist, fs_py )
     % filter each time vector with filter 
     bp_sig=abs(filter(w,1,envt)).^2;
 
-    bp_sig = downsample(bp_sig,100); % downsample operates along cols
+    bp_sig = downsample(bp_sig,dec_fac); % downsample operates along cols
 
     modspecout = 10*log10(abs(bp_sig.'));
 

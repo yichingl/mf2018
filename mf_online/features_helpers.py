@@ -160,7 +160,8 @@ def gen_correlogram(raw_audio, sr):
 
 # generate modulation spec
 def gen_modspec(raw_audio, sr, mtl_eng):
-	features = np.asarray(mtl_eng.modspec_fn(raw_audio.tolist(),sr));
+	modspec_out = mtl_eng.mymodspec_fn(raw_audio.tolist(),sr);
+	features = np.asarray(modspec_out);
 
 	return np.transpose(features);
 

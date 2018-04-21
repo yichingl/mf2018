@@ -31,8 +31,9 @@ def run_epoch(clf, train_filenames, train_labels, valid_filenames, valid_labels,
 	# use classifier to get accuracy on training and validation sets
 	#print('   ** calculating training accuracy');
 	#train_acc = calc_accuracy(clf, train_filenames, train_labels, sr, clip_duration, mtl_eng); # TODO don't continue to use this
-	print('   ** calculating valid accuracy');
+	print('   ** calculating valid accuracy for epoch');
 	valid_acc = calc_accuracy(clf, valid_filenames, valid_labels, sr, clip_duration, mtl_eng);
+	print(valid_acc);
 
 	# store data
 	clf_dict = {};
@@ -83,7 +84,9 @@ def train_final(clf, train_filenames, train_labels, valid_filenames, valid_label
 			#print('   ** calculating training accuracy');
 			#train_acc = calc_accuracy(clf, train_filenames, train_labels, sr, clip_duration, mtl_eng); # TODO don't continue to use this
 		print('   ** calculating valid accuracy');
-		valid_acc[ne] = calc_accuracy(clf, valid_filenames, valid_labels, sr, clip_duration, mtl_eng);
+		valid_acc_t = calc_accuracy(clf, valid_filenames, valid_labels, sr, clip_duration, mtl_eng);
+		print(valid_acc_t);
+		valid_acc[ne] = valid_acc_t;
 
 	print valid_acc;
 	# store data
@@ -132,7 +135,7 @@ def train_classifier(train_filenames, train_labels, valid_filenames, valid_label
 		print('*** Running epoch ' + str(ne));
 
 		# Stop training if performance is good enough
-		if (valid_acc_ne <= 0.60) or (ne <= min_epochs):
+		if (valid_acc_ne <= 0.61) or (ne <= min_epochs):
 
 			# Run sgd and update classifier
 			epoch_dict = run_epoch(clf, train_filenames, train_labels, valid_filenames, valid_labels, classes, sr, clip_duration, mtl_eng);
@@ -153,8 +156,10 @@ def train_classifier(train_filenames, train_labels, valid_filenames, valid_label
 			print('*** Stopping training at early epoch ' + str(stop_ne) + ' (valid accuracy = ' + str(valid_acc_ne) + ')');
 
 	# Train final classifier using selected params
-	print('*** Using epoch ' + str(stop_ne) + ' to train final classifier');
-	final_dict = train_final(clf, train_filenames, train_labels, valid_filenames, valid_labels, classes, sr, clip_duration, mtl_eng, stop_ne);
+	ne_half = np.int(np.floor(n_epochs/2));
+	best_stop_ne = np.argmax(valid_acc[ne_half:])+ne_half;
+	print('*** Using epoch ' + str(best_stop_ne) + ' to train final classifier');
+	final_dict = train_final(clf, train_filenames, train_labels, valid_filenames, valid_labels, classes, sr, clip_duration, mtl_eng, best_stop_ne);
 
 	clf_out = final_dict["clf"];
 	valid_acc_out = final_dict["valid_acc"];
