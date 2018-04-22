@@ -29,7 +29,7 @@ function modspecout = mymodspec(raw_audio_pylist, fs_py )
 
     %% Create Gammatone Filterbank
     % Make the center frequency vector
-    numChannels = 136;%128;
+    numChannels = 136;
     lowFreq = 0; %?
     fcoefs = MakeERBFilters(fs,numChannels,lowFreq);
 
@@ -40,13 +40,12 @@ function modspecout = mymodspec(raw_audio_pylist, fs_py )
 
     % get signal envelope (envelope operates on columns)
     envt = envelope(x_filtered);
+    envt = downsample(envt,dec_fac); % downsample operates along cols
     envt = envt - mean(envt,1); % subtract average
 
     % bandpass signal envelope
     % filter each time vector with filter 
     bp_sig=abs(filter(w,1,envt)).^2;
-
-    bp_sig = downsample(bp_sig,dec_fac); % downsample operates along cols
 
     modspecout = 10*log10(abs(bp_sig.'));
 

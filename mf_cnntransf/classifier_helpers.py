@@ -1,0 +1,207 @@
+import numpy as np
+from sklearn import linear_model # for logistic regression
+import features_helpers as fh # for generating features
+import random # for shuffling
+
+# run one epoch and visit every training example to update classifier
+def run_epoch(clf, train_filenames, train_labels, valid_filenames, valid_labels, classes, sr, clip_duration, mtl_eng):
+	n_examples = len(train_filenames);
+
+	# for every random example
+	n_shuffle = range(n_examples);
+	random.shuffle(n_shuffle);
+	for n in n_shuffle:
+
+		# select current example
+		cur_filename = train_filenames[n];
+		cur_label = train_labels[n];
+
+		print('   ** running example ' + str(n));
+		print('      * filename: ' + cur_filename);
+		print('      * label: ' + str(cur_label));
+
+		# generate feature matrix and labels
+		cur_data_dict = fh.gen_features_single(cur_filename, cur_label, sr, clip_duration, mtl_eng);
+		cur_features = cur_data_dict["features"];
+		cur_labels = cur_data_dict["labels"]; 
+
+		# do a partial fit of weights to that feature (SGD)
+		clf = fit_data(clf, cur_features, cur_labels, classes);
+
+	# use classifier to get accuracy on training and validation sets
+	#print('   ** calculating training accuracy');
+	#train_acc = calc_accuracy(clf, train_filenames, train_labels, sr, clip_duration, mtl_eng); # TODO don't continue to use this
+	print('   ** calculating valid accuracy for epoch');
+	valid_acc = calc_accuracy(clf, valid_filenames, valid_labels, sr, clip_duration, mtl_eng);
+	print(valid_acc);
+
+	# store data
+	clf_dict = {};
+	clf_dict["clf"] = clf;
+	#clf_dict["train_acc"] = train_acc;
+	clf_dict["valid_acc"] = valid_acc;
+
+	return clf_dict;
+
+# train_final: train final classifier
+def train_final(clf, train_filenames, train_labels, valid_filenames, valid_labels, classes, sr, clip_duration, mtl_eng, stop_ne):
+	filenames = train_filenames+valid_filenames;
+	labels = np.append(train_labels,valid_labels);
+
+	n_examples = len(labels);
+
+	valid_acc = np.zeros((stop_ne+1));
+
+	for ne in range(stop_ne+1):
+
+		# for every random example
+		n_shuffle = range(n_examples);
+		random.shuffle(n_shuffle);
+		for n in n_shuffle:
+
+			# select current example
+			cur_filename = filenames[n];
+			cur_label = labels[n];
+
+			print('   ** running example ' + str(n));
+			print('      * filename: ' + cur_filename);
+			print('      * label: ' + str(cur_label));
+
+			# generate feature matrix and labels
+			cur_data_dict = fh.gen_features_single(cur_filename, cur_label, sr, clip_duration, mtl_eng);
+			cur_features = cur_data_dict["features"];
+			cur_labels = cur_data_dict["labels"]; 
+
+			# do a partial fit of weights to that feature (SGD)
+			clf = fit_data(clf, cur_features, cur_labels, classes);
+
+			# use classifier to get accuracy on training and validation sets
+			#print('   ** calculating training accuracy');
+			#train_acc = calc_accuracy(clf, train_filenames, train_labels, sr, clip_duration, mtl_eng); # TODO don't continue to use this
+		print('   ** calculating valid accuracy');
+		valid_acc_t = calc_accuracy(clf, valid_filenames, valid_labels, sr, clip_duration, mtl_eng);
+		print(valid_acc_t);
+		valid_acc[ne] = valid_acc_t;
+
+	print valid_acc;
+	# store data
+	clf_dict = {};
+	clf_dict["clf"] = clf;
+	#clf_dict["train_acc"] = train_acc;
+	clf_dict["valid_acc"] = valid_acc;
+
+	return clf_dict;
+
+# fit_data: performs sgd partial fit
+def fit_data(clf, features, labels, classes):
+	clf.partial_fit(features, labels, classes);
+	return clf;
+
+def calc_finalacc(clf, filenames, true_labels_in, sr, clip_duration, mtl_eng):
+	n_files = len(filenames);
+	n_correct = 0;
+	confusion_matrix = np.zeros((2,2));
+
+	for n_file in range(n_files):
+		filename = filenames[n_file];
+		true_label_in = true_labels_in[n_file];
+		data_dict = fh.gen_features_single(filename, true_label_in, sr, clip_duration, mtl_eng);
+		features = data_dict["features"];
+		true_labels = data_dict["labels"];
+
+		# count number of features
+		n_features = np.size(true_labels);
+		n_features_half = np.round(n_features/2);
+
+		predicted_labels = classify(clf, features);
+		ones_labels_count = np.count_nonzero(predicted_labels);
+
+		# get majority vote for predicted label
+		if ones_labels_count>=n_features_half:
+			predicted_label = 1;
+		else:
+			predicted_label = 0;
+
+		# get true label
+		true_label = true_labels[0]; #all the same
+
+		# fill in confusion matrix
+		confusion_matrix[predicted_label][true_label] += 1;
+
+		print("		true label" + str(true_label) + " predicted as " + str(predicted_label));
+
+		if predicted_label == true_label:
+			n_correct += 1;
+
+	print(str(n_correct)+'/'+str(n_files)+' correct');
+	print('confusion matrix: ');
+	print confusion_matrix;
+	return (1.0*n_correct/n_files);
+
+
+# calc_accuracy: calculate accuracy using classifier
+def calc_accuracy(clf, filenames, true_labels, sr, clip_duration, mtl_eng):
+	# generate feature matrix and labels
+	data_dict = fh.gen_features_multiple(filenames, true_labels, sr, clip_duration, mtl_eng);
+	features = data_dict["features"];
+	true_labels = data_dict["labels"]; 
+
+	mean_accuracy = clf.score(features, true_labels);
+	return mean_accuracy;
+
+# classify: classifies data using classifier and returns predicted labels
+def classify(clf, features):
+	predicted_labels = clf.predict(features);
+	return predicted_labels;
+
+# train_classifier: run algorithm for provided number of epochs
+def train_classifier(train_filenames, train_labels, valid_filenames, valid_labels, classes, n_epochs, min_epochs, sr, clip_duration, mtl_eng):
+
+	# Initialize classifier
+	clf = linear_model.SGDClassifier();
+
+	# Initialize accuracy vectors
+	train_acc = np.zeros(n_epochs);
+	valid_acc = np.zeros(n_epochs);
+	train_acc_ne = 0.0;
+	valid_acc_ne = 0.0;
+
+	# For every epoch
+	for ne in range(n_epochs):
+
+		print('*** Running epoch ' + str(ne));
+
+		# Stop training if performance is good enough
+		if (valid_acc_ne <= 0.90) or (ne <= min_epochs):
+
+			# Run sgd and update classifier
+			epoch_dict = run_epoch(clf, train_filenames, train_labels, valid_filenames, valid_labels, classes, sr, clip_duration, mtl_eng);
+			clf = epoch_dict["clf"];
+			#train_acc_ne = epoch_dict["train_acc"];
+			valid_acc_ne = epoch_dict["valid_acc"];
+
+			#train_acc[ne] = train_acc_ne;
+			valid_acc[ne] = valid_acc_ne;
+
+			#print(' ** training accuarcy ' + str(train_acc_ne));
+			print(' ** validation accuarcy ' + str(valid_acc_ne));
+
+			stop_ne = ne;
+
+		else:
+			#print('*** Stopping training at early epoch ' + str(ne) + ' (train accuracy = ' + str(train_acc_ne) + ', valid accuracy = ' + str(valid_acc_ne) + ')');
+			print('*** Stopping training at early epoch ' + str(stop_ne) + ' (valid accuracy = ' + str(valid_acc_ne) + ')');
+
+	# Train final classifier using selected params
+	ne_half = np.int(np.floor(n_epochs/2));
+	best_stop_ne = np.argmax(valid_acc[ne_half:])+ne_half;
+	print('*** Using epoch ' + str(best_stop_ne) + ' to train final classifier');
+	final_dict = train_final(clf, train_filenames, train_labels, valid_filenames, valid_labels, classes, sr, clip_duration, mtl_eng, best_stop_ne);
+
+	clf_out = final_dict["clf"];
+	valid_acc_out = final_dict["valid_acc"];
+	clf_dict = {};
+	clf_dict["clf"] = clf_out; 
+	#clf_dict["train_acc"] = train_acc;
+	clf_dict["valid_acc"] = valid_acc_out;
+	return clf_dict;
