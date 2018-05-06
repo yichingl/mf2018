@@ -112,3 +112,4 @@ plt.colorbar(format='%+2.0f dB');
 plt.tight_layout();
 plt.savefig(vis_path+'melspecgram_heli6.png');
 plt.close(fig);
+
