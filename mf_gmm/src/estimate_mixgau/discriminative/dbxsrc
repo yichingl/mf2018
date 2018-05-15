@@ -1,0 +1,1 @@
+run test/datactl test/outd test/distctl

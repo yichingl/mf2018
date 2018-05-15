@@ -1,15 +1,14 @@
 import numpy as np
 from sklearn import linear_model # for logistic regression
 import features_helpers as fh # for generating features
-import random # for shuffling
 
 # run one epoch and visit every training example to update classifier
 def run_epoch(clf, train_filenames, train_labels, classes, sr, clip_duration, mtl_eng):
 	n_examples = len(train_filenames);
 
 	# for every random example
-	n_shuffle = range(n_examples);
-	random.shuffle(n_shuffle);
+	n_shuffle = np.arange(n_examples);
+	np.random.shuffle(n_shuffle);
 	for n in n_shuffle:
 
 		# select current example
@@ -123,7 +122,7 @@ def calc_finalacc(clf, filenames, true_labels_in, sr, clip_duration, mtl_eng):
 
 	print(str(n_correct)+'/'+str(n_files)+' correct');
 	print('confusion matrix: ');
-	print confusion_matrix;
+	print(confusion_matrix);
 	return (1.0*n_correct/n_files);
 
 

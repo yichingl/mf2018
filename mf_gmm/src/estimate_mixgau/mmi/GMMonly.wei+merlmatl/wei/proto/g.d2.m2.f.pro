@@ -1,0 +1,20 @@
+<NAME> gmmproto USER
+<VECSIZE> 2 <FULL>
+<NUMMIXES> 2
+
+<MIXTURE> 0 0.500
+<MEAN>
+0.0	0.0	
+<VARIANCE>
+1.0	0.0	
+1.0	
+
+
+<MIXTURE> 1 0.500
+<MEAN>
+0.0	0.0	
+<VARIANCE>
+1.0	0.0	
+1.0	
+
+<ENDGMM>

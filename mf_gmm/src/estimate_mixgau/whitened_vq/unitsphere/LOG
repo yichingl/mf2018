@@ -1,0 +1,29 @@
+./linux/vq -i LIST.4k -d 40 -w 4 -v compute_covariance/covs -o codebook.1024.bracket4 -c 1024 -n 20 
+/usr2/med_10+11+12_data/logspec40/KindredPart1/video/Kindred/HVC264044.50-6800_40filts.lspec has only 5 frames; skip.
+/usr2/med_10+11+12_data/logspec40/MED11/set1/dev/HVC777070.50-6800_40filts.lspec has only 5 frames; skip.
+Reading input.
+Reading covariances from compute_covariance/covs
+Feature dimensionality 135
+............................................................................................................................................................................................................................................................................................................................................................................................................
+Read and whitened all 53224329 frames of input.
+VQ distortion = 136596267466752.000000, improvement = 7320844233605120.000000 after 0 iterations in 4244.810000 secs
+VQ distortion = 1798183452672.000000, improvement = 74.963478 after 1 iterations in 8364.510000 secs
+VQ distortion = 1210977353728.000000, improvement = 0.484903 after 2 iterations in 12433.480000 secs
+VQ distortion = 924039053312.000000, improvement = 0.310526 after 3 iterations in 16476.990000 secs
+VQ distortion = 758947053568.000000, improvement = 0.217528 after 4 iterations in 20520.930000 secs
+VQ distortion = 691209961472.000000, improvement = 0.097998 after 5 iterations in 24564.580000 secs
+VQ distortion = 650518921216.000000, improvement = 0.062552 after 6 iterations in 28606.850000 secs
+VQ distortion = 623616000000.000000, improvement = 0.043140 after 7 iterations in 32639.900000 secs
+VQ distortion = 604637691904.000000, improvement = 0.031388 after 8 iterations in 36692.050000 secs
+VQ distortion = 590208630784.000000, improvement = 0.024447 after 9 iterations in 40720.710000 secs
+VQ distortion = 578399371264.000000, improvement = 0.020417 after 10 iterations in 44781.680000 secs
+VQ distortion = 570466762752.000000, improvement = 0.013905 after 11 iterations in 48822.200000 secs
+VQ distortion = 561847664640.000000, improvement = 0.015341 after 12 iterations in 52856.300000 secs
+VQ distortion = 556334186496.000000, improvement = 0.009910 after 13 iterations in 56901.140000 secs
+VQ distortion = 551935868928.000000, improvement = 0.007969 after 14 iterations in 60929.970000 secs
+VQ distortion = 547192340480.000000, improvement = 0.008669 after 15 iterations in 64963.350000 secs
+VQ distortion = 540618391552.000000, improvement = 0.012160 after 16 iterations in 68997.540000 secs
+VQ distortion = 534502604800.000000, improvement = 0.011442 after 17 iterations in 73027.460000 secs
+VQ distortion = 529766580224.000000, improvement = 0.008940 after 18 iterations in 77057.960000 secs
+VQ distortion = 525374259200.000000, improvement = 0.008360 after 19 iterations in 81075.510000 secs
+VQ exited after 20 iterations with total distortion 525374259200.000000

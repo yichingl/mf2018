@@ -1,0 +1,15 @@
+./linux/getcov -i MFC20list.9925 -d 20 -w 4 -o covar.mfc20.w4 
+Reading input.
+........../usr2/med_10+11+12_data/mfc20/MED11/eval/HVC560243.50-6800_40filts.mfc20 has only 5 frames; skipping.
+./usr2/med_10+11+12_data/mfc20/MED11/eval/HVC241095.50-6800_40filts.mfc20 has only 5 frames; skipping.
+........................................................./usr2/med_10+11+12_data/mfc20/MED12/eval/57/HVC579212.50-6800_40filts.mfc20 has only 5 frames; skipping.
+..................../usr2/med_10+11+12_data/mfc20/MED12/events/E021/HVC172109.50-6800_40filts.mfc20 has only 5 frames; skipping.
+/usr2/med_10+11+12_data/mfc20/MED12/events/E026/HVC174279.50-6800_40filts.mfc20 has only 5 frames; skipping.
+./usr2/med_10+11+12_data/mfc20/MED12/events/E030/HVC828682.50-6800_40filts.mfc20 has only 5 frames; skipping.
+...../usr2/med_10+11+12_data/mfc20/KindredPart1/video/Kindred/HVC138130.50-6800_40filts.mfc20 has only 11 frames; skipping.
+/usr2/med_10+11+12_data/mfc20/KindredPart1/video/Kindred/HVC323768.50-6800_40filts.mfc20 has only 5 frames; skipping.
+../usr2/med_10+11+12_data/mfc20/KindredPart1/video/Kindred/HVC971155.50-6800_40filts.mfc20 has only 5 frames; skipping.
+./usr2/med_10+11+12_data/mfc20/KindredPart1/video/Kindred/HVC650451.50-6800_40filts.mfc20 has only 5 frames; skipping.
+..
+Computed covariances. 129676802x180 data.
+Computed covariance from 129676802 frames of input.

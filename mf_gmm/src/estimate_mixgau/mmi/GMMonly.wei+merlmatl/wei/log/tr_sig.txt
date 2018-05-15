@@ -1,0 +1,239 @@
+
+GMM Training for <gmmproto>
+ Mixture		:  1
+ Cov Matrix Type	:  Full
+ Vector Size		:  2
+ Number of Files	:  1
+ Number of Frames	:  100000
+
+
+ - Initializing ... 
+   - Loop: 0 ,  Residual: 1.283747e+00,  Decreased : -12837468.3479%
+   - Loop: 1 ,  Residual: 1.283747e+00,  Decreased : -0.0000%
+Init - OK!
+
+
+ - Re-estimating ... 
+   - Loop: 1 ,  Avg Log Likelihood: -2.414309e+00,  Increment : -24143094.7657%
+   - Loop: 2 ,  Avg Log Likelihood: -2.414309e+00,  Increment : 0.0000%
+ - Converged at loop 2!
+Training Finished. :-)
+
+
+GMM Training for <gmmproto>
+ Mixture		:  2
+ Cov Matrix Type	:  Full
+ Vector Size		:  2
+ Number of Files	:  1
+ Number of Frames	:  100000
+
+
+ - Initializing ... 
+   - Loop: 0 ,  Residual: 1.280422e+00,  Decreased : -12804220.6789%
+   - Loop: 1 ,  Residual: 2.182535e-01,  Decreased : 82.9539%
+   - Loop: 2 ,  Residual: 2.170212e-01,  Decreased : 0.5646%
+   - Loop: 3 ,  Residual: 2.169848e-01,  Decreased : 0.0168%
+   - Loop: 4 ,  Residual: 2.169836e-01,  Decreased : 0.0006%
+Init - OK!
+
+
+ - Re-estimating ... 
+   - Loop: 1 ,  Avg Log Likelihood: -2.172523e+00,  Increment : -21725232.8137%
+   - Loop: 2 ,  Avg Log Likelihood: -2.171630e+00,  Increment : 0.0411%
+   - Loop: 3 ,  Avg Log Likelihood: -2.171588e+00,  Increment : 0.0019%
+   - Loop: 4 ,  Avg Log Likelihood: -2.171585e+00,  Increment : 0.0001%
+ - Converged at loop 4!
+Training Finished. :-)
+
+
+GMM Training for <gmmproto>
+ Mixture		:  3
+ Cov Matrix Type	:  Full
+ Vector Size		:  2
+ Number of Files	:  1
+ Number of Frames	:  100000
+
+
+ - Initializing ... 
+   - Loop: 0 ,  Residual: 1.274998e+00,  Decreased : -12749978.3491%
+   - Loop: 1 ,  Residual: 8.861526e-01,  Decreased : 30.4975%
+   - Loop: 2 ,  Residual: 8.770797e-01,  Decreased : 1.0238%
+   - Loop: 3 ,  Residual: 8.725714e-01,  Decreased : 0.5140%
+   - Loop: 4 ,  Residual: 8.682495e-01,  Decreased : 0.4953%
+Init - OK!
+
+
+ - Re-estimating ... 
+   - Loop: 1 ,  Avg Log Likelihood: -2.170453e+00,  Increment : -21704528.7436%
+   - Loop: 2 ,  Avg Log Likelihood: -2.166473e+00,  Increment : 0.1834%
+   - Loop: 3 ,  Avg Log Likelihood: -2.164929e+00,  Increment : 0.0713%
+   - Loop: 4 ,  Avg Log Likelihood: -2.162911e+00,  Increment : 0.0932%
+   - Loop: 5 ,  Avg Log Likelihood: -2.160152e+00,  Increment : 0.1276%
+   - Loop: 6 ,  Avg Log Likelihood: -2.156481e+00,  Increment : 0.1700%
+   - Loop: 7 ,  Avg Log Likelihood: -2.151827e+00,  Increment : 0.2158%
+   - Loop: 8 ,  Avg Log Likelihood: -2.146391e+00,  Increment : 0.2526%
+   - Loop: 9 ,  Avg Log Likelihood: -2.140765e+00,  Increment : 0.2621%
+   - Loop: 10 ,  Avg Log Likelihood: -2.135673e+00,  Increment : 0.2379%
+ - Break at loop 10!
+Training Finished. :-)
+
+
+GMM Training for <gmmproto>
+ Mixture		:  4
+ Cov Matrix Type	:  Full
+ Vector Size		:  2
+ Number of Files	:  1
+ Number of Frames	:  100000
+
+
+ - Initializing ... 
+   - Loop: 0 ,  Residual: 1.267189e+00,  Decreased : -12671886.5073%
+   - Loop: 1 ,  Residual: 8.866122e-01,  Decreased : 30.0329%
+   - Loop: 2 ,  Residual: 9.337900e-01,  Decreased : -5.3211%
+   - Loop: 3 ,  Residual: 9.565642e-01,  Decreased : -2.4389%
+   - Loop: 4 ,  Residual: 9.720470e-01,  Decreased : -1.6186%
+Init - OK!
+
+
+ - Re-estimating ... 
+   - Loop: 1 ,  Avg Log Likelihood: -2.148103e+00,  Increment : -21481031.9223%
+   - Loop: 2 ,  Avg Log Likelihood: -2.139154e+00,  Increment : 0.4166%
+   - Loop: 3 ,  Avg Log Likelihood: -2.135579e+00,  Increment : 0.1671%
+   - Loop: 4 ,  Avg Log Likelihood: -2.133660e+00,  Increment : 0.0899%
+   - Loop: 5 ,  Avg Log Likelihood: -2.132596e+00,  Increment : 0.0499%
+   - Loop: 6 ,  Avg Log Likelihood: -2.131997e+00,  Increment : 0.0281%
+   - Loop: 7 ,  Avg Log Likelihood: -2.131658e+00,  Increment : 0.0159%
+   - Loop: 8 ,  Avg Log Likelihood: -2.131466e+00,  Increment : 0.0090%
+   - Loop: 9 ,  Avg Log Likelihood: -2.131357e+00,  Increment : 0.0051%
+   - Loop: 10 ,  Avg Log Likelihood: -2.131295e+00,  Increment : 0.0029%
+ - Break at loop 10!
+Training Finished. :-)
+
+
+GMM Training for <gmmproto>
+ Mixture		:  5
+ Cov Matrix Type	:  Full
+ Vector Size		:  2
+ Number of Files	:  1
+ Number of Frames	:  100000
+
+
+ - Initializing ... 
+   - Loop: 0 ,  Residual: 1.258095e+00,  Decreased : -12580946.6553%
+   - Loop: 1 ,  Residual: 8.870185e-01,  Decreased : 29.4949%
+   - Loop: 2 ,  Residual: 9.295977e-01,  Decreased : -4.8002%
+   - Loop: 3 ,  Residual: 9.275961e-01,  Decreased : 0.2153%
+   - Loop: 4 ,  Residual: 9.285637e-01,  Decreased : -0.1043%
+Init - OK!
+
+
+ - Re-estimating ... 
+   - Loop: 1 ,  Avg Log Likelihood: -2.135713e+00,  Increment : -21357129.2915%
+   - Loop: 2 ,  Avg Log Likelihood: -2.081556e+00,  Increment : 2.5358%
+   - Loop: 3 ,  Avg Log Likelihood: -2.069226e+00,  Increment : 0.5924%
+   - Loop: 4 ,  Avg Log Likelihood: -2.057665e+00,  Increment : 0.5587%
+   - Loop: 5 ,  Avg Log Likelihood: -2.046990e+00,  Increment : 0.5188%
+   - Loop: 6 ,  Avg Log Likelihood: -2.037525e+00,  Increment : 0.4624%
+   - Loop: 7 ,  Avg Log Likelihood: -2.029314e+00,  Increment : 0.4030%
+   - Loop: 8 ,  Avg Log Likelihood: -2.022303e+00,  Increment : 0.3455%
+   - Loop: 9 ,  Avg Log Likelihood: -2.016404e+00,  Increment : 0.2917%
+   - Loop: 10 ,  Avg Log Likelihood: -2.011502e+00,  Increment : 0.2431%
+ - Break at loop 10!
+Training Finished. :-)
+
+
+GMM Training for <gmmproto>
+ Mixture		:  6
+ Cov Matrix Type	:  Full
+ Vector Size		:  2
+ Number of Files	:  1
+ Number of Frames	:  100000
+
+
+ - Initializing ... 
+   - Loop: 0 ,  Residual: 1.264918e+00,  Decreased : -12649175.5216%
+   - Loop: 1 ,  Residual: 8.861677e-01,  Decreased : 29.9424%
+   - Loop: 2 ,  Residual: 9.296266e-01,  Decreased : -4.9041%
+   - Loop: 3 ,  Residual: 9.247075e-01,  Decreased : 0.5291%
+   - Loop: 4 ,  Residual: 9.157931e-01,  Decreased : 0.9640%
+Init - OK!
+
+
+ - Re-estimating ... 
+   - Loop: 1 ,  Avg Log Likelihood: -2.131899e+00,  Increment : -21318986.9098%
+   - Loop: 2 ,  Avg Log Likelihood: -2.079128e+00,  Increment : 2.4753%
+   - Loop: 3 ,  Avg Log Likelihood: -2.066895e+00,  Increment : 0.5884%
+   - Loop: 4 ,  Avg Log Likelihood: -2.055585e+00,  Increment : 0.5472%
+   - Loop: 5 ,  Avg Log Likelihood: -2.045206e+00,  Increment : 0.5049%
+   - Loop: 6 ,  Avg Log Likelihood: -2.036032e+00,  Increment : 0.4486%
+   - Loop: 7 ,  Avg Log Likelihood: -2.028061e+00,  Increment : 0.3915%
+   - Loop: 8 ,  Avg Log Likelihood: -2.021230e+00,  Increment : 0.3368%
+   - Loop: 9 ,  Avg Log Likelihood: -2.015448e+00,  Increment : 0.2860%
+   - Loop: 10 ,  Avg Log Likelihood: -2.010606e+00,  Increment : 0.2403%
+ - Break at loop 10!
+Training Finished. :-)
+
+
+GMM Training for <gmmproto>
+ Mixture		:  7
+ Cov Matrix Type	:  Full
+ Vector Size		:  2
+ Number of Files	:  1
+ Number of Frames	:  100000
+
+
+ - Initializing ... 
+   - Loop: 0 ,  Residual: 1.255371e+00,  Decreased : -12553707.4555%
+   - Loop: 1 ,  Residual: 8.864706e-01,  Decreased : 29.3855%
+   - Loop: 2 ,  Residual: 9.286318e-01,  Decreased : -4.7560%
+   - Loop: 3 ,  Residual: 9.240172e-01,  Decreased : 0.4969%
+   - Loop: 4 ,  Residual: 9.136380e-01,  Decreased : 1.1233%
+Init - OK!
+
+
+ - Re-estimating ... 
+   - Loop: 1 ,  Avg Log Likelihood: -2.130920e+00,  Increment : -21309200.2756%
+   - Loop: 2 ,  Avg Log Likelihood: -2.077986e+00,  Increment : 2.4841%
+   - Loop: 3 ,  Avg Log Likelihood: -2.065780e+00,  Increment : 0.5874%
+   - Loop: 4 ,  Avg Log Likelihood: -2.054546e+00,  Increment : 0.5438%
+   - Loop: 5 ,  Avg Log Likelihood: -2.044293e+00,  Increment : 0.4991%
+   - Loop: 6 ,  Avg Log Likelihood: -2.035243e+00,  Increment : 0.4427%
+   - Loop: 7 ,  Avg Log Likelihood: -2.027378e+00,  Increment : 0.3864%
+   - Loop: 8 ,  Avg Log Likelihood: -2.020631e+00,  Increment : 0.3328%
+   - Loop: 9 ,  Avg Log Likelihood: -2.014912e+00,  Increment : 0.2830%
+   - Loop: 10 ,  Avg Log Likelihood: -2.010112e+00,  Increment : 0.2382%
+ - Break at loop 10!
+Training Finished. :-)
+
+
+GMM Training for <gmmproto>
+ Mixture		:  8
+ Cov Matrix Type	:  Full
+ Vector Size		:  2
+ Number of Files	:  1
+ Number of Frames	:  100000
+
+
+ - Initializing ... 
+   - Loop: 0 ,  Residual: 1.250006e+00,  Decreased : -12500057.4814%
+   - Loop: 1 ,  Residual: 8.867155e-01,  Decreased : 29.0629%
+   - Loop: 2 ,  Residual: 9.278748e-01,  Decreased : -4.6417%
+   - Loop: 3 ,  Residual: 9.228844e-01,  Decreased : 0.5378%
+   - Loop: 4 ,  Residual: 9.125118e-01,  Decreased : 1.1239%
+Init - OK!
+
+
+ - Re-estimating ... 
+   - Loop: 1 ,  Avg Log Likelihood: -2.130451e+00,  Increment : -21304513.4264%
+   - Loop: 2 ,  Avg Log Likelihood: -2.077160e+00,  Increment : 2.5014%
+   - Loop: 3 ,  Avg Log Likelihood: -2.065022e+00,  Increment : 0.5843%
+   - Loop: 4 ,  Avg Log Likelihood: -2.053879e+00,  Increment : 0.5396%
+   - Loop: 5 ,  Avg Log Likelihood: -2.043726e+00,  Increment : 0.4943%
+   - Loop: 6 ,  Avg Log Likelihood: -2.034766e+00,  Increment : 0.4384%
+   - Loop: 7 ,  Avg Log Likelihood: -2.026974e+00,  Increment : 0.3829%
+   - Loop: 8 ,  Avg Log Likelihood: -2.020284e+00,  Increment : 0.3301%
+   - Loop: 9 ,  Avg Log Likelihood: -2.014607e+00,  Increment : 0.2810%
+   - Loop: 10 ,  Avg Log Likelihood: -2.009834e+00,  Increment : 0.2369%
+ - Break at loop 10!
+Training Finished. :-)
+

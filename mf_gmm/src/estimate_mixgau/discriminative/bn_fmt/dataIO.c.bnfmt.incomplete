@@ -1,0 +1,95 @@
+#include "discriminative.h"
+
+// Read data for all classes
+void  getfeatures(char*, float***, int*, int*, int);
+
+void readallclasses(char *ctllist, int dim, 
+            float *****odata, // nclass, nseqs, len, dim
+            int *onclass, 
+            int **onseqs,    // nclas
+            int ***olenseq)  // nclass, nseqs
+{
+    float ****data;
+    int i, j, nclass, *nseqs, **len, fdim;
+    char filen[512], filen2[512];
+    FILE *fctl, *fp;
+
+    if ((fctl = fopen(ctllist,"r")) == NULL)
+        QUIT(("Unable to open %s for reading\n",ctllist))
+    for (nclass=0; fscanf(fctl,"%s",filen) != EOF; nclass++); rewind(fctl);
+    *onclass = nclass;
+    *onseqs = nseqs = (int *)calloc(nclass,sizeof(int));
+    *odata  = data = (float ****)calloc(nclass,sizeof(float***));
+    *olenseq = len = (int **) calloc(nclass,sizeof(int *));
+
+    for (i=0; i<nclass; i++) {
+        fscanf(fctl,"%s",filen);
+        if ((fp = fopen(filen,"r")) == NULL)
+            QUIT(("Unable to open %s for reading\n",filen))
+        for (j=0; fscanf(fp,"%s",filen2) != EOF; j++); rewind(fp);
+        nseqs[i] = j;
+        data[i] = (float ***)calloc(nseqs[i],sizeof(float **));
+        len[i] = (int *)calloc(nseqs[i],sizeof(int));
+        for (j=0; j<nseqs[i]; j++){
+            fscanf(fp,"%s",filen2);
+            getfeatures(filen2, data[i]+j, len[i]+j, &fdim, dim);
+        }
+        fclose(fp);
+    }
+    fclose(fctl);
+
+    return;
+
+}
+
+void  getfeatures(char *ctlfile, float ***feat, int *nfr, int *featdim, 
+          int cepdim)
+{
+    float **cep, **features=NULL, **outfeat, cepmean[100];
+    int i,j,beg,end,frmno,nfrm,outdim,totframes=0,begseg;
+    char fname[256],prevfile[256],*dummy="/dev/null";
+    FILE *fp;
+
+    outdim = cepdim;
+    if ((fp=fopen(ctlfile,"r"))==NULL) QUIT(("Unable to open %s\n",ctlfile))
+    while(fscanf(fp,"%s %d %d",fname,&beg,&end)!=EOF)
+        totframes += end - beg + 1;
+    rewind(fp);
+
+    outfeat = (float **)alloc2d(totframes,outdim,sizeof(float));
+    *featdim = outdim; *feat = outfeat;
+
+    strcpy(prevfile,dummy); frmno = 0;
+    while(fscanf(fp,"%s %d %d",fname,&beg,&end)!=EOF){
+        if (beg < 1) beg = 1;
+        if (strcmp(fname,prevfile) != 0){
+            printf("Reading from %s\n",fname); fflush(stdout);
+            if (features != NULL) free2d((void **)features);
+            if (read_cep(fname,&cep,&nfrm,cepdim) == IO_ERR)
+                QUIT(("Unable to read %s\n",fname))
+            features = (float **)alloc2d(nfrm,2*cepdim,sizeof(float));
+            for (i=0;i<nfrm;i++){
+                for(j=0;j<cepdim;j++) features[i][j] = cep[i][j];
+            }
+            free2d((void **)cep);
+        }
+        if (end >= nfrm) end = nfrm;
+        if (end <= beg) continue; // Ignore segment
+//            QUIT(("Beg %d, End %d and nfr %d error %s\n",beg,end,nfrm,fname))
+        for (j=0;j<outdim;j++) cepmean[j] = 0; begseg = frmno;
+        for (i=beg;i<end;i++){
+            for (j=0;j<outdim;j++) outfeat[frmno][j] = features[i][j];
+//            for (j=0;j<outdim;j++) cepmean[j] += features[i][j];
+            frmno++;
+        }
+//        for (j=0;j<outdim;j++) cepmean[j] /= (float)(end-beg+1);
+//        for (i=begseg;i<frmno;i++){
+//           for (j=0;j<cepdim;j++) outfeat[i][j] -= cepmean[j];
+//        }
+        strcpy(prevfile,fname);
+    }
+    if (features != NULL) free2d((void **)features);
+    printf("%d of %d total frames obtained from cepfiles\n",frmno,totframes);
+    *nfr = frmno;
+    return;
+}

@@ -1,0 +1,48 @@
+% Read in Model
+
+function [gmm, iMod] = loadgmm(strModPath)
+
+if nargin ~= 1
+    printf('loadgmm(strModPath)');
+    exit(-1);
+end
+
+fid = fopen(strModPath, 'rt');
+if fid == -1
+    s = sprintf('cannot open %s for read', strModPath);
+end
+
+iMod = fscanf(fid, '<MODNUM> %d\n', 1);
+gmm(iMod).name = 0;
+gmm(iMod).dim = 0;
+for i = 1:iMod
+    gmm(i).name = fscanf(fid, '<NAME> %s USER\n', 1);
+    gmm(i).dim = fscanf(fid, '<VECSIZE> %d', 1);
+    gmm(i).ctype = fscanf(fid, '%s\n', 1);
+    gmm(i).mix = fscanf(fid, '<NUMMIXES> %d\n', 1);
+    
+    gmm(i).wt  = zeros(1, gmm(i).mix);
+    gmm(i).mu  = zeros(gmm(i).dim, gmm(i).mix);
+    gmm(i).cov = zeros(gmm(i).dim, gmm(i).dim, gmm(i).mix);
+    for j = 1:gmm(i).mix
+        s = fscanf(fid, '<MIXTURE> %d', 1);
+        gmm(i).wt(j)  = fscanf(fid, '%f\n', 1);
+        s = fscanf(fid, '%s\n', 1); % <MEAN>
+        gmm(i).mu(:, j) = fscanf(fid, '%f', gmm(i).dim);
+        s = fscanf(fid, '%s\n', 1); % <VARIANCE>
+        if strcmp(gmm(i).ctype, '<DIAG>') == 1
+            for k = 1:gmm(i).dim
+                gmm(i).cov(k, k, j) = fscanf(fid, '%f', 1);
+            end
+        else
+            gmm(i).cov(:,:,j) = fscanf(fid, '%f', [gmm(i).dim gmm(i).dim]);
+            gmm(i).cov(:,:,j) = gmm(i).cov(:,:,j)';
+        end
+        fscanf(fid, '\n', 1);
+    end
+    s = fscanf(fid, '%s\n', 1); % <ENDGMM>
+    
+    if abs(sum(gmm(i).wt) - 1) > 1e-3
+        s = sprintf('sum of mix weight - %.3f does not equal 1.\n', sum(wt))
+    end
+end

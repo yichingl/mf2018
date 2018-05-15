@@ -1,0 +1,27 @@
+#ifndef _SR_MATH_EX
+#define _SR_MATH_EX
+
+int Cholesky(double **A, double **L, int size);
+
+double InvertCov(double** c, double **invc, int n);
+
+double LogCovDet(double** c, int n);
+
+int
+matrixinvert_dbl(double **ainv,
+             float **a,
+	     int len);
+	     
+int ludcmp_dbl(double **a,
+	       int   n,
+	       int   *indx,
+	       double *d);
+
+int lubksb_dbl(
+		double **a, 
+       int   n, 
+       int   *indx, 
+       double b[],
+       double x[]
+	      );
+#endif //_SR_MATH_EX

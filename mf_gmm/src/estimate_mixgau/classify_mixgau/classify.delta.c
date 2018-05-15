@@ -1,0 +1,385 @@
+/*---------------------------------------------------------------------------
+* Program that actually trains a gaussian mixture distribution using EM
+* given a control file and the parameters (no. of mixture components needed)
+* The mfc file is read, and a combination of mfc and delta-mfc features is
+* obtained and the joint feature is used for the distribution estimation.
+*----------------------------------------------------------------------------*/
+#include "header.h"
+
+int getfeatures(char*, int, int, int, float, float***, int*);
+void  estimate_mixture_gau(float**,int,int,int,float**,float**,float*,int);
+void read_classes(char*,char***,int*,int**,int*,float****);
+float likelihood(float**,int,float**,int,int);
+float gauss(float*,float*,float*,float,int);
+
+
+#define USAGE "USAGE:\n%s -c <control file> \\\n\t-i <indir (def none)> \\\n\t-e <filename extension (def none)> \\\n\t-m <for CMN> \\\n\t-l <for delta feats> \\\n\t-d <Classfile> \\\n\t-o <outputfile (def none)> \\\n\t-r <frac [0-1] of 0th component range to filter out vectors (def 0)>\n"
+
+void getfilename(char *filename,char *indir,char *filehead,char *inext)
+{
+    if (inext) {
+        if (indir) sprintf(filename,"%s/%s.%s",indir,filehead,inext);
+        else sprintf(filename,"%s.%s",filehead,inext);
+    }
+    else {
+        if (indir) sprintf(filename,"%s/%s",indir,filehead);
+        else sprintf(filename,"%s",filehead);
+    }
+    return;
+}
+
+
+int main(int argc, char **argv)
+{
+    float ***pars,lkhd;
+    int  featdim,i,j,*ngau,nclass,dim, CMN=0, DELTA=0;
+    float FILTERLOWEGY=0;
+    char *ctlfile=NULL,*outfile=NULL,*classfile=NULL,*indir=NULL,*inext=NULL;
+    char **class, filename[512], *filehead,sw,line[8192];
+    FILE *ctlfp=NULL,*fout=NULL;
+
+    if (argc == 1) {
+        printf(USAGE,argv[0]); exit (0);
+    }
+    for (i=1;i<argc;++i) {
+        if (argv[i][0]!='-')
+            QUIT ((USAGE,argv[0]));
+        sw = argv[i][1];
+        switch(sw)
+        {
+            case 'e': case 'E':
+            {
+                inext = argv[++i];
+                break;
+            }
+            case 'i':
+            {
+                indir = argv[++i];
+                break;
+            }
+            case 'c': case 'C':
+            {
+                ctlfile = argv[++i];
+                break;
+            }
+            case 'm':
+            {
+                CMN = 1;
+                break;
+            }
+            case 'l':
+            {
+                DELTA = 1;
+                break;
+            }
+            case 'r':
+            {
+                sscanf(argv[++i],"%f",&FILTERLOWEGY);
+                break;
+            }
+            case 'o': case 'O':
+            {
+                outfile = argv[++i];
+                break;
+            }
+            case 'd':
+            {
+                classfile = argv[++i];
+                break;
+            }
+            default:
+            {
+                printf(USAGE,argv[0]); exit(0);
+            }
+
+        }
+    }
+
+    if (outfile)
+        if ((fout=fopen(outfile,"w")) == NULL)
+            QUIT(("Unable to write %s\n",outfile))
+
+    if ((ctlfp = fopen(ctlfile,"r")) == NULL)
+        QUIT(("Unable to open control file %s for reading\n",ctlfile))
+
+    read_classes(classfile,&class,&nclass,&ngau,&featdim,&pars);
+    dim =  DELTA ? featdim/2 : featdim;
+
+    i = 0;
+    while (fgets(line,8192,ctlfp) != NULL) {
+        float max = -1e+30;
+        float **featlist[100];
+	int maxid, featlen[100], nfeat, ll;
+
+        /* Get features for all files and concatenate them */
+        filehead = strtok(line," \t\n"); nfeat = 0;
+        while (filehead != NULL) {
+            getfilename(filename,indir,filehead,inext);
+
+            if (getfeatures(filename,dim,CMN,DELTA,FILTERLOWEGY,
+                            &featlist[nfeat],&featlen[nfeat]) == -1) {
+                printf("Error reading/computing features for %s\n",filename);
+                nfeat--;
+            }
+            nfeat++;
+            filehead = strtok(NULL," \t\n");
+        }
+
+        max = -1e+30; maxid = 0;
+        for (j=0;j<nclass;j++){
+            lkhd = 0;
+            for (ll=0; ll<nfeat; ll++) {
+                lkhd += likelihood(featlist[ll],featlen[ll],pars[j],
+                                   ngau[j],featdim);
+            }
+            if (outfile) fprintf(fout,"%f ",lkhd);
+	    if (max < lkhd) {
+	  	max = lkhd;
+		maxid = j;
+            }
+        }
+        if (outfile) {fprintf(fout,"\n"); fflush(fout);}
+    	fprintf(stdout,"Segment no. %d classified as %s\n",i++,class[maxid]);
+        for (ll=0; ll<nfeat; ll++) free2d((void **)featlist[ll]);
+    }
+    if (outfile) fclose(fout);
+    return 0;
+}
+
+
+/*==========================================================================*/
+/* Routine to read mfc file and get feature mfc+deltamfc */
+
+int getfeatures(char * filename, int dim, int CMN, int DELTA, 
+                float FILTERLOWEGY, float ***feat, int *nfr)
+{
+    float **cep, **outfeat;
+    int i,j,outdim,filenfrm;
+
+    if (read_cep(filename,&cep,&filenfrm,dim) == IO_ERR)
+        return -1;
+
+    if (DELTA && filenfrm < 5) {
+        printf("%s too short to compute deltas\n",filename);
+        free2d((void**)cep);
+        return -1;
+    }
+
+    if (FILTERLOWEGY > 0) { /* Remove lowest egy vectors within 5% of min egy */
+        float min = 1e+30;
+        float max = -1e+30;
+        float c0thresh;
+        int k;
+
+        for (i=0; i<filenfrm; i++) {
+            if (cep[i][0] < min) min = cep[i][0];
+            if (cep[i][0] > max) max = cep[i][0];
+        }
+        c0thresh = min + (max - min)*FILTERLOWEGY;
+        for (i=0,k=0; i<filenfrm; i++) {
+            if (cep[i][0] < c0thresh) continue;
+            for (j=0; j<dim; j++) cep[k][j] = cep[i][j];
+            k++;
+        }
+        filenfrm = k;
+    }
+
+    *nfr = DELTA ? filenfrm - 4 : filenfrm;
+    outdim = DELTA ? 2*dim : dim;
+    *feat = outfeat = (float **)alloc2d(*nfr,outdim,sizeof(float));
+
+    if (CMN) {
+        float *mean;
+        mean = (float *)calloc(dim,sizeof(float));
+        for (i=0; i<filenfrm; i++)
+            for (j=0; j<dim; j++) mean[j] += cep[i][j];
+        for (j=0; j<dim; j++) mean[j] /= (float)(filenfrm);
+        for (i=0; i<filenfrm; i++)
+            for (j=0; j<dim; j++) cep[i][j] -= mean[j];
+        free(mean);
+    }
+
+    if (DELTA) {
+        int k;
+        for (i=2;i<*nfr-2;i++){
+            for(j=0;j<dim;j++) outfeat[i][j] = cep[i][j];
+            for(k=0;k<dim;k++,j++) {
+                 outfeat[i][j] = 0.67*cep[i+1][k]+0.33*cep[i+2][k] -
+                          0.67*cep[i-1][k]-0.33*cep[i-2][k];
+            }
+        }
+        for(j=0;j<dim;j++) {
+            outfeat[0][j] = cep[0][j];
+            outfeat[1][j] = cep[1][j];
+            outfeat[*nfr-1][j] = cep[*nfr-1][j];
+            outfeat[*nfr-2][j] = cep[*nfr-2][j];
+            outfeat[0][j+dim]=outfeat[2][j+dim];
+            outfeat[1][j+dim]=outfeat[2][j+dim];
+            outfeat[*nfr-1][j+dim]=outfeat[*nfr-3][j+dim];
+            outfeat[*nfr-2][j+dim]=outfeat[*nfr-3][j+dim];
+        }
+    }
+    else {
+        for (i=0; i<filenfrm; i++)
+            for (j=0; j<dim; j++) outfeat[i][j] = cep[i][j];
+    }
+
+    free2d((void**)cep);
+    return 0;
+}
+
+/*===========================================================*/
+
+#define TOPN 4
+
+float likelihood(float **xi, int nframes, float **pars, 
+                 int ngau, int Ndim)
+{
+    float lkhd,Tau[TOPN],max,sum,*p,tmp,*x;
+    int i,j,l,k,m,skip;
+    int top[TOPN]={0,1,2,3};
+    int otop[TOPN]={0,1,2,3};
+
+    lkhd = 0;
+    for (i=0;i<nframes;++i) {
+        x = xi[i];
+
+        p = pars[otop[0]]; k = 0;
+        Tau[0] = p[k++];
+        for (j=0;j<Ndim;++j) {
+            tmp = x[j] - p[k++];
+            Tau[0] -= tmp * tmp * p[k++];
+        }
+        top[0] = otop[0];
+
+        for (l=1; l<TOPN; l++) {
+            p = pars[otop[l]]; k = 0;
+            max = p[k++];
+            for (j=0;j<Ndim;++j) {
+                tmp = x[j] - p[k++];
+                max -= tmp * tmp * p[k++];
+            }
+            m = l;
+            while (m > 0 && max > Tau[m-1]) {
+                Tau[m] = Tau[m-1];
+                top[m] = top[m-1];
+                m--;
+            }
+            Tau[m] = max; top[m] = l;
+        }
+
+        for (l=0; l<ngau; l++){
+            p = pars[l]; k = 0; skip = 0;
+            max = p[k++];
+            for (j=0;j<Ndim;++j) {
+                tmp = x[j] - p[k++];
+                max -= tmp * tmp * p[k++];
+                if (max < Tau[TOPN-1]) {skip = 1; break;}
+            }
+            if (skip) continue;
+            m = TOPN-1;
+            while (m > 0 && max > Tau[m-1]) {
+                Tau[m] = Tau[m-1];
+                top[m] = top[m-1];
+                m--;
+            }
+            Tau[m] = max; top[m] = l;
+        }
+        for (l=0; l<TOPN; l++) otop[l] = top[l];
+
+        sum = 0.0; max = Tau[0];
+        for (j=0;j<TOPN;++j) {
+            Tau[j] = exp(Tau[j] - max + 10);
+            sum += Tau[j];
+        }
+        lkhd += max + log(sum) - 10;
+    }
+    return(lkhd);
+}
+
+/*---------------------------------------------------------------------------*/
+
+float gauss(float *x,float *mean,float *invvar,float corprod,int Ndim)
+{
+    auto int	j;
+    auto float	power=0,density;
+
+    for (j=0;j<Ndim;++j)
+	power += (x[j]-mean[j])*(x[j]-mean[j])*invvar[j];
+    power /= -2.0;
+    density = corprod + power;
+    return(density);
+}
+/*---------------------------------------------------------------------------*/
+
+// Read class info from the given file. Kinda long..
+void read_classes(char *classfile, char ***class, int *nclass, 
+                  int **ngau, int *dim, 
+                  float ****pars)
+{
+    float **tmean,**tvar,*tmixw, ***tpars;
+    int   ncls,*tngau,ndim,pdim=-1;
+    char  **clsname;
+    char  modelfile[8192],line[8192];
+    int i,j,k,clsid = 0;
+
+    FILE *fp, *fp2;
+
+    // Ignore all lines beginning with '#' and find how many classes
+    if ((fp=fopen(classfile,"r")) == NULL)
+        QUIT(("Unable to open %s for reading\n",classfile))
+    fgets(line,8192,fp);
+    while(line[0]=='#') fgets(line,8192,fp);
+    for(ncls=1;fgets(line,8192,fp)!=NULL;ncls++);
+    rewind(fp);
+    fgets(line,8192,fp);
+    while(line[0]=='#') fgets(line,8192,fp);
+
+    // Preallocate outermost pointer for multidimensional arrays
+    clsname = (char **)alloc2d(ncls,100,sizeof(char));
+    tngau = (int *)calloc(ncls,sizeof(int));
+    tpars = (float ***)calloc(ncls,sizeof(float **));
+
+    // Since we already have a line, use a do-until loop.
+    do{
+        sscanf(line,"%s %s",clsname[clsid],modelfile);
+        printf("Reading models for %s\n",clsname[clsid]);
+        if ((fp2=fopen(modelfile,"r")) == NULL)
+            QUIT(("Unable to open %s for reading\n",modelfile))
+        fscanf(fp2,"%d %d",&tngau[clsid],&ndim);
+        if (pdim != -1 && pdim != ndim) 
+            QUIT(("Dimension mismatch in some models\n"))
+        pdim = ndim;
+        tmean = (float **) alloc2d(tngau[clsid],ndim,sizeof(float));
+        tvar = (float **) alloc2d(tngau[clsid],ndim,sizeof(float));
+        tmixw = (float *) calloc(tngau[clsid],sizeof(float));
+        for (i=0; i<tngau[clsid]; i++){
+            fscanf(fp2,"%f",&tmixw[i]);
+            for (j=0;j<ndim;j++) fscanf(fp2,"%f",&tmean[i][j]);
+            for (j=0;j<ndim;j++) fscanf(fp2,"%f",&tvar[i][j]);
+            tmixw[i] = log((double)tmixw[i]);
+            for (j=0;j<ndim;j++) {
+                if (tvar[i][j] < 1.0e-20) tvar[i][j] = 1.0e-20;
+                tmixw[i] -= 0.5*log((double)tvar[i][j]);
+            }
+            for (j=0;j<ndim;j++) tvar[i][j] = 0.5/tvar[i][j];
+        }
+        fclose(fp2);
+        tpars[clsid] = (float**)alloc2d(tngau[clsid],(2*ndim+1),sizeof(float));
+        for (i=0; i<tngau[clsid]; i++){
+            k = 0;
+            tpars[clsid][i][k++] = tmixw[i];
+            for (j=0;j<ndim;j++) {
+                tpars[clsid][i][k++] = tmean[i][j];
+                tpars[clsid][i][k++] = tvar[i][j];
+            }
+        }
+        free(tmixw); free2d((void **)tmean); free2d((void**)tvar);
+        clsid++;
+    } while(fgets(line,8192,fp)!=NULL);
+    fclose(fp);
+
+    *pars = tpars;
+    *ngau = tngau; *nclass = ncls; *dim = ndim; *class = clsname;
+    return;
+}

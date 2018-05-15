@@ -1,0 +1,21 @@
+all = 8;
+r = 2;
+l = 4;
+
+%simu
+num = 100;
+while num <= 100000
+    name = 'g.n2.d2.m4.f.smu';
+    gmmdata(1, 2, name, num, 1000, 1, 1);
+    num = num *10;
+end
+
+
+% figure;
+% for i=1:8
+%     subplot(r, l, i);hold on;
+%     name = ['g.n1.d2.m', num2str(i), '.f.tr1000.def'];
+% %    name = 'g.n2.d2.m4.f.smu';
+%     gmmdata(0, 2, name, 10000, 1000, 0, 0);
+%     %gmmdata(1, 2, name, i, 1000, 1, 1);
+% end

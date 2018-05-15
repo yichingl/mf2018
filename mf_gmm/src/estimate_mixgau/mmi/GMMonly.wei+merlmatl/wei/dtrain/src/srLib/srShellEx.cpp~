@@ -1,0 +1,154 @@
+#include <stdint.h>
+#include <stdio.h>
+#include <memory.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "srShellEx.h"
+
+char          **alloc2d(int dim1,	/* "x" dimension */ 
+			int dim2,	/* "y" dimension */
+			int size	/* number of bytes each entry takes */
+		       )
+{
+	int             i;		/* loop control variable */
+	unsigned        nelem;		/* total number of elements */
+
+	char	       *p,		/* pointer to matrix memory */
+			**pp;		/* pointer to matrix mem table */
+
+	nelem = (unsigned) dim1 * dim2;
+
+	p = (char *)calloc(nelem, (unsigned) size);
+	if (p == NULL) return (NULL);
+
+	pp = (char **) calloc((unsigned) dim1, (unsigned) sizeof(char *));
+	if (pp == NULL) {
+		free(p);
+		return (NULL);
+	}
+
+	for (i = 0; i < dim1; i++)
+		pp[i] = p + (i * dim2 * size);
+
+	return (pp);
+}
+
+void free2d(char **p)
+{
+	if (p!=NULL) {
+		free(p[0]);
+		free(p);
+	}
+	return;
+}
+
+
+double      ***alloc3d( int       dim1,        /* "x" dimension */
+             	      int 	dim2,        /* "y" dimension */
+             	      int 	dim3,        /* "z" dimension */
+             	      int 	size         /* number of bytes per entry */
+		    )
+{
+    int     j,i;     	/* loop control variables */
+
+    double    *p;
+    double    **pp;
+    double    ***ppp;        /* pointer to matrix mem table */
+
+    // Allocate for all the elements
+    if ((p = (double *)calloc(dim1*dim2*dim3,size)) == NULL)
+        return(NULL);
+
+    // Allocate for first level pointers
+    if ((pp = (double **)calloc(dim1*dim2,sizeof(double *))) == NULL)
+    {
+        free(p);
+        return(NULL);
+    }
+
+    // Allocate for the 3-D level pointers
+    if ((ppp = (double ***)calloc(dim1,sizeof(double **))) == NULL)
+    {
+        free(pp); free(p);
+        return(NULL);
+    }
+
+    // Fill the table with locations to where each row begins
+    for (i = 0, j = 0; i < dim1*dim2; i++, j += dim3)
+    {
+        pp[i] = p + j*size;
+    }
+    for (i = 0, j = 0; i < dim1; i++, j += dim2)
+    {
+        ppp[i] = pp + j;
+    }
+
+    return(ppp);
+}
+
+
+void  free3d(double ***X)
+{
+    	// The alloc3d routine simplies the freeing to the following:
+	int i, j, k;
+	free((double *) X[0][0]);
+	free((double **) X[0]);
+	free(X);
+}
+
+long flip_long(long lin)
+{
+	long lout;
+	_int8 *i8in,*i8out,ii;
+
+	i8in = (_int8*)&lin;
+	i8out = (_int8*)&lout;
+
+	for (ii=0;ii<sizeof(long);ii++)
+		i8out[ii] = i8in[sizeof(long)-1-ii];
+
+
+	return lout;
+}
+
+void flip(_int8 *data,int len)
+{
+	_int8 temp;
+
+	int ii;
+	for (ii=0;ii<len/2;ii++)
+	{
+		temp = data[len-1-ii];
+		data[len-1-ii] = data[ii];
+		data[ii] = temp;
+	}
+}
+
+float flip_float(float fin)
+{
+	float fout;
+	_int8 *i8in,*i8out,ii;
+
+	i8in = (_int8*)&fin;
+	i8out = (_int8*)&fout;
+
+	for (ii=0;ii<sizeof(float);ii++)
+		i8out[ii] = i8in[sizeof(float)-1-ii];
+
+	return fout;
+}
+
+short flip_short(short sin)
+{
+	short sout;
+	_int8 *i8in,*i8out,ii;
+
+	i8in = (_int8*)&sin;
+	i8out = (_int8*)&sout;
+
+	for (ii=0;ii<sizeof(short);ii++)
+		i8out[ii] = i8in[sizeof(short)-1-ii];
+
+	return sout;
+}

@@ -1,0 +1,32 @@
+#ifndef _SR_SHELL_EX
+#define _SR_SHELL_EX
+
+typedef int8_t _int8;
+
+short flip_short(short sin);
+long flip_long(long lin);
+float flip_float(float fin);
+void flip(_int8 *data,int len);
+
+// definition of the HTK header
+typedef struct _HTKheader
+{
+	int nSamples;		// N
+	int sampPeriod;		// 100000
+	short sampleSize;		// 4
+	short parmKind;		// 9 - USER
+} HTKheader;
+
+char         **alloc2d(int dim1,	/* "x" dimension */ 
+			int dim2,	/* "y" dimension */
+			int size	/* number of bytes each entry takes */
+		       );
+void free2d(char **p);
+
+char      ***alloc3d( int       dim1,        /* "x" dimension */
+             	      int 	dim2,        /* "y" dimension */
+             	      int 	dim3,        /* "z" dimension */
+             	      int 	size         /* number of bytes per entry */
+		    );
+void  free3d(char ***X);
+#endif // SR_SHELL

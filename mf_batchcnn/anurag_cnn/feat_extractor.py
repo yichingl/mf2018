@@ -52,21 +52,24 @@ def getFeat(extractor,inpt, pool=False):
 srate = 44100 # Audio should use sample rate 44100
 pool = True # If pooling enabled, will generate one vector per audio clip
 def main(feat, use_gpu = True):
+
+    # Altered original code - now take in pre-generated spectrograms
     #y = raw_audio
-        
     #mel_feat = lib.feature.melspectrogram(y=y,sr=srate,n_fft=n_fft,hop_length=hop_length,n_mels=128)
     inpt = lib.power_to_db(feat).T
     
-    #quick hack for now
+    # If input is too small, just zero-pad (quick hack for now)
     if inpt.shape[0] < 128:
         inpt = np.concatenate((inpt,np.zeros((128-inpt.shape[0],inpt.shape[1]))),axis=0)
-    
 
-    # input needs to be 4D, batch_size X 1 X inpt_size[0] X inpt_size[1]
+    # Reshape input to be 4D with each data along 3rd and 4th dim, stacked along first dim
+    # First dim is 1 because batch size is 1
+    # (input needs to be 4D, batch_size X 1 X inpt_size[0] X inpt_size[1])
     inpt = np.reshape(inpt,(1,1,inpt.shape[0],inpt.shape[1]))
     #print(inpt.shape)
 
-    netType = getattr(netark,trainType)
+    # equiv to netwark.trainType, or network_architectures.trainType, with trainType = 'weak_mxh64_1024'
+    netType = getattr(netark,trainType) 
     netx = netType(527,netwrkgpl)
     load_model(netx,pre_model_path)
     global usegpu

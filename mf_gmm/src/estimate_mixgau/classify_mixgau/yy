@@ -1,0 +1,17 @@
+            for (i=2;i<nfrm-2;i++){
+                for(j=0;j<cepdim;j++) features[i][j] = cep[i][j];
+                for(k=0;k<cepdim;k++,j++) {
+                    features[i][j] = 0.67*cep[i+1][k]+0.33*cep[i+2][k] -
+                             0.67*cep[i-1][k]-0.33*cep[i-2][k];
+                }
+            }
+            for(j=0;j<cepdim;j++) {
+                features[0][j] = cep[0][j];
+                features[1][j] = cep[1][j];
+                features[nfrm-1][j] = cep[nfrm-1][j];
+                features[nfrm-2][j] = cep[nfrm-2][j];
+                features[0][j+cepdim]=features[2][j+cepdim];
+                features[1][j+cepdim]=features[2][j+cepdim];
+                features[nfrm-1][j+cepdim]=features[nfrm-3][j+cepdim];
+                features[nfrm-2][j+cepdim]=features[nfrm-3][j+cepdim];
+            }

@@ -1,0 +1,42 @@
+% simulated data, and record
+
+function [y] = simudata(iMod, gstr, smpnum, bRecord, strDataPath, strScpPath, id)
+
+y = mgdistri(smpnum, gstr.dim, gstr.mix, gstr.wt, gstr.mu, gstr.cov);
+
+%write down in natural order
+if bRecord == 1
+    fo = fopen(strDataPath, 'wb');
+    if fo == -1
+        printf('cannot open %s for write', strDataPath);
+    end
+    %write htk header
+    fwrite(fo, smpnum, 'int');       % # of samples
+    fwrite(fo, 100000, 'int');  % sampling period
+    fwrite(fo, 4*gstr.dim, 'short');     % sample size
+    fwrite(fo, 9, 'short');     % feature type - 9:USER
+    %write data y - n x dim
+    fwrite(fo, y, 'float');
+    fclose(fo);
+
+    % 2 - model numbers
+    % 5 - # of files for training 1st model
+    % files ...
+    % ...
+    % 3 - # of files for training 2nd model
+    % ...
+    if id == 1 && exist(strScpPath, 'file')
+        delete(strScpPath);
+    end
+    
+    fo = fopen(strScpPath, 'at+');        
+    if fo == -1
+        printf('cannot open %s for write', strScpPath);
+    end
+    if id == 1
+        fprintf(fo, '%d\n', iMod);
+    end
+    fprintf(fo, '%d\n', 1);
+    fprintf(fo, '%s\n', strDataPath);
+    fclose(fo);
+end

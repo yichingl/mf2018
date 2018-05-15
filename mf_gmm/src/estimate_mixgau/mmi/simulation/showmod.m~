@@ -1,0 +1,19 @@
+%load('g.n2.d2.f.tr1000.gt.mat')
+function [G] = showmod(gt)
+
+% show model trained
+% load g.n2.d2.m4.f.tr1000.gt.mat;    % ground truth of classification
+% boundary
+%seq = [1 2 3 4 8];
+seq = [1];
+r=2
+l=length(seq);
+figure;
+for i=1:l
+    subplot(r, l, i);
+    name = ['g.n2.d2.m', num2str(seq(i)), '.d.tr1000'];
+    gmmdata(0, 3, name, 1000, 1000, 0, 0, gt); %
+    subplot(r, l, i+l);
+    name = ['mmi.g.n2.d2.m', num2str(seq(i)), '.d.tr1000'];
+    gmmdata(0, 3, name, 1000, 1000, 0, 0, gt); %
+    endD

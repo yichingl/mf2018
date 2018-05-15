@@ -1,0 +1,1050 @@
+///////////////////////////////////////////////////////////////
+//                                                           //
+//                                                           //
+//  GMM.cpp: implementation of the CGMM class.               //
+//                                                           //
+///////////////////////////////////////////////////////////////
+
+
+#define VAR_FLOOR   0.01			// Variance floor, make sure the variance to be large enough
+#define MAX_CUS_TAG		10		// Maximum length of Tags in Custom GMM definition file
+#define MAX_HTK_TAG		10		// Maximum length of Tags in HTK format GMM definition file
+#define TAG_CUS_NUM		8		// Maximum types of Tags in GMM definition file
+#define TAG_HTK_NUM		15		// Maxinum types of Tags in HTK format GMM definition file
+#define MAX_FILES	20000		// Maximum parameter files to be loaded when training
+
+#define VAR_DEFAULT 2			// Variance maximum
+
+#ifdef PI
+#undef PI                /* PI is defined in Linux */
+#endif
+#define PI   3.14159265358979
+//#define LOG2PI		1.837877066
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include <limits.h>
+#include <time.h>
+#include <ctype.h>
+#include <float.h>
+#include <stddef.h>
+#include <stdbool.h>
+
+
+#include "pconf.h"
+//#include "srTrainEx.h"
+
+char msg[1000];
+static CGMM *p;
+static double minLogExp;
+static double dsqrt2pi; // sqrt (2 * PAI)
+static double dlog2pi; // log(2*pai)
+
+//////////////////////////////////////////////////////////////////////
+// Construction/Destruction
+//////////////////////////////////////////////////////////////////////
+
+
+
+
+void SayBye(char *msg)
+{
+	//fprintf(stderr,"\n *** Error around LINE %d at FILE \"%s\" !\n\n     Error Message: %s\n\n",__LINE__,__FILE__,msg);
+	printf("Error Message: %s\n\n", msg);
+	exit(-1);
+}
+void LookOut(char *msg)
+{
+	printf("Warining  %s !\n", msg);
+}
+/*
+void Initialization(CGMM *pCGMM)
+{
+	p = pCGMM;
+	p->bMLoaded		= false;
+	p->bPLoaded		= false;
+	p->bDiag			= true;
+	p->iVectorSize		= 0;
+	p->iNumMixtures	= 0;
+	p->dLDet			= 0;
+	p->dMixtureWeight	= 0;
+	p->dMean			= NULL;
+	p->dCovar			= NULL;
+	p->dnVar			= NULL; 
+	p->dTrans			= NULL;
+	srand(0);	// Fixed random seed
+	
+	minLogExp = -log(-LOGZERO);
+	dsqrt2pi = sqrt(2 * PI);
+	dlog2pi = log(2 * PI);
+}
+
+void Release(CGMM *pCGMM)
+{
+	CleanUpMdl();
+	
+	CleanUpPar();
+}
+
+
+//--------------------------------------------------------------
+// Load GMM from the definition files
+// RETURN VALUE:
+//	-1 : Error opening file
+//	1 : Success
+int loadgmmset(int a)
+{
+	return 1;
+}
+int loadgmmset1(char *fname)
+{
+	char *cTags[TAG_CUS_NUM] = {
+			"NAME",		// 0
+			"VECSIZE",	// 1
+			"DIAG",		// 2
+			"NUMMIXES",	// 3
+			"MIXTURE",	// 4
+			"MEAN",		// 5
+			"VARIANCE",	// 6
+			"ENDGMM" };	// 7
+
+	char ctag[MAX_CUS_TAG];
+	int iflag;
+	FILE *fp;
+	int ii;
+
+	int iCurMixture=0;
+
+	bool bNAME     = false;
+	bool bVECSIZE  = false;
+	bool bDIAG     = false;
+	bool bNUMMIXES = false;
+	int  iMEAN     = -1;
+	int  iVAR      = -1;
+	
+	if ((fp=fopen(fname,"rt"))==NULL)
+		return -1;
+
+	while ( (iflag = GetNextTag(fp,ctag)) == 1)
+	{
+		for (ii=0;ii<TAG_CUS_NUM;ii++) {	if (strcmp(ctag,cTags[ii])==0) break; }
+		switch (ii) {
+			case 0:		// <NAME>
+				if (bNAME) { sprintf(msg,"Duplicated TAG <%s> in %s",ctag,fname); SayBye(msg); }
+
+				fscanf(fp,"%s", p->cName);	// read name
+				fscanf(fp,"%s", p->cParm);	// read parameter type
+
+				bNAME = true;
+				break;
+			case 1:		// <VECSIZE>
+				if (bVECSIZE) { sprintf(msg,"Duplicated TAG <%s> in %s",ctag,fname); SayBye(msg); } 
+				if (!bNAME)	{ sprintf(msg,"Missing TAG <NAME> in %s",fname); SayBye(msg); }
+
+				fscanf(fp,"%d",&p->iVectorSize);
+				if (p->iVectorSize<=0) SayBye("Vector size should be positive");
+
+				bVECSIZE = true;
+				break;
+			case 2:		// <DIAG>
+				if (bDIAG) { sprintf(msg,"Duplicated TAG <%s> in %s",ctag,fname); SayBye(msg); } 
+				if (!bVECSIZE) { sprintf(msg,"Missing TAG <VECSIZE> in %s",fname); SayBye(msg); }
+				
+				p->bDiag = true;
+				bDIAG = true;
+				break;
+			case 3:		// <NUMMIXES>
+				if (bNUMMIXES) { sprintf(msg,"Duplicated TAG <%s> in %s",ctag,fname); SayBye(msg); } 
+				if (!bDIAG) { sprintf(msg,"Missing TAG <DIAG> in %s",fname); SayBye(msg); }
+
+				fscanf(fp,"%d",&p->iNumMixtures);
+				if (p->iNumMixtures<=0) SayBye("Mixture of Gaussian should be positive");
+				if (p->iVectorSize<=0) SayBye("Vector size should be > 0");
+				
+				p->dLDet 			= (double *) malloc( p->iNumMixtures * sizeof(double) );
+				p->dMixtureWeight	= (double *) malloc( p->iNumMixtures * sizeof(double) );
+				p->dlgWeight		= (double *) malloc( p->iNumMixtures * sizeof(double) );
+				p->dMean 		= (double **) malloc( p->iNumMixtures * sizeof(double *) );
+				p->dnVar	 		= (double **) malloc( p->iNumMixtures * sizeof(double *) );
+				p->dCovar 		= (double **) malloc( p->iNumMixtures * sizeof(double *) );
+				for (ii=0;ii<p->iNumMixtures;ii++)
+				{
+					p->dMean[ii]	= (double *) malloc( p->iVectorSize * sizeof(double) );
+					p->dCovar[ii]	= (double *) malloc( p->iVectorSize * sizeof(double) );
+					p->dnVar[ii]	= (double *) malloc( p->iVectorSize * sizeof(double) );
+				}
+				p->dVarFloor		= (double *) malloc( p->iVectorSize * sizeof(double) );
+
+				bNUMMIXES = true;
+				break;
+			case 4:		// <MIXTURE> - read in the value one by one
+				if (!bNUMMIXES) { sprintf(msg,"Missing TAG <NUMMIXES> in %s",fname); SayBye(msg); }
+
+				fscanf(fp,"%d", &iCurMixture);
+				fscanf(fp,"%lf", p->dMixtureWeight + iCurMixture);
+				p->dlgWeight[iCurMixture] = log(p->dMixtureWeight[iCurMixture]);
+				if ( iCurMixture!=(iMEAN+1) || iCurMixture!=(iVAR+1) )
+					{ sprintf(msg,"Wrong <%s> index in %s",ctag,fname); SayBye(msg); } 
+				break;
+			case 5:		// <MEAN>
+				iMEAN ++;
+				if (iMEAN != iCurMixture) { sprintf(msg,"Wrong <MIXTURE> index in %s",fname); SayBye(msg); } 
+
+				for (ii=0; ii< p->iVectorSize; ii++)
+					fscanf(fp,"%lf",&p->dMean[iCurMixture][ii]);
+				break;
+			case 6:		// <VARIANCE>
+				iVAR ++;
+				if (iVAR != iCurMixture) { sprintf(msg,"Wrong <MIXTURE> index in %s",fname); SayBye(msg); } 
+
+				p->dLDet[iCurMixture] = .0;
+				for (ii=0;ii<p->iVectorSize;ii++)
+				{
+					fscanf(fp,"%lf",&p->dCovar[iCurMixture][ii]);
+					p->dnVar[iCurMixture][ii] = 1.0 / p->dCovar[iCurMixture][ii];
+					p->dLDet[iCurMixture] += log(p->dCovar[iCurMixture][ii]);
+				}
+				break;
+			case 7:		// <ENDGMM>
+				break;
+			default:
+				sprintf(msg,"Unknown TAG \"%s\"",ctag);
+				LookOut(msg);
+		}
+	}
+	if (iflag == 0)
+	{
+		sprintf(msg,"Unsolved TAG in \"%s\"",fname);
+		SayBye(msg);
+	}
+	fclose(fp);
+	// check integraty
+	if ( ! (bNAME					// found <NAME> tag
+		&& bVECSIZE					// found <VECSIZE> tag
+		&& bDIAG					// found <DIAG> tag
+		&& bNUMMIXES				// found <NUMMIXES> tag
+		&& (iMEAN==p->iNumMixtures-1)	// means loaded
+		&& (iVAR ==p->iNumMixtures-1)) )	// covariances loaded
+	{
+		sprintf(msg,"Format Error in %s",fname);
+		SayBye(msg);
+	}
+
+	p->bMLoaded = true;
+
+	return 1;
+}
+
+
+//--------------------------------------------------------------
+// Free model's memory before exit
+int CleanUpMdl()
+{
+	int ii;
+
+	if (!p->bMLoaded)
+		return 0;
+	for (ii = 0; ii < p->iNumMixtures; ii++)
+	{ // for each stream
+		free( p->dMean[ii] );
+		free( p->dCovar[ii] );
+		free( p->dnVar[ii] );
+		//free( dTrans[ii];
+	}
+	//free( dTrans );
+	free( p->dMean );
+	free( p->dCovar );
+	free( p->dLDet );
+	free( p->dMixtureWeight  );
+	free( p->dlgWeight );
+	free( p->dnVar );
+	free( p->dVarFloor );
+
+	p->bMLoaded = false;
+	return 1;
+}
+
+//-------------------------------------------------------------------
+// Free the parameter's memoroy
+int CleanUpPar()
+{
+	int ii;
+
+	if (!p->bPLoaded)
+		return 0;
+
+	free(p->pparam);
+
+	p->bPLoaded = false;
+	return 1;
+}
+
+//-------------------------------------------------------------------
+// Get Next Tag from 'fp', tag stored in 'ctag'
+// Return Value:
+//      0 : Unresolved TAG
+//      1 : Success
+//     -1 : End of file
+int GetNextTag(FILE *fp, char *ctag)
+{
+	int ii;
+	char ch;
+
+	while (!feof(fp))
+	{
+		ch=getc(fp);
+		if (ch!='<')
+			continue;
+		// ch = '<'
+		ii=0;
+		while ((ctag[ii]=getc(fp))!='>' && ii<MAX_CUS_TAG) ii++;
+		if (ii>=MAX_CUS_TAG)
+			return 0;
+		ctag[ii]=0;
+		return 1;
+	}
+	return -1;
+}
+
+//------------------------------------------------------------------
+// Write GMM definition to *fname in ASC
+// Return Value :
+//    1 :  Success
+//    0 :  No data to write
+//   -1 :  error
+int WriteGMMSet(char *fname)
+{
+	int ii,ij;
+	FILE *fp;
+
+	if (!p->bMLoaded)
+		return 0;
+
+	if ((fp=fopen(fname,"w"))==NULL) {
+		printf("cannot open %s for write.\n", fname);	return -1;}
+
+		fprintf(fp,"<NAME> %s %s\n", p->cName, p->cParm);
+		fprintf(fp,"<VECSIZE> %d", p->iVectorSize);
+	if (p->bDiag)
+		fprintf(fp," <DIAG>");
+	fprintf(fp, "\n");
+	fprintf(fp, "<NUMMIXES> %d\n", p->iNumMixtures);
+	for (ii = 0; ii < p->iNumMixtures; ii++)
+	{
+		fprintf(fp, "<MIXTURE> %d %E\n", ii, p->dMixtureWeight[ii]);
+		fprintf(fp, " <MEAN> \n");
+		for (ij = 0; ij < p->iVectorSize; ij++)
+			fprintf(fp, "  %E", p->dMean[ii][ij]);
+		fprintf(fp, "\n");
+		fprintf(fp, " <VARIANCE> \n");
+		for (ij = 0; ij < p->iVectorSize; ij++)
+			fprintf(fp, "  %E", p->dCovar[ii][ij]);
+		fprintf(fp,"\n");
+	}
+	fprintf(fp, "<ENDGMM>\n");
+	fclose(fp);
+
+	return 1;
+}
+
+//---------------------------------------------------------------------
+// Euclidean Distance
+// (alternative: pre-calculate the total variance of each feature, 
+// then weighting each feature with the variance)
+double VQDistortion(float *vec1, double *vec2)
+{
+	int i;
+	double result=0;
+	for (i = 0; i < p->iVectorSize; i++)
+		result += (vec1[i]-vec2[i]) * (vec1[i]-vec2[i]);
+	return result;
+}
+
+
+//-----------------------------------------------------------------
+// Init the mean vectors of VQ procedure
+// Return Value:
+//   1 :  Success
+//   0 :  Nothing to init
+int VQInit()
+{
+	int ii,ij;
+	double amp=0.001;
+	int *iCount = malloc(p->iNumMixtures * sizeof(int));
+	// check if the model and the param have been loaded
+	if (!p->bMLoaded || !p->bPLoaded){
+		LookOut("Model or Param not loaded yet");return 0;}
+
+	for (ii = 0; ii < p->iNumMixtures; ii++)
+	{
+		for (ij = 0; ij < p->iVectorSize; ij++)
+		{
+			p->dMean[ii][ij]  = 0;
+			p->dCovar[ii][ij] = 0;
+		}
+		iCount[ii] = 0;
+	}
+
+	for (ii=0; ii < p->iFrames; ii++)
+	{
+		for (ij=0; ij < p->iVectorSize; ij++)
+		{
+			p->dMean[ii % p->iNumMixtures][ij]  += p->pparam[ii][ij];
+			p->dCovar[ii % p->iNumMixtures][ij] += p->pparam[ii][ij] * p->pparam[ii][ij];
+		}
+		iCount[ii % p->iNumMixtures] ++ ;
+	}
+
+	for (ii = 0; ii < p->iNumMixtures; ii++)
+	{
+		for (ij = 0; ij < p->iVectorSize; ij++)
+		{
+			p->dMean[ii][ij]  /= iCount[ii];
+			p->dCovar[ii][ij] /= iCount[ii];
+			p->dCovar[ii][ij] -= p->dMean[ii][ij] * p->dMean[ii][ij];
+		}
+	}
+
+	free( iCount );
+
+	return 1;
+}
+
+#define FILE_BLOCK 500
+int LoadParaList(char *flist)
+{	
+	int ii,ij,ik,inum,idim,isampledim;
+	FILE *fp, * fptemp;
+	HTKheader strHeader;
+	
+	char filename[500];
+
+	int ifilenum, ilen, itmp, iframenum, icur, isample; 	//maybe long long
+	float ** buffer;
+
+	idim = p->iVectorSize;
+	
+	//time_t ltime;
+	//time( &ltime );
+//	printf( "Loading start:\t\t%s", ctime( &ltime ) );	
+	// open the file list
+	if ((fp = fopen(flist, "rt")) == NULL) {
+		printf("fail to open file %s\n", flist);return -1;}
+		
+		iframenum = 0;
+		ifilenum  = 0;
+		while (!feof(fp))
+		{
+			if ( fscanf(fp, "%s",  filename) == EOF ){
+				break;
+			}
+			if ( (fptemp = fopen(filename, "rb")) == NULL ) {
+				printf("fail to open file %s %d\n", filename, ifilenum ); return -1;
+			}
+			if ( (LONG_MAX - iframenum) < 1e3  ) {
+				printf("iframenum - %l overflow!\n", iframenum ); return -1;
+			}
+			fread(&strHeader, sizeof(HTKheader), 1, fptemp);
+			ilen = ftell(fptemp);
+			fclose(fptemp);
+			
+			itmp = (int) ( ilen - sizeof(HTKheader) ) / ( idim * sizeof(float) );
+			if (strHeader.nSamples != itmp) {
+				printf("feature %s len and header mismatch.\n", filename); return -1;}
+			isampledim = (int) strHeader.sampleSize/sizeof(float);
+			if (isampledim != idim) {
+				printf("feature dim %d and model dim %d mismath.\n", isampledim, idim); return -1;}
+			iframenum += itmp;
+			ifilenum++;
+		}
+		if (ifilenum >= MAX_FILES){
+			SayBye("Maximum files in file list is set to 20000");
+		}
+	
+		
+		// allocate a big buffer for reading all the feature files
+		p->pparam = malloc(iframenum * sizeof(float *));
+		buffer = p->pparam;
+		for (ii = 0; ii < iframenum; ii++)
+		{
+			buffer[ii] = malloc(idim * sizeof(float));
+			memset(buffer[ii], 0, sizeof(float) * idim);
+		}
+		
+		rewind(fp);
+		icur =0;
+		for (ii = 0; ii < ifilenum; ii++)
+		{
+			fscanf(fp, "%s",  filename);
+			if ( (fptemp = fopen(filename, "rb")) == NULL ) {
+				printf("fail to open file %s %d\n", filename, ifilenum ); return -1;
+			}
+			fread(&strHeader, sizeof(HTKheader), 1, fptemp);
+			isample = strHeader.nSamples;
+			for (ij = 0; ij < isample; ij++)
+			{
+				fread(&buffer[icur], sizeof(float), idim, fptemp);
+				icur++;
+			}
+			fclose(fptemp);
+		}
+		
+		//time( &ltime );
+		//printf( "Loading OK:\t\t%s", ctime( &ltime ) );
+
+		p->iFrames = iframenum;
+		if (ifilenum!=0){
+			p->bPLoaded = true;
+		}
+
+		return ifilenum;
+}
+
+//---------------------------------------------------------------
+// Get the nearest mean vector to the given vector according to
+// Euclidean distance.
+//    fvector : Vector to calculate
+//        err : minimal distance
+// Return Value:
+//    1 : Success
+//    0 : Nothing to calculate
+int VQNearest(float *fvector, double *err)
+{
+	if (!p->bMLoaded || !p->bPLoaded){
+		LookOut("Model or Param not loaded yet");return 0;
+	}
+
+	int ii,ij,imin = 0;
+	double dtmp = 0;	// buffer to accumulate distances
+	
+	*err = DBL_MAX;
+	for (ii = 0; ii < p->iNumMixtures; ii++)
+	{
+		dtmp = 0;
+		for (ij = 0; ij < p->iVectorSize; ij++)
+		{
+			dtmp += (fvector[ij] - p->dMean[ii][ij] ) * (fvector[ij] - p->dMean[ii][ij] ) / p->dCovar[ii][ij];
+		}
+		if (dtmp < *err)
+		{
+			*err = dtmp;
+			imin = ii;
+		}
+	}
+	return imin;
+}
+
+
+//------------------------------------------------------------------
+// Check if any mean vector (core) are not assigned any vectors, if
+// yes, delete this one and divide the most populated one into two
+// cores.
+// Return Value:
+//   1 : Success
+//   0 : Model or Param not loaded yet
+//  -1 : Not enough training data
+int VQCheckZero(int *counter)
+{
+	if (!p->bMLoaded || !p->bPLoaded){
+		LookOut("Model or Param not loaded yet");return 0;}
+
+	int ii,ij,opti,optc;
+	double amp=0.0001;
+	float minimum; // threshold for smallest mixture
+	
+	minimum = p->iFrames / p->iNumMixtures * 0.02; // should be more than 2% of the average.
+	for (ii = 0; ii < p->iNumMixtures; ii++)
+	{
+		if (counter[ii] <= minimum)
+		{
+			// find the largest mixture
+			optc = 0;
+			for (ij=0, optc=0; ij < p->iNumMixtures; ij++)
+			{
+				if (counter[ij] > optc)
+				{
+					optc = counter[ij];
+					opti = ij;
+				}
+			}
+
+			for (ij = 0; ij < p->iVectorSize; ij++)
+			{
+				//update the smallest mixture
+				p->dMean[ii][ij] = p->dMean[opti][ij] + (amp* ((double)(rand()%10000)/10000.-.5));
+				p->dCovar[ii][ij] = p->dCovar[opti][ij];
+
+				//split the largest mixture
+				p->dMean[opti][ij] += amp* ((double)(rand()%10000)/10000.-.5);
+			}
+
+			//update weights
+			counter[ii] += (int)(counter[opti]*0.5);
+			counter[opti] -= (int)(counter[opti]*0.5);
+		}
+	}
+	
+	return 1;
+}
+
+
+//--------------------------------------------------------------------
+// Init the model for EM by VQ
+//   MaxLoop :  Max loop of VQ iterations
+// Return Value:
+//   1 : Success
+int InitMdl(int MaxLoop)
+{
+	int ii,ij,imin,sum;
+	double tstep=0.8;		//the step of temperature decreasing
+	
+	double lastrubbish,rubbish; // 
+	double threhold=1e-5;		// for convergence
+	int ct=0;					// loop times
+
+	double dtmp;
+	
+	double *dmean;			// global mean 
+	double **dcore;			// temperary core
+	int *iCount;			// counter of the assigned frames for each mixture
+	int iframenum = p->iFrames;
+	int idim = p->iVectorSize;
+	int imix = p->iNumMixtures;
+
+	if (!p->bMLoaded || !p->bPLoaded)
+		SayBye("Model or Param not loaded");
+
+	if (p->iFrames / p->iNumMixtures < 30)
+		SayBye("Too few training data [AVG < 30]");
+	
+	iCount      = malloc(imix * sizeof(int));
+	dcore       = malloc(imix * sizeof(double*));
+	dmean 	= malloc(idim * sizeof(double));
+	for (ii = 0; ii < p->iNumMixtures; ii++)
+		dcore[ii] = malloc(idim * sizeof(double));
+
+	if (!VQInit())
+		SayBye("VQInit not succeed");
+
+	printf(" - Initializing ... \n");
+	rubbish = 0;
+	
+	// get the varFloor
+	for (ij = 0; ij < p->iVectorSize; ij++) // for all frames
+	{
+		dmean[ij] = 0;
+		p->dVarFloor[ij] = 0;
+		for (ii = 0; ii < p->iFrames; ii++)
+		{
+			dmean[ij] += p->pparam[ii][ij] / p->iFrames;
+			p->dVarFloor[ij] += p->pparam[ii][ij] * p->pparam[ii][ij] / p->iFrames;
+		}
+		p->dVarFloor[ij] -= dmean[ij] * dmean[ij];
+		p->dVarFloor[ij] *= VAR_FLOOR;	// * 0.01
+	}
+	
+	do
+	{
+		lastrubbish=rubbish;
+		//-- clean up core
+		for (ii = 0; ii < p->iNumMixtures; ii++)
+		{
+			for (ij = 0; ij < p->iVectorSize; ij++)
+			{
+				dcore[ii][ij] = 0;
+				p->dCovar[ii][ij] = 0;
+			}
+			iCount[ii] = 0;
+		}
+		
+		rubbish = 0;
+		for (ii = 0; ii < p->iFrames; ii++) // for all frames
+		{
+			imin = VQNearest(&p->pparam[ii], &dtmp);
+			// sum the err
+			rubbish += dtmp;
+			for (ij = 0; ij < p->iVectorSize; ij++)
+			{
+				dcore[imin][ij] += p->pparam[ii][ij];
+				p->dCovar[imin][ij] += p->pparam[ii][ij] * p->pparam[ii][ij];
+			}
+			iCount[imin] ++;
+		}
+		rubbish /= p->iFrames;
+		// recalculate the core
+		for (ii = 0; ii < p->iNumMixtures; ii++)
+		{
+			if (iCount[ii] != 0)
+			{
+				for (ij = 0; ij < p->iVectorSize; ij++)
+				{
+					p->dMean[ii][ij] = dcore[ii][ij] / iCount[ii];
+					p->dCovar[ii][ij] = p->dCovar[ii][ij] / iCount[ii] - p->dMean[ii][ij] * p->dMean[ii][ij];
+					if (p->dCovar[ii][ij] < p->dVarFloor[ij]) {
+						p->dCovar[ii][ij] = p->dVarFloor[ij]; 
+					} 
+				}
+			}
+		}
+		
+		//-- check for the non-assigned core
+		VQCheckZero(iCount);
+		
+		printf("   - Loop: %d ,  Residual: %f ,  Increment: %f\n", ct, rubbish, lastrubbish-rubbish);
+		ct++;
+	}while( (fabs((lastrubbish-rubbish)/(0.01+lastrubbish)) >threhold) && (ct<MaxLoop) );
+
+	printf("Init - OK!\n");
+
+	// Update weight
+	for (ii=0,sum=0; ii< p->iNumMixtures; ii++)
+	{
+		if (iCount[ii]==0)
+			SayBye("Too few training data");
+		sum += iCount[ii];
+	}	
+	for (ii = 0; ii < p->iNumMixtures; ii++){
+		p->dMixtureWeight[ii] = iCount[ii] / (float)sum;
+	}
+	
+	UpdateRest();
+	
+	for (ii = 0; ii < p->iNumMixtures; ii++)
+		free( dcore[ii] );
+	free( dcore );
+	free (dmean);
+	free( iCount );
+	return 1;	
+
+}
+
+//-----------------------------------------------------------------
+// EM algorithm
+int ReesMdl(int MaxLoop)
+{
+	int ii,ij,ik,iloop;
+	double dlogfrmprob;
+	double *dsumgama,*dlogmixw;
+	double *dgama;
+	double rubbish,lastrubbish;
+	const double threshold = 1e-5;
+
+	double *dmixw;		// A copy of mixture weights
+	double **dmean;		//           mean values
+	double **dvar;		//           and covariances
+
+	int imix = p->iNumMixtures;
+	int idim = p->iVectorSize;
+	int iframenum = p->iFrames;
+	
+	// alloc memory
+	dmean = malloc(imix * sizeof(double *));
+	dvar  = malloc(imix * sizeof(double *));
+	for (ii = 0; ii < p->iNumMixtures; ii++)
+	{
+		dmean[ii] = malloc(idim * sizeof(double));
+		dvar[ii]  = malloc(idim * sizeof(double));
+	}
+
+	dmixw = malloc(imix * sizeof(double));
+	dlogmixw = malloc(imix * sizeof(double));
+	dgama = malloc(imix * sizeof(double));
+	dsumgama = malloc(imix * sizeof(double));
+	
+	// main procedure >>
+	rubbish = .0;
+	iloop   = 0;
+	printf(" - Re-estimating ... \n");
+	do {
+		lastrubbish = rubbish;
+		rubbish = .0;
+		//-----------------------------------------------
+		// E-step
+		//-----------------------------------------------
+		for (ii = 0; ii < p->iNumMixtures; ii++)
+		{
+			// clean up temporary values
+			dmixw[ii] = dsumgama[ii] = .0;
+			for (ij = 0; ij < p->iVectorSize; ij++)
+				dmean[ii][ij] = dvar[ii][ij] = .0;
+		}
+		
+		for (ii = 0; ii< p->iFrames; ii++)
+		{
+			dlogfrmprob = LOGZERO; // log scale probability of a given frame
+			for (ij = 0; ij < p->iNumMixtures; ij++)
+			{
+				dgama[ij]   = LMixProb(&p->pparam[ii], ij);
+				dgama[ij]  += p->dlgWeight[ij];
+				dlogfrmprob = LogAdd(dgama[ij], dlogfrmprob);
+			}
+			rubbish += dlogfrmprob;	// sum the rubbish
+			
+			for (ij = 0; ij < p->iNumMixtures; ij++)
+			{
+				dgama[ij] -= dlogfrmprob;
+				dgama[ij]  = exp( dgama[ij] );
+
+				// for updating weights
+				dmixw[ij] += dgama[ij];
+				dsumgama[ij]  += dgama[ij];
+				// for updating mean & covariance
+				for (ik = 0; ik < p->iVectorSize; ik++)
+				{					 
+					dmean[ij][ik] += dgama[ij] * p->pparam[ii][ik];					
+					dvar[ij][ik] += dgama[ij] * p->pparam[ii][ik] * p->pparam[ii][ik];
+				}
+			}
+		}
+		rubbish /= p->iFrames;
+		
+		//-----------------------------------------------
+		// M-step
+		//-----------------------------------------------
+		// update weight, mean & covariance
+		for (ii = 0; ii < p->iNumMixtures; ii++)
+		{
+			p->dMixtureWeight[ii] = dmixw[ii] / p->iFrames;
+			for (ij = 0; ij < p->iVectorSize; ij++)
+			{
+				p->dMean[ii][ij] = dmean[ii][ij] / dsumgama[ii];
+				p->dCovar[ii][ij]  = dvar[ii][ij] / dsumgama[ii];
+				p->dCovar[ii][ij] -= p->dMean[ii][ij] * p->dMean[ii][ij];
+				// check variance
+				if (p->dCovar[ii][ij] < p->dVarFloor[ij]) {
+					p->dCovar[ii][ij] = p->dVarFloor[ij]; 
+				}
+			}
+		}
+		// update determinate
+		UpdateRest();
+
+		iloop ++;
+		printf("   - loop: %d ,  Average Log Likelihood: %f ,  Increment: %f\n",iloop,rubbish,rubbish-lastrubbish);
+	}while(fabs((rubbish-lastrubbish)/(lastrubbish+0.01))>threshold && iloop<MaxLoop);
+	if (iloop>=MaxLoop)
+		printf(" - Break at loop %d!\n",iloop);
+	else
+		printf(" - Converged at loop %d!\n",iloop);
+	// main procedure <<
+	for (ii = 0; ii < p->iNumMixtures; ii++)
+	{
+		free( dmean[ii] );
+		free( dvar[ii] );
+	}
+	free( dmean );
+	free( dvar );
+	free( dmixw );
+	free( dgama );
+	free( dsumgama );
+	free( dlogmixw );
+
+	return 1;
+}
+
+//----------------------------------------------------------------
+// Return the log likelihood of the given vector to the given
+// mixture (the score should be multiplied with the mixture weight).
+//    fparam :  pointer to the feature vector in float
+//  MixIndex :  Mixture index
+// Return Value:
+//    The log-likelihood in double
+double LMixProb(float *fparam, int MixIndex)
+{
+	int ii;
+	double dsum,dtmp;
+	const double dfloor   = 0;
+
+	if (!p->bMLoaded)
+		return .0;
+
+	dsum = .0;
+	for (ii = 0; ii < p->iVectorSize; ii++)
+	{
+		dtmp  = fparam[ii] - p->dMean[MixIndex][ii];
+		//dsum += dtmp *dtmp / dCovar[MixIndex][ii];
+		dsum += dtmp * dtmp * p->dnVar[MixIndex][ii];
+	}
+	dsum  = - p->iVectorSize * dlog2pi - p->dLDet[MixIndex] - dsum;
+	dsum *= 0.5;
+	return (dsum<LOGZERO? LOGZERO:dsum);
+}
+
+
+//--------------------------------------------------------------
+// Recalculate the Determinant for each mixture after the covariance matrixes are changed.
+// plus update the log weight and the inverse covarance
+int UpdateRest()
+{
+	int ii,ij;
+	
+	for (ii = 0; ii < p->iNumMixtures; ii++)
+	{
+		p->dLDet[ii] = .0;
+		for (ij = 0; ij < p->iVectorSize; ij++)
+		{
+			p->dnVar[ii][ij] = 1.0 / p->dCovar[ii][ij];
+			p->dLDet[ii] += log(p->dCovar[ii][ij]);
+		}
+
+		if (p->dMixtureWeight[ii] <= 0)
+			p->dlgWeight[ii] = LOGZERO;
+		else
+			p->dlgWeight[ii] = log(p->dMixtureWeight[ii]);
+	}
+	
+	return 1;
+}
+
+//----------------------------------------------------------------
+// Routine for adding two log-values in a linear scale, return the log
+// result in double
+double LogAdd(double logVar1,double logVar2)
+{
+	double temp,diff,z;
+	
+	if (logVar1<logVar2) {
+		temp = logVar1; logVar1 = logVar2; logVar2 = temp;
+	}
+	diff = logVar2-logVar1;
+	if (diff<minLogExp) 
+		return  (logVar1<LSMALL)?LOGZERO:logVar1;
+	else {
+		z = exp(diff);
+		return logVar1+log(1.0+z);
+	}
+}
+
+*/
+void PrintUsage();
+
+char PathProto[512]		= "proto";
+char PathOutput[512]	= "hmm";
+char PathTrainList[512]	= "list";
+int iIter1 = 5,iIter2 = 10;
+int main(int argc, char *argv[])
+{
+	int ii,	ifnum;
+
+	
+	char fn[256];
+	char strCmd[256];
+
+
+	static Confit params[] = {
+
+		"ProtoFile", "Proto definition of the GMM",
+		"-p", cmuSTRING, (caddr_t)&PathProto,
+
+		"OutFile", "Output file name of the GMM",
+		"-o", cmuSTRING, (caddr_t)&PathOutput,
+		
+		"Tr_File_List", "HTK format training file list",
+		"-t", cmuSTRING, (caddr_t)&PathTrainList,
+
+		"Ite1", "Max iterations when initializing the model",
+		"-i1", cmuINT, (caddr_t)&iIter1,
+
+		"Ite2", "Max iterations when re-estimating the model",
+		"-i2", cmuINT, (caddr_t)&iIter2,
+
+		0, 0, 0, NOTYPE, 0
+	};
+
+
+	if (argc<8 || argc>13)
+	{
+		pusage (argv[0], params);
+		exit(0);
+	}
+
+	if ( ppconf( argc, argv, params, true ) ) 
+	{
+		pusage(argv[0], params);
+		exit(1);
+	}
+
+
+	printf("\n[Command Line] ");
+	for (ii=0;ii<argc;ii++)
+		printf(" %s",argv[ii]);
+	printf("\n");
+	// read the iterations
+	iIter1 = iIter2 = -1;
+	if (argc>=5)
+		sscanf(argv[4],"%d",&iIter1);
+	if (argc>=6)
+		sscanf(argv[5],"%d",&iIter2);
+
+	/*
+	CGMM *cp = (CGMM *) malloc(sizeof(CGMM));
+	// Load GMM set PathProto
+	if (loadgmmset(1) == -1){
+		printf("Can't open \"%s\" for reading\n", argv[1]); return -1;
+	}
+
+	// Load Features
+	ifnum = LoadParaList(PathTrainList);
+	if ( ifnum == -1){
+		printf("Can't open \"%s\" for reading\n", argv[3]); return -1;
+	} else if (ifnum == 0) {
+		printf("No training files loaded\n"); return -1;
+	}
+	
+	printf("\nGMM Training for <%s>\n", cp->cName);
+	printf("    GMM Mixture      :  %d\n", cp->iNumMixtures);
+	printf("    GMM Type         :  Diagonal\n");
+	printf("    Vector Size      :  %d\n", cp->iVectorSize);
+	printf("    Number of Files  :  %d\n", ifnum);
+	printf("    Number of Frames :  %d\n", cp->iFrames);
+	*/
+	SayBye("o");
+
+/*
+	//K-Means
+	if (iIter1>0)
+	gmm->mInitMdl(iIter1);
+	else
+	gmm->mInitMdl();
+
+	// re-estimate model EM
+	if (iIter2>0)
+	gmm->mReesMdl(iIter2);
+	else
+	gmm->mReesMdl();
+	
+	// Write the GMM set
+	if (gmm->WriteGMMSet(PathOutput) == -1)
+	{
+	gmm->WriteGMMSet("_tmp_GMM_");
+	sprintf(msg,"Can't open \"%s\" for writing, Model saved in _tmp_GMM_",argv[2]);
+	SayBye(msg);
+}
+	
+	remove("_tmp_GMM_");
+
+	printf("Tmp model _tmp_GMM_ is deleted\n");
+
+	delete gmm;
+*/
+}
+
+
+void PrintUsage(void)
+{
+	printf("                                                                   \n");
+	printf("lGmmTr: GMM-Training Utility.                                      \n");
+	printf("                                                                   \n");
+	printf(" [USAGE]: lGmmTr <ProtoFile> <OutFile> <Tr_File_List> [Ite1] [Ite2]\n");
+	printf("                                                                   \n");
+	printf("     <ProtoFile> :  Proto definition of the GMM                    \n");
+	printf("       <OutFile> :  Output file name of the GMM                    \n");
+	printf("  <Tr_File_List> :  HTK format training file list                  \n");
+	printf("          [Ite1] :  Max iterations when initializing the model     \n");
+	printf("          [Ite2] :  Max iterations when re-estimating the model    \n");
+	printf("                                                                   \n");
+	printf("                                                                   \n");
+}

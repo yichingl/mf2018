@@ -1,0 +1,19 @@
+Takes a list of binary feature files.
+Feature file format: 4 byte integer followed by 4 byte floats in
+sets of 13 (all in sequence). Trainclass.c is hardcoded for
+13 dimensional feature vectors. Uses difference vectors. See code
+for further information.
+
+To compile, give
+gcc -o trainclass *.c -lm
+
+usage example: trainclass speechlist_forclassifier 32 16kspeech.32gau
+
+sample of speechlist_forclassifier:
+
+train2_set1/speech/g03a10_unpr.sph.ch1_10651_10763.13kltonly 1 113
+train2_set1/speech/g03a10_unpr.sph.ch1_10891_11059.13kltonly 1 169
+train2_set1/speech/g03a10_unpr.sph.ch1_11221_11499.13kltonly 1 279
+train2_set1/speech/g03a10_unpr.sph.ch1_11673_11731.13kltonly 1 59
+train2_set1/speech/g03a10_unpr.sph.ch1_13167_13399.13kltonly 1 233
+train2_set1/speech/g03a10_unpr.sph.ch1_13570_13643.13kltonly 1 74 

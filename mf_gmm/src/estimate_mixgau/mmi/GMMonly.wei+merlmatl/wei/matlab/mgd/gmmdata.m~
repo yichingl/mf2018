@@ -1,0 +1,92 @@
+% Read proto and write data generated from Guassians
+% Author : Wei Chu @ UCLA
+% Date : 06/26/2008
+%
+% gmmdata(strModel, bplot, bsimu, strDir, trnum, tenum)
+% bsimu    - 1 - simu data, 0 - do not
+% bplot    - 1 - plot data, 0 - do not
+% strMod   - contain multivariate Gaussian pdfs' name, mix weight, mean, covar
+% trnum    - # of samples to be generated for each pdf for training set
+% tenum    - # of samples to be generated for each pdf for test set
+% bshow    - 1 - show the simu data, 0 - do not
+
+function [flag] = gmmdata(bsimu, bplot, strMod, trnum, tenum, bRecord, bshow)
+
+if nargin < 3
+    printf('gmmdata(bsimu, bplot, strMod, trnum, tenum, bshow)');
+    exit(-1);
+end
+
+% cd '/net/homes/wchu/projects/GMM/matlab/mgd';
+strRoot = '/net/homes/wchu/projects/GMM/';
+% strDir   - output data dir
+% strLst   - scriptt data dir
+strModDir    = strcat(strRoot, 'model/');
+strDataDir   = strcat(strRoot, 'data/');
+strScpDir    = strcat(strRoot, 'script/');
+strModPath   = strcat(strModDir, strMod);
+sprintf('Model name: %s\n', strModPath)
+
+anum = [tenum; trnum];
+aname = ['te'; 'tr'];
+acolor = ['b'; 'r'; 'k'];
+astyle = ['+'; 'x'; '*'];
+
+[gmm, iMod] = loadgmm(strModPath);
+    
+for i = 1:iMod
+    if bsimu == 1
+        % t = 1 -> simu data for testing
+        % t = 2 -> simu data for training
+        % simulate data
+        rand('twister', 0);
+        randn('state', 0);
+        for t = 1:2
+            strDataPath = strcat(strDataDir, gmm(i).name, '.', aname(t,:), num2str(anum(t)) );
+            strScpPath = strcat(strScpDir, gmm(i).name, '.', aname(t,:), num2str(anum(t)) );
+            if bRecord == 1
+                y = simudata(iMod, gmm(i), anum(t), 1, strDataPath, strScpPath, i);
+            else
+                y = simudata(iMod, gmm(i), anum(t), 0);
+            end
+            
+            %some plot cmd
+            if bshow == 1 && t == 2
+                %figure;
+                pt = strcat(acolor(i), astyle(i));
+                plot(y(1,:), y(2,:), pt); hold on;
+                xlabel('x1'); ylabel ('x2');
+                title(['the data of ', num2str(i), 'th model: ', gmm(i).name]);
+            end
+        end
+    end
+    
+    % plot pdf contour
+    if bplot >= 1
+        x1 = linspace(-3, 3, 50);
+        x2 = linspace(-3, 3, 50);
+        [X1,X2] = meshgrid(x1, x2);
+        num = size(X1(:), 1);
+        X = [X1(:) X2(:)]; % N * dim
+        V = zeros(num, 1);
+        
+        % p = \sum c x N (x, u, cov)
+        for k = 1:num
+            V(k) = mgdprob(gmm(i), X(k,:));
+        end
+        V = reshape(V, length(x2), length(x1));
+        contour(x1, x2, V); hold on; grid on;
+        xlabel('x1'); ylabel ('x2');
+        title(['the ', num2str(i), ' th model: ', gmm(i).name]);
+    end
+    if bplot >= 2
+        smp = 100;
+        mell = getmellipse(gmm(i), smp);
+        for j = 1:gmm(i).mix
+            plot(mell(1,:,j), mell(2,:,j), 'g', 'LineWidth', 2); hold on;
+            plot(gmm(i).mu(1,j), gstr.mu(2,j), 'g+', 'LineWidth', 2);
+        end
+    end
+    axis([-3 3 -3 3]);
+
+end

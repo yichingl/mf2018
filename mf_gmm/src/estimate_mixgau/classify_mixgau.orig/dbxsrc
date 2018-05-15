@@ -1,0 +1,1 @@
+run /projects/speech-raj/expts/TIMIT/mixture_of_experts/ctls/breath.ctl.fullpath  /projects/speech-raj/expts/TIMIT/mixture_of_experts/modelctl /projects/speech-raj/expts/TIMIT/mixture_of_experts/lkhds/breath.lkhds

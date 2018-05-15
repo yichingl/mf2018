@@ -1,0 +1,148 @@
+function [V] = gmmdata(bsimu, bplot, gmm, trnum, tenum, bRecord, bshow, G)
+% [V] = gmmdata(bsimu, bplot, gmm, trnum, tenum, bRecord, bshow, G)
+% Read proto and write data generated from Guassians
+% Author : Wei Chu @ UCLA
+% Date : 06/26/2008
+%
+% gmmdata(strModel, bplot, bsimu, strDir, trnum, tenum)
+% bsimu    - 1 - simu data, 0 - do not
+% bplot    - >1 - plot 1 std ellipse
+%          - 2  - equal prob contour for each class
+%          - 3  - equal prob boundary among classes
+% gmm      - gmm data structures loaded by loadgmm
+% trnum    - # of samples to be generated for each pdf for training set
+% tenum    - # of samples to be generated for each pdf for test set
+% bshow    - 1 - show the simu data, 0 - do not
+
+if nargin < 3
+    printf('gmmdata(bsimu, bplot, strMod, trnum, tenum, bshow)');
+    exit(-1);
+end
+
+% cd '/net/homes/wchu/projects/GMM/matlab/mgd';
+%strRoot = '/net/homes/wchu/projects/GMM/';
+% strDir   - output data dir
+% strLst   - scriptt data dir
+%strModDir    = strcat(strRoot, 'model/');
+%strDataDir   = strcat(strRoot, 'data/');
+%strScpDir    = strcat(strRoot, 'script/');
+%if bsimu == 1
+%    strModPath   = strcat(strModDir, strMod, '.smu');
+%else
+%    strModPath   = strcat(strModDir, strMod, '.def');
+%end
+%sprintf('Model name: %s\n', strModPath)
+
+
+anum = [tenum; trnum];
+aname = ['te'; 'tr'];
+acolor = ['b'; 'r'; 'k'];
+astyle = ['+'; 'x'; '*'];
+
+%[gmm, iMod] = loadgmm(strModPath);
+iMod = length(gmm);
+    
+bsimu = 0;
+for i = 1:iMod
+    if bsimu == 1
+        % t = 1 -> simu data for testing
+        % t = 2 -> simu data for training
+        % simulate data
+        rand('twister', 0);        randn('state', 0);
+        for t = 1:2
+            strDataPath = strcat(strDataDir, gmm(i).name, '.', aname(t,:), num2str(anum(t)) );
+            strScpPath = strcat(strScpDir, strMod, '.', aname(t,:), num2str(anum(t)) );
+            if bRecord == 1
+                y = simudata(iMod, gmm(i), anum(t), 1, strDataPath, strScpPath, i);
+            else
+                y = simudata(iMod, gmm(i), anum(t), 0);
+            end
+            
+            %some plot cmd
+            if bshow == 1 && t == 2
+                %figure;
+                pt = strcat(acolor(i), astyle(i));
+                plot(y(1,:), y(2,:), pt); hold on;
+                xlabel('x1'); ylabel ('x2');
+                title(['the data of ', num2str(i), 'th model: ', gmm(i).name]);
+            end
+        end
+    end
+end
+    
+if bplot == 3
+        x1 = linspace(-2, 2, 50);
+        x2 = linspace(-5, 5, 50);
+        [X1,X2] = meshgrid(x1, x2);
+        num = size(X1(:), 1);
+        X = [X1(:) X2(:)]; % N * dim
+        P = zeros(num, iMod); 
+        V = ones(num, 1);
+        % p = \sum c x N (x, u, cov)
+        
+        for k = 1:num
+            for i = 1:iMod
+                P(k, i) = mgdprob(gmm(i), X(k,:));
+            end
+        end
+        vf = std(P(:));
+        for k = 1:num
+            [s, V(k)] = max(P(k,:));
+%             if P(k,1) < P(k,2)
+%                 V(k) = 2;
+%             end
+        end
+        V = reshape(V, length(x2), length(x1));
+        contour(x1, x2, V, 1, 'c', 'LineWidth', 2); hold on; grid on;
+        xlabel('x1'); ylabel ('x2');
+        title(['the ', num2str(i), ' th model: ', gmm(i).name]);
+        
+        %show the ground truth
+        y1 = linspace(-2, 2, 100);
+        y2 = linspace(-5, 5, 100);
+        contour(y1, y2, G, 1, 'k', 'LineWidth', 2); hold on; grid on;
+        for m = 1:length(x1)
+            for n = 1:length(x2)
+                plot(x1(m), x2(n), [acolor(V(n, m)), '.']); hold on;
+            end
+        end
+end
+
+% plot equal prob curve for each class
+% looks messy when more than 1 class ...
+for i = 1:iMod
+    % plot pdf contour
+    if bplot == 2
+%         x1 = linspace(-3, 3, 50);
+%         x2 = x1;
+        x1 = linspace(-2, 2, 50);
+        x2 = linspace(-5, 5, 50);
+        [X1,X2] = meshgrid(x1, x2);
+        num = size(X1(:), 1);
+        X = [X1(:) X2(:)]; % N * dim
+        V = zeros(num, 1);
+        
+        % p = \sum c x N (x, u, cov)
+        for k = 1:num
+            V(k) = mgdprob(gmm(i), X(k,:));
+        end
+        V = reshape(V, length(x2), length(x1));
+        contour(x1, x2, V); hold on; grid on;
+        xlabel('x1'); ylabel ('x2');
+        title(['the ', num2str(i), ' th model: ', gmm(i).name]);
+    end
+end
+
+% plot the 1 std ellipse
+for i = 1:iMod
+    if bplot >= 1
+        smp = 100;
+        mell = getmellipse(gmm(i), smp);
+        for j = 1:gmm(i).mix
+            plot(mell(1,:,j), mell(2,:,j), acolor(i), 'LineWidth', 3); hold on;
+            plot(gmm(i).mu(1,j), gmm(i).mu(2,j), [acolor(i), '+'], 'LineWidth', 3);
+        end
+    end
+    axis([-2 2 -5 5]);grid on;
+     axis([-3 3 -3 3]);
+end

@@ -1,0 +1,12 @@
+% use surf from multivariate Gaussian pdfs
+% Author : Wei Chu @ UCLA
+% Date : 06/26/2008
+
+% n   - # of samples to generate
+% dim - # of dimensionsf
+% mix - # of mixtures
+% wt  - weight       (1 x mix)
+% mu  - mean         (dim x mix)
+% cov - covariance   (dim x dim x mix)
+
+function [y] = plotmgd(n, dim, mix, wt, mu, cov)

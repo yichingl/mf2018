@@ -1,0 +1,6 @@
+    if ((Newmean = (float ***)alloc2d(L+R+1,K,Ndim,sizeof(float))) == NULL)
+        QUIT(("Unable to allocate Newmean array\n"));
+
+    if ((Newvar = (float ****) alloc4d(L+R+1,K,Ndim,Ndim,sizeof(float))) == NULL)
+        QUIT(("Unable to allocate for Newvar array\n"));
+

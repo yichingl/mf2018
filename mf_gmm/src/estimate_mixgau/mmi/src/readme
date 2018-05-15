@@ -1,0 +1,3 @@
+To run to learn mixtures of (for instance) 4 Gaussians:
+
+./linux/mgaummi tstdata/class1.dat tstdata/class2.dat 4

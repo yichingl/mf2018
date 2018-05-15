@@ -1,0 +1,152 @@
+/***************************************************************************
+ *   Copyright (C) 2008 by Wei Chu @ UCLA                                         *
+ *                                                                                                      *
+ *   Function :  GMM Training                                                              *
+ *   Created  :  06/18/2008                                                                  *
+ *   Modified :                                                                                     *
+ ***************************************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <dirent.h>
+
+#include "pconf.h"
+#include "srTrainEx.h"
+#include "gmmtr.h"
+
+
+char msg[1024];
+
+extern FILE *fdb;
+
+int main(int argc, char *argv[])
+{
+	int ii,	ifnum, ir, itrained = 0, imethod = 0, iIter1 = 10,iIter2 = 20, imodnum;
+
+	char * PathProto	= "seed.pro";
+	char * PathOutput	= "model.def";
+	char * trList		= "list";
+	CGMM **pp;
+
+	char fn[512];
+	char strCmd[512];
+	char PathTrainList[512];
+	FILE *fp, fpmod;
+	static Confit params[] = {
+		
+		"Flag X", "start with: 0/1 - proto/trained",
+		"-t", cmuINT, (caddr_t)&itrained,
+		
+		"Flag Y", "method with 0/1/2 - MLE/MMI/MCE",
+		"-m", cmuINT, (caddr_t)&imethod,
+		
+		"Proto or Trained Model", "Model for GMM training to start with",
+		"-i", cmuSTRING, (caddr_t)&PathProto,
+
+		"Train List", "list of the training file list: each line - GMM proto path \t GMM training file list",
+		"-l", cmuSTRING, (caddr_t)&trList,
+
+		"Output Model", "Output Dir of the GMM",
+		"-o", cmuSTRING, (caddr_t)&PathOutput,
+		
+		"Iter1", "Max iterations when initializing the model",
+		"-i1", cmuINT, (caddr_t)&iIter1,
+
+		"Iter2", "Max iterations when re-estimating the model",
+		"-i2", cmuINT, (caddr_t)&iIter2,
+		
+		
+
+		0, 0, 0, NOTYPE, 0
+	};
+
+	if (argc < 9)
+	{
+		pusage (argv[0], params);
+		exit(0);
+	}
+
+	if ( ppconf( argc, argv, params, true ) ) 
+	{
+		pusage(argv[0], params);
+		exit(1);
+	}
+
+	// figure out the num of models from training feature list
+	if( (fp = fopen(trList, "rt")) == NULL) {
+		printf("cannot open %s for read.\n", trList); return -1;
+	}
+	fscanf(fp, "%d\n", &imodnum);
+	if (imodnum <= 0) {
+		printf("modnum should be larger than 1\n"); return -1;
+	}
+	WriteGMMSet(PathOutput, imodnum, NULL);
+	
+	// Initialize and Load GMM set
+	if (Initialize(&pp, imodnum) != 1) {
+		printf("Model initialization failed.\n"); return -1;
+	};
+	if (LoadGMMSet(PathProto, &pp) == -1) {
+		printf("Can't open \"%s\" for reading", PathProto); return -1;
+	}
+		
+	// Load Features
+	for (ii = 0; ii < imodnum; ii++) {
+		fscanf(fp, "%d\n", &ifnum);	
+		ir = LoadParaList(fp, ifnum, pp[ii]);
+		if ( ir == -1) {
+			sprintf(msg,"Can't open \"%s\" for reading", PathTrainList);	SayBye(msg);
+		} else if (ir == 0) {
+			SayBye("No training files loaded");
+		}
+	
+		//show the config of GMM proto
+		ShowGMMCfg(pp[ii], ii);
+	}
+	fclose(fp);
+	
+	// calcualte the global variance
+	CalVarFloor(pp, imodnum, itrained);
+	if (itrained == 0) {
+		// the current covariance matrix is loaded from the proto
+		// make sure the proto is correct
+		if (!VQInit(0, pp, imodnum))
+			SayBye("VQInit not succeed");
+
+		// start with proto
+		for (ii = 0; ii < imodnum; ii++) {
+			//K-Means
+			InitMdl(iIter1, pp[ii]);
+		}
+	} else {
+		// start with the trained model
+		if (imethod == 0) {
+			for (ii = 0; ii < imodnum; ii++) {
+				// MLE 
+				ReesMdl(iIter2, pp[ii]);
+			}
+		} else {
+			// MMI or MCE ...
+			ReesMdlMMI(iIter2, pp, imodnum);
+		}
+		
+		
+	}
+	
+	for (ii = 0; ii < imodnum; ii++) {
+		// Write the GMM set
+		WriteGMMSet(PathOutput, 0, pp[ii]);
+		printf("The %s model trained.\n", PathOutput);
+		
+	}
+	
+	if (Release(pp, imodnum) != 1) {
+		printf("Release model and feature array failed\n"); 
+	}
+		
+	
+	printf("Training Finished. :-)\n\n");
+	
+	return 0;
+}

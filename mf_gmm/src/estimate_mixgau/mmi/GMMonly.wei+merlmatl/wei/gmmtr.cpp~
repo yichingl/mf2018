@@ -1,0 +1,154 @@
+/***************************************************************************
+ *   Copyright (C) 2008 by Wei Chu @ UCLA                                         *
+ *                                                                                                      *
+ *   Function :  GMM Training                                                              *
+ *   Created  :  06/18/2008                                                                  *
+ *   Modified :                                                                                     *
+ ***************************************************************************/
+
+#include "pconf.h"
+#include <stdlib.h>
+#include <string.h>
+#include <dirent.h>
+
+#include "gmmtr.h"
+
+
+char msg[1024];
+
+void PrintUsage();
+
+char * PathProto	= "proto",
+	* PathOutput	= "hmm",
+	* PathTrainList = "list",
+	* language		= "CN";
+
+
+
+int main(int argc, char *argv[])
+{
+	int ii,	ifnum,iIter1 = 5,iIter2 = 10;
+
+
+	char fn[256];
+	char strCmd[256];
+	CGMM *gmm = new CGMM;
+
+	static Confit params[] = {
+
+		"ProtoFile", "Proto definition of the GMM",
+		"-p", cmuSTRING, (caddr_t)&PathProto,
+
+		"OutFile", "Output file name of the GMM",
+		"-o", cmuSTRING, (caddr_t)&PathOutput,
+		
+		"Tr_File_List", "HTK format training file list",
+		"-t", cmuSTRING, (caddr_t)&PathTrainList,
+
+		"Ite1", "Max iterations when initializing the model",
+		"-i1", cmuINT, (caddr_t)&iIter1,
+
+		"Ite2", "Max iterations when re-estimating the model",
+		"-i2", cmuINT, (caddr_t)&iIter2,
+
+		"Language", "use CN",
+		"-l", cmuSTRING, (caddr_t)&language,
+
+		0, 0, 0, NOTYPE, 0
+	};
+
+
+	if (argc<8 || argc>13)
+	{
+		pusage (argv[0], params);
+		exit(0);
+	}
+
+	if ( ppconf( argc, argv, params, true ) ) 
+	{
+		pusage(argv[0], params);
+		exit(1);
+	}
+
+/*
+	printf("\n[Command Line] ");
+	for (ii=0;ii<argc;ii++)
+		printf(" %s",argv[ii]);
+	printf("\n");
+	// read the iterations
+	iIter1 = iIter2 = -1;
+	if (argc>=5)
+		sscanf(argv[4],"%d",&iIter1);
+	if (argc>=6)
+		sscanf(argv[5],"%d",&iIter2);
+*/
+
+	CGMM *cp = (CGMM *) malloc(sizeof(CGMM));
+	// Load GMM set
+	if (LoadGMMSet(PathProto) == -1)
+	{
+		sprintf(msg,"Can't open \"%s\" for reading",argv[1]);
+		SayBye(msg);
+	}
+
+	// Load Features
+	ifnum = gmm->LoadParaList(PathTrainList);
+	if ( ifnum == -1)
+	{
+		sprintf(msg,"Can't open \"%s\" for reading",argv[3]);
+		SayBye(msg);
+	} else if (ifnum == 0)
+		SayBye("No training files loaded");
+	
+	printf("\nGMM Training for <%s>\n",gmm->cName);
+	printf("    GMM Mixture      :  %d\n",gmm->iNumMixtures);
+	printf("    GMM Type         :  Diagonal\n");
+	printf("    Vector Size      :  %d\n",gmm->iVectorSize);
+	printf("    Number of Files  :  %d\n",ifnum);
+	printf("    Number of Frames :  %d\n",gmm->iFrames);
+
+/*
+	//K-Means
+	if (iIter1>0)
+		gmm->mInitMdl(iIter1);
+	else
+		gmm->mInitMdl();
+
+	// re-estimate model EM
+	if (iIter2>0)
+		gmm->mReesMdl(iIter2);
+	else
+		gmm->mReesMdl();
+	
+	// Write the GMM set
+	if (gmm->WriteGMMSet(PathOutput) == -1)
+	{
+		gmm->WriteGMMSet("_tmp_GMM_");
+		sprintf(msg,"Can't open \"%s\" for writing, Model saved in _tmp_GMM_",argv[2]);
+		SayBye(msg);
+	}
+	
+	remove("_tmp_GMM_");
+
+	printf("Tmp model _tmp_GMM_ is deleted\n");
+
+	delete gmm;
+*/
+}
+
+
+void PrintUsage(void)
+{
+	printf("                                                                   \n");
+	printf("lGmmTr: GMM-Training Utility.                                      \n");
+	printf("                                                                   \n");
+	printf(" [USAGE]: lGmmTr <ProtoFile> <OutFile> <Tr_File_List> [Ite1] [Ite2]\n");
+	printf("                                                                   \n");
+	printf("     <ProtoFile> :  Proto definition of the GMM                    \n");
+	printf("       <OutFile> :  Output file name of the GMM                    \n");
+	printf("  <Tr_File_List> :  HTK format training file list                  \n");
+	printf("          [Ite1] :  Max iterations when initializing the model     \n");
+	printf("          [Ite2] :  Max iterations when re-estimating the model    \n");
+	printf("                                                                   \n");
+	printf("                                                                   \n");
+}

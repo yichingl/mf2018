@@ -1,0 +1,7 @@
+recogn->	class0	class1
+class0	2366	2380
+class1	822	2249
+
+Class 0 accur = 49.852507 (2366/4746)
+Class 1 accur = 73.233474 (2249/3071)
+Overall accur = 59.037994 (4615/7817)
