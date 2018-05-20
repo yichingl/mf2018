@@ -83,11 +83,15 @@ def save_as_bin(feat_in, out_path):
 
 	#write_vals.tofile(out_path,sep="");
 
-raw_audio_path = '../../../data/miniset/heli/test/72qNna11Znw_051.wav';
-out_path = '../../../data/miniset/heli/test/feats/72qNna11Znw_051.spec';
-sr = 44100;
+filenames = ['72qNna11Znw_035.wav','72qNna11Znw_039.wav','72qNna11Znw_045.wav','72qNna11Znw_051.wav'];
 
-raw_audio = load_audio(raw_audio_path,sr, start_sec=0.0,duration_sec=2);
-feat = gen_magspec(raw_audio,sr);
-show_feat(feat,sr);
-#save_as_bin(feat,out_path);
+for filename in filenames:
+
+	raw_audio_path = '../../../data/miniset/heli/test/' + filename + '.wav';
+	out_path = '../../../data/miniset/heli/test/feats/' + filename + '.spec';
+	sr = 44100;
+
+	raw_audio = load_audio(raw_audio_path,sr, start_sec=0.0,duration_sec=2);
+	#feat = gen_magspec(raw_audio,sr);
+	show_feat(feat,sr);
+	save_as_bin(feat,out_path);
