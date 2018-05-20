@@ -17,17 +17,20 @@ def load_audio(filepath, sr, start_sec=0.0, duration_sec=None):
 #	put features along rows
 def gen_magspec(raw_audio, sr):
 
-	w_len = 0.02*sr;
+	#w_len = 0.02*sr;
+	w_len = 0.005*sr;
 	features =  librosa.stft(raw_audio,n_fft=np.int(w_len),hop_length=np.int(round(w_len/2)),window='hamming')
 	#features = librosa.core.stft(raw_audio);
 	return features;
 
 def show_feat(feat, sr):
+	print(np.shape(feat));
 	fig = plt.figure();
-	librosa.display.specshow(np.absolute(feat), y_axis='linear',x_axis='time',sr=sr);
-	plt.title('Spectrogram');
+	librosa.display.specshow(librosa.amplitude_to_db(feat, ref=np.max),x_axis='time',y_axis='linear');
+	plt.title('Magnitude Spectrogram of Boat');
 	plt.colorbar(format='%+2.0f dB');
 	plt.tight_layout();
+	plt.show();
 	plt.close(fig);
 
 # save_as_bin: save provided feature as a binary file at provided output
