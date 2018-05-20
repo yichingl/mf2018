@@ -68,8 +68,8 @@ sr = 44100; # sampling rate
 clip_duration = 2; # audio clips will split into segments of this duration (in seconds)
 
 # Define training params
-max_epochs = 20; # maximum number of epochs for sgd
-min_epochs = 8; # minimum number of epochs for sgd
+max_epochs = 10; # maximum number of epochs for sgd
+min_epochs = 2; # minimum number of epochs for sgd
 
 ### START MATLAB ENGINE CODE
 # This has to be in top-level file so it only has to start up once.. It takes a while

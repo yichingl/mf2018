@@ -3,6 +3,8 @@
 * given a control file and the parameters (no. of mixture components needed)
 * The mfc file is read, and a combination of mfc and delta-mfc features is
 * obtained and the joint feature is used for the distribution estimation.
+
+* Compile this code to create a program to be used by trainClasses.csh
 *----------------------------------------------------------------------------*/
 
 #include "trainclass.h"
@@ -15,6 +17,14 @@ void  initialize(float**,int,int,int,float**,float***,float***);
 void  estimate_mixture_gau(float**,int,int,int,float**,float**,float*,int);
 void  store_distribution(char*,int,int,float*,float**,float**);
 
+/* main: trains a gmm classifier using provided inputs and macros
+*   reads inputs from command line:
+*       0. whatever calls the program
+*       1. ctlfile: input filename containing list of feature files
+*       2. nmodes: number of gaussians to use
+*       3. outfile: location to store the trained gaussian distribution as output
+*       4. cepdim (optional): feature dimension of inputs; defaults to 13 if input not provided
+*/
 int main(int argc, char **argv)
 {
     float **feat,*mixw,**mean,**vars;
@@ -26,6 +36,9 @@ int main(int argc, char **argv)
 
     cepdim = argc == 5 ? atoi(argv[4]) : 13;
 
+    if (CMN) printf("CMN Enabled");
+    if (DELTA) printf("Delta Enabled");
+
     getfeatures(ctlfile,&feat,&nframes,&featdim,cepdim); 
     initialize(feat,nframes,featdim,nmodes,&mixw,&mean,&vars);
     estimate_mixture_gau(feat,nframes,featdim,nmodes,mean,vars,mixw,10);
@@ -36,8 +49,14 @@ int main(int argc, char **argv)
 
 
 /*==========================================================================*/
-/* Routine to read mfc file and get feature mfc+deltamfc */
-
+/* getfeatures: Routine to read mfc file and get feature mfc+deltamfc 
+*   Inputs:
+*       ctlfile: input filename containing list of feature files
+*       feat: pointer to float matrix passed by main
+*       nfr: pointer to int passed by main - number of frames
+*       featdim: pointer to int passed by main - output feature dimension
+*       cepdim: int passed by main - intput cepstral feature dimension
+*/
 void  getfeatures(char *ctlfile, float ***feat, int *nfr, int *featdim, int cepdim)
 {
     float **cep, **features=NULL, **outfeat, cepmean[100];
@@ -45,28 +64,48 @@ void  getfeatures(char *ctlfile, float ***feat, int *nfr, int *featdim, int cepd
     char fname[256],prevfile[256],*dummy="/dev/null";
     FILE *fp;
 
+    // If using delta features, double output dimensions
     outdim = DELTA? 2*cepdim : cepdim;
 
+    // Loop through each file in ctlfile and extract the total number of frames
     if ((fp=fopen(ctlfile,"r"))==NULL) QUIT(("Unable to open %s\n",ctlfile))
     while(fscanf(fp,"%s %d %d",fname,&beg,&end)!=EOF)
         totframes += end - beg + 1;
     rewind(fp);
 
+    // Use calculated output-dim and num-frames to initialize:
+    //  outfeat - matrix which holds generated features as floats
+    //  featdim - pointer to int passed by main - output feature dimensions
+    //  feat - pointer to float matrix passed by main - pointer to outfeat
     outfeat = (float **)alloc2d(totframes,outdim,sizeof(float));
     *featdim = outdim; *feat = outfeat;
 
+    // Dummy holds invalid path
     strcpy(prevfile,dummy); frmno = 0;
     while(fscanf(fp,"%s %d %d",fname,&beg,&end)!=EOF){
         if (beg < 1) beg = 1;
+        // If current file is not the same as previous file (why)
         if (strcmp(fname,prevfile) != 0){
             printf("Reading from %s\n",fname); fflush(stdout);
             if (features != NULL) free2d((void **)features);
+
+            // Read each value in feature file into cep buffer
+            // Track how many frames there are in nfrm
             if (read_cep(fname,&cep,&nfrm,cepdim) == IO_ERR)
                 QUIT(("Unable to read %s\n",fname))
+
+            // Create 2D matrix buffer for fead features (why 2*cepdim)
             features = (float **)alloc2d(nfrm,2*cepdim,sizeof(float));
+
+            // For each frame
             for (i=0;i<nfrm;i++){
-                for(j=0;j<cepdim;j++) features[i][j] = cep[i][j];
+                // For each value in feature vector
+                for(j=0;j<cepdim;j++){
+                    // Store cepstral feature into feature buffer
+                    features[i][j] = cep[i][j];
+                }
             }
+            // If using delta features, perform necessary computations
             if (DELTA) {
                 for (i=2;i<nfrm-2;i++){
                     for(k=0,j=cepdim;k<cepdim;k++,j++) {
@@ -87,11 +126,19 @@ void  getfeatures(char *ctlfile, float ***feat, int *nfr, int *featdim, int cepd
             }
             free2d((void **)cep);
         }
+
+        // If selected end frame is greater than total existing number of frames, pick largest possible
+        // 
         end = end >= nfrm ? DELTA ? nfrm - 2 : nfrm : end;
         if (end < beg)
             QUIT(("Beg %d, End %d and nfr %d error %s\n",beg,end,nfrm,fname))
+
+        // Init values of cepmean to 0
         for (j=0;j<outdim;j++) cepmean[j] = 0; begseg = frmno;
+
+        // For each frame
         for (i=beg;i<end;i++){
+            // For each feature value, copy feature value to outfeat buffer
             for (j=0;j<outdim;j++) outfeat[frmno][j] = features[i][j];
             if (CMN) {
                 for (j=0;j<outdim;j++) cepmean[j] += features[i][j];

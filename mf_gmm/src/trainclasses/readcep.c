@@ -43,32 +43,31 @@ int read_cep(char *file, float***cep, int *numframes, int cepsize)
     
     /* Check if n_float matches file size */
     byterev = FALSE;
-    if ((n_float*sizeof(float) + 4) != statbuf.st_size) {
-	n = n_float;
-	SWAP_INT(&n);
+    if ((n_float*sizeof(float) + 4) != statbuf.st_size) { //st_size size in bytes
+    	n = n_float;
+    	SWAP_INT(&n);
 
-	if ((n*sizeof(float) + 4) != statbuf.st_size) {
-	    printf("Header size field: %d(%08x); filesize: %d(%08x)\n",
-		    n_float,n_float,(int)statbuf.st_size,(int)statbuf.st_size);
-	    fclose (fp);
-	    return -1;
-	}
-
-	n_float = n;
-	byterev = TRUE;
+    	if ((n*sizeof(float) + 4) != statbuf.st_size) {
+    	    printf("Header size field: %d(%08x); filesize: %d(%08x)\n",
+    		    n_float,n_float,(int)statbuf.st_size,(int)statbuf.st_size);
+    	    fclose (fp);
+    	    return -1;
+    	}
+    	n_float = n;
+    	byterev = TRUE;
     }
     if (n_float <= 0) {
-	printf("Header size field: %d\n",  n_float);
-	fclose (fp);
-	return -1;
+    	printf("Header size field: %d\n",  n_float);
+    	fclose (fp);
+    	return -1;
     }
     
     /* n = #frames of input */
     n = n_float/cepsize;
     if (n * cepsize != n_float) {
-	printf("Header size field: %d; not multiple of %d\n", n_float, cepsize);
-	fclose (fp);
-	return -1;
+    	printf("Header size field: %d; not multiple of %d\n", n_float, cepsize);
+    	fclose (fp);
+    	return -1;
     }
     sf = 0;
     ef = n;

@@ -50,9 +50,9 @@ def train_final(clf, train_filenames, train_labels, valid_filenames, valid_label
 
 	n_examples = len(labels);
 
-	valid_acc = np.zeros((stop_ne+1));
+	valid_acc = np.zeros((stop_ne));
 
-	for ne in range(stop_ne+1):
+	for ne in range(stop_ne):
 
 		# for every random example
 		n_shuffle = range(n_examples);
@@ -193,8 +193,14 @@ def train_classifier(train_filenames, train_labels, valid_filenames, valid_label
 			print('*** Stopping training at early epoch ' + str(stop_ne) + ' (valid accuracy = ' + str(valid_acc_ne) + ')');
 
 	# Train final classifier using selected params
-	ne_half = np.int(np.floor(n_epochs/2));
-	best_stop_ne = np.argmax(valid_acc[ne_half:])+ne_half;
+	#ne_half = np.int(np.floor(n_epochs/2));
+	#best_stop_ne = np.argmax(valid_acc[ne_half:])+ne_half;
+	ne_ind = np.arange(stop_ne+1);
+	# inverse to find last highest acc
+	ne_ind = ne_ind[::-1];
+	valid_acc_inv = valid_acc[::-1];
+	best_stop_ne_inv = np.argmax(valid_acc_inv);
+	best_stop_ne = ne_ind[best_stop_ne_inv]; #number of epoch, not epoch index
 	print('*** Using epoch ' + str(best_stop_ne) + ' to train final classifier');
 	final_dict = train_final(clf, train_filenames, train_labels, valid_filenames, valid_labels, classes, sr, clip_duration, mtl_eng, best_stop_ne);
 
