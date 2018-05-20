@@ -24,7 +24,7 @@ def gen_magspec(raw_audio, sr):
 
 def show_feat(feat, sr):
 	fig = plt.figure();
-	librosa.display.specshow(feat, y_axis='linear',x_axis='time',sr=sr);
+	librosa.display.specshow(np.absolute(feat), y_axis='linear',x_axis='time',sr=sr);
 	plt.title('Spectrogram');
 	plt.colorbar(format='%+2.0f dB');
 	plt.tight_layout();
