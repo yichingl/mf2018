@@ -87,4 +87,4 @@ sr = 44100;
 raw_audio = load_audio(raw_audio_path,sr, start_sec=0.0,duration_sec=2);
 feat = gen_magspec(raw_audio,sr);
 show_feat(feat,sr);
-save_as_bin(feat,out_path);
+#save_as_bin(feat,out_path);
