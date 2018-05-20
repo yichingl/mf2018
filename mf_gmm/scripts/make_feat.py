@@ -18,7 +18,7 @@ def load_audio(filepath, sr, start_sec=0.0, duration_sec=None):
 def gen_magspec(raw_audio, sr):
 
 	#w_len = 0.02*sr;
-	w_len = 0.005*sr;
+	w_len = 0.006*sr;
 	features =  librosa.stft(raw_audio,n_fft=np.int(w_len),hop_length=np.int(round(w_len/2)),window='hamming')
 	#features = librosa.core.stft(raw_audio);
 	return features;
