@@ -1,0 +1,439 @@
+import gmm_helper as gmm_h
+import pickle
+import numpy as np
+import bob.io.base
+import bob.learn.em
+import svm_helper as svm_h
+from sklearn import svm;
+from sklearn.externals import joblib
+
+##############################
+# TRAIN GMM MLE
+##############################
+def train_gmm_mle(data_params, path_params, scaler):
+	# Unpack data parameters
+	n_feats = data_params['n_feats'];
+	n_clusters = data_params['n_clusters'];
+	feat_type = data_params['feat_type'];
+	# Unpack path parameters
+	traingmm_ctl_names = path_params['traingmm_ctl_names'];
+	gmm_hdf5_filepath = path_params['gmm_hdf5_filepath'];
+
+	# Initialize matrix for features
+	feat_all = np.zeros((0,n_feats));
+
+	# Read all ctl files
+	for ctl_group_name in traingmm_ctl_names:
+
+		# Generate input ctl read path
+		ctl_path = '../ctl_files/' + ctl_group_name +'.train.ctl';
+
+		# Read ctl file
+		read_feat = gmm_h.read_specgram_features(ctl_path, n_feats, feat_type);
+
+		# Add to full matrix
+		feat_all = np.vstack((feat_all, read_feat));
+
+	# Normalize data along feature axis
+	scaler.fit(feat_all);
+	feat_all = scaler.transform(feat_all);
+
+	# Run K-Means clustering to gather means for training GMM
+	kmeans_means = gmm_h.get_kmeans_means(feat_all, n_clusters, n_feats);
+
+	## Initialize and train GMM
+	gmm_ubm = gmm_h.train_gmm(feat_all, n_clusters, n_feats); #max iter, covariance type?
+		
+	# Save GMM parameters
+	gmm_hdf5_file = bob.io.base.HDF5File(gmm_hdf5_filepath, 'w');
+	gmm_ubm.save(gmm_hdf5_file);
+
+
+
+##############################
+# GENERATE SUPERVECTS
+##############################
+def make_and_save_supervect(ctl_path, data_params, gmm_ubm):
+
+	# Unpack data parameters
+	n_feats = data_params['n_feats'];
+	n_clusters = data_params['n_clusters'];
+	feat_type = data_params['feat_type'];
+
+	with open(ctl_path) as f: # open boat,heli ctl file
+		for line in f: # for each filepath, generate a supervect and save
+			ctl_name = gmm_h.read_ctlname(line,feat_type);
+			feat_read = gmm_h.read_specgram_feature(ctl_name);
+			supervect = gmm_h.create_supervect(feat_read, n_clusters, n_feats, gmm_ubm);
+
+			# save means supervector
+			supervect_out_path = ctl_name.replace('feat_out','supervect_out');
+			with open(supervect_out_path, 'w') as f:
+				np.savetxt(f,np.asarray(supervect));
+
+def make_supervects(data_params, path_params):
+	# unpack path params
+	gmm_hdf5_filepath = path_params['gmm_hdf5_filepath'];
+	gensupervect_train_ctl_names = path_params['gensupervect_train_ctl_names'];
+	gensupervect_test_ctl_names = path_params['gensupervect_test_ctl_names'];
+
+	# load GMM-UBM
+	gmm_hdf5_file = bob.io.base.HDF5File(gmm_hdf5_filepath, 'r');
+	gmm_ubm = bob.learn.em.GMMMachine(gmm_hdf5_file);
+
+	# Process training set (boat, heli)
+	for ctl_group_name_supervect in gensupervect_train_ctl_names: # boat, heli
+		ctl_path = '../ctl_files/' + ctl_group_name_supervect +'.train.ctl';
+		make_and_save_supervect(ctl_path, data_params, gmm_ubm);
+
+	# Process testing set (boat, heli)
+	for ctl_group_name_supervect in gensupervect_test_ctl_names: # boat, heli
+		ctl_path = '../ctl_files/' + ctl_group_name_supervect +'.test.ctl';
+		make_and_save_supervect(ctl_path, data_params, gmm_ubm);
+
+
+##############################
+# READ TRAIN DATA
+##############################
+def read_train_data(data_params, path_params, labels):
+	# Unpack data parameters
+	n_feats = data_params['n_feats'];
+	n_clusters = data_params['n_clusters'];
+	feat_type = data_params['feat_type'];
+
+	# Unpack path parameters
+	boat_train_ctl_name = path_params['boat_train_ctl_name'];
+	heli_train_ctl_name = path_params['heli_train_ctl_name'];
+	ctlset_path = path_params['ctlset_path'];
+
+	# Unpack label parameters
+	BOAT_N = labels['BOAT_N'];
+	HELI_N = labels['HELI_N'];
+
+	# read control file for boat training data, create label vector, read group data
+	filename = ctlset_path+boat_train_ctl_name;
+	train_feat_read_boat = svm_h.read_gmm_features(filename+'.train.ctl',feat_type,n_feats*n_clusters);
+	labels_boat = svm_h.create_labels(train_feat_read_boat, BOAT_N);
+	subgroups_boat = svm_h.read_subgroups(filename+'.train_subgroups.ctl');
+
+	# read control file for heli training data, create label vector, read group data
+	filename = ctlset_path+heli_train_ctl_name;
+	train_feat_read_heli = svm_h.read_gmm_features(filename+'.train.ctl',feat_type,n_feats*n_clusters);
+	labels_heli = svm_h.create_labels(train_feat_read_heli, HELI_N);
+	subgroups_heli = svm_h.read_subgroups(filename+'.train_subgroups.ctl');
+
+	# concatenate boat and heli data
+	train_feat_read = np.vstack((train_feat_read_boat,train_feat_read_heli));
+	labels_train = np.concatenate((labels_boat,labels_heli));
+	subgroups = subgroups_boat+subgroups_heli;
+
+
+	train_data = {'train_feat_read': train_feat_read, 'labels_train': labels_train, 'subgroups': subgroups};
+	return train_data;
+
+##############################
+# FIND PARAMS
+##############################
+# train_data: dict, generated by read_train_data
+# SVM_params: dict of dicts, specified in main code
+# xval_params: dict, specified in main code
+# group_name_full: overall group name
+def xval_params(train_data, SVM_params, xval_params, full_name,pretty_results_filepath, best_params_filepath, split_obj,scaler):
+
+	# unpack training data
+	train_feat_read = train_data['train_feat_read'];
+	labels_train = train_data['labels_train'];
+	subgroups = train_data['subgroups'];
+
+	# unpack xval_params
+	xval_test_size = xval_params['xval_test_size'];
+	xval_num_splits = xval_params['xval_num_splits'];
+
+	# initialize params
+	best_avg_mcc = 0;
+	best_C = 0;
+	best_gamma = 0;
+	best_kernel = None;
+
+	with open(pretty_results_filepath,'a') as f: #clear beforehand
+
+		# try each classifier parameter set
+		for param_type in SVM_params:
+			kernel_type = param_type['kernel'][0];
+			print('kernel type: ' + kernel_type +'\n');
+			f.write('Kernel Type: '+str(kernel_type)+'\n');
+
+			# for each C parameter 
+			for C in param_type['C']:
+				print('	C: '+str(C)+'\n');
+				f.write('	C: '+str(C)+'\n');
+
+				# for each gamma parameter
+				for gamma in param_type['gamma']:
+					print('		gamma: '+str(gamma)+'\n');
+					f.write('		gamma: '+str(gamma)+'\n');
+
+					# reset accuracy count for each method
+					avg_accuracy = 0;
+					avg_mcc = 0;
+
+					# generate a new set of data - split into data groups
+					for train_ind,test_ind in split_obj.split(X=train_feat_read,y=labels_train,groups=subgroups):
+						
+						# move this?
+						# extract train set
+						train_idx = np.asarray(train_ind,dtype=int)
+						train_feat_subset = train_feat_read[train_idx,:];
+						train_labels_subset = labels_train[train_idx];
+						# extract test set
+						test_idx = np.asarray(test_ind,dtype=int)
+						test_feat_subset = train_feat_read[test_idx,:];
+						test_labels_subset = labels_train[test_idx];
+
+						# preprocess data (train and test sets)
+						scaler.fit(train_feat_subset);
+						train_feat_subset = scaler.transform(train_feat_subset);
+						test_feat_subset = scaler.transform(test_feat_subset);
+
+						# for each subset train SVM and make predictions
+						clf = svm.SVC(C=C,kernel=kernel_type,gamma=gamma);
+						clf.fit(train_feat_subset, train_labels_subset);  
+						predicted_test_labels = clf.predict(test_feat_subset);
+
+						# compute performance metrics
+						precision = svm_h.calc_precision(test_labels_subset,predicted_test_labels);
+						recall = svm_h.calc_recall(test_labels_subset,predicted_test_labels);
+						f1 = svm_h.calc_f1(test_labels_subset,predicted_test_labels);
+						mcc = svm_h.calc_mcc(test_labels_subset,predicted_test_labels);
+						accuracy = svm_h.calc_accuracy(test_labels_subset,predicted_test_labels);
+						cf_mat = svm_h.calc_cfmat(test_labels_subset,predicted_test_labels);
+
+						f.write('			Trial MCC: '+ str(mcc)+'\n');
+						f.write('				accuracy: ' + str(accuracy)+'\n');
+						f.write('				precision: ' + str(precision)+'\n');
+						f.write('				recall: ' + str(recall)+'\n');
+						f.write('				f1: ' + str(f1)+'\n');
+						f.write('				confusion matrix: '+'\n');
+						f.write('					'+str(cf_mat[0,:])+'\n');
+						f.write('					'+str(cf_mat[1,:])+'\n');
+						print('			Trial MCC: '+ str(mcc)+'\n');
+						print('				accuracy: ' + str(accuracy)+'\n');
+						print('				precision: ' + str(precision)+'\n');
+						print('				recall: ' + str(recall)+'\n');
+						print('				f1: ' + str(f1)+'\n');
+						print('				confusion matrix: '+'\n');
+						print('					'+str(cf_mat[0,:])+'\n');
+						print('					'+str(cf_mat[1,:])+'\n');
+
+						# update accuracy and sum
+						avg_accuracy = avg_accuracy + accuracy
+						avg_mcc = avg_mcc + mcc;
+
+					# calcuate average accuracy
+					avg_accuracy = 1.*avg_accuracy/xval_num_splits;
+					f.write('			Average Accuracy: ' + str(avg_accuracy)+'\n');
+					print('			Average Accuracy: ' + str(avg_accuracy)+'\n');
+
+					# calcualate average mcc
+					avg_mcc = 1.*avg_mcc/xval_num_splits;
+					f.write('			Average MCC: ' + str(avg_mcc)+'\n\n');
+					print('			Average MCC: ' + str(avg_mcc)+'\n\n');
+
+					# update best accuracy
+					if avg_mcc > best_avg_mcc:
+						best_avg_mcc = avg_mcc;
+						best_avg_accuracy = avg_accuracy;
+						best_C = C;
+						best_gamma = gamma
+						best_kernel = kernel_type;
+
+	with open(pretty_results_filepath,'a') as f:
+		f.write('\n\n');
+		f.write('==================================\n')
+		f.write('best kernel: ' + best_kernel+'\n');
+		f.write('best C: ' + str(best_C)+'\n');
+		f.write('best gamma: ' + str(best_gamma)+'\n');
+		f.write('best avg accuracy: ' + str(best_avg_accuracy)+'\n');
+		f.write('best avg mcc: ' + str(best_avg_mcc)+'\n');
+	print('best kernel: ' + best_kernel+'\n');
+	print('best C: ' + str(best_C)+'\n');
+	print('best gamma: ' + str(best_gamma)+'\n');
+	print('best avg accuracy: ' + str(best_avg_accuracy)+'\n');
+	print('best avg mcc: ' + str(best_avg_mcc)+'\n')
+
+	print('Writing best params to: '+best_params_filepath);
+	with open(best_params_filepath,'w') as f:
+		f.write(best_kernel+'\n');
+		f.write(str(best_C)+'\n')
+		f.write(str(best_gamma)+'\n');
+
+
+##############################
+# TRAIN SVM
+##############################
+
+def read_SVM_param(best_params_filepath,n_feats):
+	# read parameters from file
+	with open(best_params_filepath,'r') as f:
+		i = 0;
+		for line in f:
+			if i == 0:
+				best_kernel = line.strip();
+				print('read best kernel: '+best_kernel);
+			elif i == 1:
+				best_C = float(line.strip());
+				print('read best C: ' +str(best_C));
+			elif i == 2:
+				best_gamma = line.strip(); # TODO: STRING OR INT??
+				if best_gamma == 'auto':
+					best_gamma = 1./n_feats;
+				best_gamma = float(best_gamma);
+				print('read best gamma: '+str(best_gamma));
+			i = i + 1;
+
+	SVM_params = {'best_kernel': best_kernel, 'best_C': best_C, 'best_gamma': best_gamma};
+	return SVM_params;
+
+# train_data: dict, generated by read_train_data
+# best_SVM_params: dict of dicts, specified in main code
+# path_params: contains paths and names
+# scaler: object for scaling
+def train_svm(train_data, path_params, SVM_params, scaler):
+	
+	# unpack path params
+	group_name_full = path_params['full_name'];
+	trained_svm_filepath = path_params['trained_svm_filepath'];
+	trained_svm_scalerobj_filepath = path_params['trained_svm_scalerobj_filepath'];
+
+	# unpack training data
+	train_feat_read = train_data['train_feat_read'];
+	labels_train = train_data['labels_train'];
+
+	# unpack SVM params
+	best_C = SVM_params['best_C'];
+	best_gamma = SVM_params['best_gamma'];
+	best_kernel = SVM_params['best_kernel'];
+
+	# preprocess data (train and test sets)
+	scaler.fit(train_feat_read);
+	train_feat_read = scaler.transform(train_feat_read);
+
+	# for each subset train SVM and make predictions
+	clf = svm.SVC(C=best_C,gamma=best_gamma,kernel=best_kernel);
+	clf.fit(train_feat_read, labels_train);  
+	predicted_train_labels = clf.predict(train_feat_read);
+
+	# calculate performance metrics
+	precision = svm_h.calc_precision(labels_train,predicted_train_labels);
+	recall = svm_h.calc_recall(labels_train,predicted_train_labels);
+	f1 = svm_h.calc_f1(labels_train,predicted_train_labels);
+	mcc = svm_h.calc_mcc(labels_train,predicted_train_labels);
+	accuracy = svm_h.calc_accuracy(labels_train,predicted_train_labels);
+	cf_mat = svm_h.calc_cfmat(labels_train,predicted_train_labels);
+
+	print('final training accuracy: ' + str(accuracy)+'\n');
+	print('final training mcc: ' + str(mcc)+'\n');
+	with open('../new_gmm_results/' + group_name_full +'.results.txt','a') as f:
+		f.write('\n\n');
+		f.write('==================================\n');
+		f.write('Training Results');
+		f.write('	MCC: '+ str(mcc)+'\n');
+		f.write('	accuracy: ' + str(accuracy)+'\n');
+		f.write('	precision: ' + str(precision)+'\n');
+		f.write('	recall: ' + str(recall)+'\n');
+		f.write('	f1: ' + str(f1)+'\n');
+		f.write('	confusion matrix: '+'\n');
+		f.write('		'+str(cf_mat[0,:])+'\n');
+		f.write('		'+str(cf_mat[1,:])+'\n');
+
+	#np.savetxt('../new_gmm_results/' + group_name_full +'.train_predicted.txt',predicted_train_labels);
+	pickle.dump(clf, open(trained_svm_filepath, 'wb'));
+
+	# save trained scaler object
+	joblib.dump(scaler, trained_svm_scalerobj_filepath); 
+
+##############################
+# READ TEST DATA
+##############################
+def read_test_data(data_params, path_params, labels):
+	# Unpack data parameters
+	n_feats = data_params['n_feats'];
+	n_clusters = data_params['n_clusters'];
+	feat_type = data_params['feat_type'];
+
+	# Unpack path parameters
+	boat_test_ctl_name = path_params['boat_test_ctl_name'];
+	heli_test_ctl_name = path_params['heli_test_ctl_name'];
+	ctlset_path = path_params['ctlset_path'];
+
+	# Unpack label parameters
+	BOAT_N = labels['BOAT_N'];
+	HELI_N = labels['HELI_N'];
+
+	# read control file for boat testing data, create label vector, read group data
+	filename = ctlset_path+boat_test_ctl_name;
+	test_feat_read_boat = svm_h.read_gmm_features(filename+'.test.ctl',feat_type,n_feats*n_clusters);
+	labels_boat = svm_h.create_labels(test_feat_read_boat, BOAT_N);
+
+	# read control file for heli testing data, create label vector, read group data
+	filename = ctlset_path+heli_test_ctl_name;
+	test_feat_read_heli = svm_h.read_gmm_features(filename+'.test.ctl',feat_type,n_feats*n_clusters);
+	labels_heli = svm_h.create_labels(test_feat_read_heli, HELI_N);
+
+	# concatenate boat and heli data
+	test_feat_read = np.vstack((test_feat_read_boat,test_feat_read_heli));
+	labels_test = np.concatenate((labels_boat,labels_heli));
+
+
+	test_data = {'test_feat_read': test_feat_read, 'labels_test': labels_test};
+	return test_data;
+
+##############################
+# CLASSIFY DATA
+##############################
+def classify_data(test_data, path_params, scaler):
+	# unpack test data
+	test_feat_read = test_data['test_feat_read'];
+	labels_test = test_data['labels_test'];
+
+	# unpack path_params
+	full_name = path_params['full_name'];
+	trained_svm_filepath = path_params['trained_svm_filepath'];
+	trained_svm_scalerobj_filepath = path_params['trained_svm_scalerobj_filepath'];
+
+	# load scaler 
+	scaler = joblib.load(trained_svm_scalerobj_filepath);
+
+	# preprocess test data
+	test_feat_read = scaler.transform(test_feat_read);
+
+	# load model
+	clf = pickle.load(open(trained_svm_filepath, 'rb'));
+
+	# predict labels
+	predicted_test_labels = clf.predict(test_feat_read);
+
+	# calculate performance metrics
+	precision = svm_h.calc_precision(labels_test,predicted_test_labels);
+	recall = svm_h.calc_recall(labels_test,predicted_test_labels);
+	f1 = svm_h.calc_f1(labels_test,predicted_test_labels);
+	mcc = svm_h.calc_mcc(labels_test,predicted_test_labels);
+	accuracy = svm_h.calc_accuracy(labels_test,predicted_test_labels);
+	cf_mat = svm_h.calc_cfmat(labels_test,predicted_test_labels);
+
+	print('final testing accuracy: ' + str(accuracy)+'\n');
+	print('final testing mcc: ' + str(mcc)+'\n');
+	with open('../new_gmm_results/' + full_name +'.results.txt','a') as f:
+		f.write('\n\n');
+		f.write('==================================\n')
+		f.write('Test Results');
+		f.write('	MCC: '+ str(mcc)+'\n');
+		f.write('	accuracy: ' + str(accuracy)+'\n');
+		f.write('	precision: ' + str(precision)+'\n');
+		f.write('	recall: ' + str(recall)+'\n');
+		f.write('	f1: ' + str(f1)+'\n');
+		f.write('	confusion matrix: '+'\n');
+		f.write('		'+str(cf_mat[0,:])+'\n');
+		f.write('		'+str(cf_mat[1,:])+'\n');
+
+	np.savetxt('../new_gmm_results/' + full_name +'.test_predicted.txt',predicted_test_labels);

@@ -1,0 +1,159 @@
+Kernel Type: linear
+	C: 1
+		gamma: auto
+			accuracy: 0.6
+			accuracy: 0.7272727272727273
+			accuracy: 0.0
+			accuracy: 0.5714285714285714
+			accuracy: 0.3333333333333333
+			average accuracy: 0.44640692640692636
+
+	C: 100
+		gamma: auto
+			accuracy: 0.0
+			accuracy: 0.5714285714285714
+			accuracy: 0.8571428571428571
+			accuracy: 0.0
+			accuracy: 0.25
+			average accuracy: 0.3357142857142857
+
+Kernel Type: rbf
+	C: 1
+		gamma: 0.1
+			accuracy: 0.3333333333333333
+			accuracy: 0.5
+			accuracy: 0.5
+			accuracy: 0.0
+			accuracy: 0.3333333333333333
+			average accuracy: 0.3333333333333333
+
+		gamma: auto
+			accuracy: 0.125
+			accuracy: 0.14285714285714285
+			accuracy: 0.25
+			accuracy: 0.4
+			accuracy: 0.6
+			average accuracy: 0.30357142857142855
+
+	C: 100
+		gamma: 0.1
+			accuracy: 0.3333333333333333
+			accuracy: 0.2222222222222222
+			accuracy: 0.0
+			accuracy: 0.3333333333333333
+			accuracy: 0.14285714285714285
+			average accuracy: 0.20634920634920634
+
+		gamma: auto
+			accuracy: 0.25
+			accuracy: 0.2
+			accuracy: 0.25
+			accuracy: 0.125
+			accuracy: 0.6
+			average accuracy: 0.285
+
+
+
+==================================
+best kernel: linear
+best C: 1
+best gamma: auto
+best avg accuracy: 0.44640692640692636
+
+
+==================================
+final training accuracy: 1.0
+confusion matrix: 
+[10  0]
+[ 0 10]
+
+
+==================================
+final testing accuracy: 0.62
+confusion matrix: 
+[10 15]
+[ 4 21]
+
+
+==================================
+final training accuracy: 1.0
+confusion matrix: 
+[10  0]
+[ 0 10]
+
+
+==================================
+final testing accuracy: 0.62
+confusion matrix: 
+[10 15]
+[ 4 21]
+
+
+==================================
+final training accuracy: 1.0
+confusion matrix: 
+[10  0]
+[ 0 10]
+
+
+==================================
+final testing accuracy: 0.62
+confusion matrix: 
+[10 15]
+[ 4 21]
+
+
+==================================
+final training accuracy: 1.0
+confusion matrix: 
+[10  0]
+[ 0 10]
+
+
+==================================
+final testing accuracy: 0.62
+confusion matrix: 
+[10 15]
+[ 4 21]
+
+
+==================================
+final training accuracy: 1.0
+confusion matrix: 
+[10  0]
+[ 0 10]
+
+
+==================================
+final testing accuracy: 0.62
+confusion matrix: 
+[10 15]
+[ 4 21]
+
+
+==================================
+final training accuracy: 1.0
+confusion matrix: 
+[10  0]
+[ 0 10]
+
+
+==================================
+final testing accuracy: 0.62
+confusion matrix: 
+[10 15]
+[ 4 21]
+
+
+==================================
+final training accuracy: 1.0
+confusion matrix: 
+[10  0]
+[ 0 10]
+
+
+==================================
+final testing accuracy: 0.62
+confusion matrix: 
+[10 15]
+[ 4 21]

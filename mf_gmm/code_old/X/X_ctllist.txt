@@ -1,0 +1,7 @@
+TRAIN
+/home/yichingl/mf/mf2018/mf_gmm/ctl_files/X.trainclass.boat.ctl
+/home/yichingl/mf/mf2018/mf_gmm/ctl_files/X.trainclass.heli.ctl
+/home/yichingl/mf/mf2018/mf_gmm/ctl_files/X.trainclass.etc.ctl
+TEST
+/home/yichingl/mf/mf2018/mf_gmm/ctl_files/X.testclass.boat.ctl
+/home/yichingl/mf/mf2018/mf_gmm/ctl_files/X.testclass.heli.ctl

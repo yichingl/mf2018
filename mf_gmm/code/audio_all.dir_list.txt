@@ -1,0 +1,10 @@
+TRAIN_DIR
+/home/yichingl/mf/data/audio_all/boat/train/
+/home/yichingl/mf/data/audio_all/extra/boat/
+/home/yichingl/mf/data/audio_all/heli/train/
+/home/yichingl/mf/data/audio_all/extra/heli/
+/home/yichingl/mf/data/audio_all/extra/etc/
+
+TEST_DIR
+/home/yichingl/mf/data/audio_all/boat/test/
+/home/yichingl/mf/data/audio_all/heli/test/

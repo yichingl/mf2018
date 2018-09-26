@@ -1,0 +1,10 @@
+/home/yichingl/mf/feat_out/audio_all/boat/train/ECyqCpZoXWg_045_2.spec
+/home/yichingl/mf/feat_out/audio_all/boat/train/03LBxCR55J4_030_0.spec
+/home/yichingl/mf/feat_out/audio_all/extra/boat/x6i3VgPVDNQ_278.spec
+/home/yichingl/mf/feat_out/audio_all/extra/boat/x6i3VgPVDNQ_279.spec
+/home/yichingl/mf/feat_out/audio_all/boat/train/nLmzxqP27fI_short_000_0.spec
+/home/yichingl/mf/feat_out/audio_all/boat/train/nLmzxqP27fI_short_000_1.spec
+/home/yichingl/mf/feat_out/audio_all/boat/train/nLmzxqP27fI_short_000_2.spec
+/home/yichingl/mf/feat_out/audio_all/boat/train/nLmzxqP27fI_short_000_3.spec
+/home/yichingl/mf/feat_out/audio_all/boat/train/nLmzxqP27fI_short_000_4.spec
+/home/yichingl/mf/feat_out/audio_all/boat/train/_Pn6YcCZAvo_019_3.spec

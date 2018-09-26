@@ -1,0 +1,28 @@
+
+
+==================================
+final training accuracy: 0.9102005231037489
+confusion matrix: 
+[1381  265]
+[  44 1751]
+
+
+==================================
+final testing accuracy: 0.5
+confusion matrix: 
+[24  1]
+[24  1]
+
+
+==================================
+final training accuracy: 0.9122114216281896
+confusion matrix: 
+[1397  249]
+[  40 1606]
+
+
+==================================
+final testing accuracy: 0.5
+confusion matrix: 
+[24  1]
+[24  1]

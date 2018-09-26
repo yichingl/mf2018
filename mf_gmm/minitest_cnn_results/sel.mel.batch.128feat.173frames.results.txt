@@ -1,0 +1,308 @@
+kernel type: linear
+	C: 0.00390625
+		gamma: auto
+			accuracy: 0.5411255411255411
+			accuracy: 0.15721040189125296
+			accuracy: 0.6289855072463768
+			average accuracy: 0.44244048342105696
+
+	C: 0.015625
+		gamma: auto
+			accuracy: 0.6091644204851752
+			accuracy: 0.3262411347517731
+			accuracy: 0.7389006342494715
+			average accuracy: 0.55810206316214
+
+	C: 0.0625
+		gamma: auto
+			accuracy: 0.7440878378378378
+			accuracy: 0.2331002331002331
+			accuracy: 0.6535947712418301
+			average accuracy: 0.5435942807266336
+
+	C: 0.25
+		gamma: auto
+			accuracy: 0.509927797833935
+			accuracy: 0.7080610021786492
+			accuracy: 0.6461538461538462
+			average accuracy: 0.6213808820554768
+
+	C: 1.0
+		gamma: auto
+			accuracy: 0.6497175141242938
+			accuracy: 0.6546003016591252
+			accuracy: 0.42178217821782177
+			average accuracy: 0.5753666646670802
+
+	C: 4.0
+		gamma: auto
+			accuracy: 0.328125
+			accuracy: 0.5124835742444153
+			accuracy: 0.6101388050694025
+			average accuracy: 0.4835824597712726
+
+	C: 16.0
+		gamma: auto
+			accuracy: 0.4039334341906203
+			accuracy: 0.5
+			accuracy: 0.7456492637215528
+			average accuracy: 0.5498608993040577
+
+	C: 64.0
+		gamma: auto
+			accuracy: 0.7345679012345679
+			accuracy: 0.31237113402061856
+			accuracy: 0.5842105263157895
+			average accuracy: 0.5437165205236586
+
+	C: 256.0
+		gamma: auto
+			accuracy: 0.7639569049951028
+			accuracy: 0.5766961651917404
+			accuracy: 0.503731343283582
+			average accuracy: 0.6147948044901418
+
+	C: 1024.0
+		gamma: auto
+			accuracy: 0.46730345334313006
+			accuracy: 0.3890909090909091
+			accuracy: 0.2165948275862069
+			average accuracy: 0.35766306334008197
+
+	C: 4096.0
+		gamma: auto
+			accuracy: 0.540381791483113
+			accuracy: 0.6325459317585301
+			accuracy: 0.6852233676975945
+			average accuracy: 0.6193836969797458
+
+kernel type: rbf
+	C: 0.00390625
+		gamma: 0.001
+			accuracy: 0.34822104466313397
+			accuracy: 0.2702498107494323
+			accuracy: 0.14332514332514332
+			average accuracy: 0.2539319995792365
+
+		gamma: 0.0001
+			accuracy: 0.4027196652719665
+			accuracy: 0.08085501858736059
+			accuracy: 0.2890262751159196
+			average accuracy: 0.2575336529917489
+
+		gamma: auto
+			accuracy: 0.39104024297646167
+			accuracy: 0.39354187689202824
+			accuracy: 0.3102189781021898
+			average accuracy: 0.3649336993235599
+
+	C: 0.015625
+		gamma: 0.001
+			accuracy: 0.3709016393442623
+			accuracy: 0.3697953422724065
+			accuracy: 0.3870967741935484
+			average accuracy: 0.37593125193673904
+
+		gamma: 0.0001
+			accuracy: 0.037037037037037035
+			accuracy: 0.4982300884955752
+			accuracy: 0.3601449275362319
+			average accuracy: 0.2984706843562814
+
+		gamma: auto
+			accuracy: 0.3524590163934426
+			accuracy: 0.36786786786786785
+			accuracy: 0.4120795107033639
+			average accuracy: 0.3774687983215581
+
+	C: 0.0625
+		gamma: 0.001
+			accuracy: 0.4600326264274062
+			accuracy: 0.38697068403908796
+			accuracy: 0.06924315619967794
+			average accuracy: 0.30541548888872405
+
+		gamma: 0.0001
+			accuracy: 0.3415977961432507
+			accuracy: 0.06085376930063579
+			accuracy: 0.5941558441558441
+			average accuracy: 0.33220246986657687
+
+		gamma: auto
+			accuracy: 0.13107511045655376
+			accuracy: 0.2744755244755245
+			accuracy: 0.3706441393875396
+			average accuracy: 0.2587315914398726
+
+	C: 0.25
+		gamma: 0.001
+			accuracy: 0.5372549019607843
+			accuracy: 0.20287253141831238
+			accuracy: 0.3487858719646799
+			average accuracy: 0.3629711017812589
+
+		gamma: 0.0001
+			accuracy: 0.12307692307692308
+			accuracy: 0.6049046321525886
+			accuracy: 0.5508474576271186
+			average accuracy: 0.4262763376188768
+
+		gamma: auto
+			accuracy: 0.578538102643857
+			accuracy: 0.5255376344086021
+			accuracy: 0.734020618556701
+			average accuracy: 0.6126987852030533
+
+	C: 1.0
+		gamma: 0.001
+			accuracy: 0.3420229405630866
+			accuracy: 0.5149253731343284
+			accuracy: 0.5279850746268657
+			average accuracy: 0.46164446277476023
+
+		gamma: 0.0001
+			accuracy: 0.3445006321112516
+			accuracy: 0.29785247432306255
+			accuracy: 0.7375946173254836
+			average accuracy: 0.4599825745865993
+
+		gamma: auto
+			accuracy: 0.5183566433566433
+			accuracy: 0.32339297548045065
+			accuracy: 0.8137254901960784
+			average accuracy: 0.5518250363443907
+
+	C: 4.0
+		gamma: 0.001
+			accuracy: 0.5429740791268759
+			accuracy: 0.5828343313373253
+			accuracy: 0.5411849710982659
+			average accuracy: 0.5556644605208224
+
+		gamma: 0.0001
+			accuracy: 0.6855590062111802
+			accuracy: 0.6481481481481481
+			accuracy: 0.38022165387894286
+			average accuracy: 0.5713096027460904
+
+		gamma: auto
+			accuracy: 0.16512915129151293
+			accuracy: 0.3202463433410316
+			accuracy: 0.5613026819923371
+			average accuracy: 0.3488927255416272
+
+	C: 16.0
+		gamma: 0.001
+			accuracy: 0.5977249224405378
+			accuracy: 0.7454545454545455
+			accuracy: 0.6483790523690773
+			average accuracy: 0.6638528400880536
+
+		gamma: 0.0001
+			accuracy: 0.705026455026455
+			accuracy: 0.5378361475922452
+			accuracy: 0.48677248677248675
+			average accuracy: 0.5765450297970623
+
+		gamma: auto
+			accuracy: 0.752741774675972
+			accuracy: 0.684931506849315
+			accuracy: 0.38419618528610355
+			average accuracy: 0.6072898222704636
+
+	C: 64.0
+		gamma: 0.001
+			accuracy: 0.5406790518898142
+			accuracy: 0.5675276752767527
+			accuracy: 0.32421614409606403
+			average accuracy: 0.477474290420877
+
+		gamma: 0.0001
+			accuracy: 0.27715030408340574
+			accuracy: 0.5828729281767956
+			accuracy: 0.3830769230769231
+			average accuracy: 0.4143667184457081
+
+		gamma: auto
+			accuracy: 0.27266797129810827
+			accuracy: 0.6068376068376068
+			accuracy: 0.27931488801054016
+			average accuracy: 0.38627348871541844
+
+	C: 256.0
+		gamma: 0.001
+			accuracy: 0.5472761427676894
+			accuracy: 0.4464627151051625
+			accuracy: 0.44300822561692127
+			average accuracy: 0.47891569449659105
+
+		gamma: 0.0001
+			accuracy: 0.7721410146173688
+			accuracy: 0.6727941176470589
+			accuracy: 0.5737051792828686
+			average accuracy: 0.6728801038490988
+
+		gamma: auto
+			accuracy: 0.49266503667481665
+			accuracy: 0.5978511128165771
+			accuracy: 0.7119460500963392
+			average accuracy: 0.6008207331959109
+
+	C: 1024.0
+		gamma: 0.001
+			accuracy: 0.8172194777699365
+			accuracy: 0.5738295318127251
+			accuracy: 0.6220689655172413
+			average accuracy: 0.671039325033301
+
+		gamma: 0.0001
+			accuracy: 0.7064439140811456
+			accuracy: 0.5554780181437544
+			accuracy: 0.6644542772861357
+			average accuracy: 0.6421254031703453
+
+		gamma: auto
+			accuracy: 0.6789237668161435
+			accuracy: 0.5106382978723404
+			accuracy: 0.5650969529085873
+			average accuracy: 0.5848863391990237
+
+	C: 4096.0
+		gamma: 0.001
+			accuracy: 0.5631313131313131
+			accuracy: 0.7617260787992496
+			accuracy: 0.4714828897338403
+			average accuracy: 0.5987800938881344
+
+		gamma: 0.0001
+			accuracy: 0.3139963167587477
+			accuracy: 0.653217011995638
+			accuracy: 0.33298969072164947
+			average accuracy: 0.4334010064920117
+
+		gamma: auto
+			accuracy: 0.42884801548886736
+			accuracy: 0.5773615635179153
+			accuracy: 0.6741116751269035
+			average accuracy: 0.5601070847112287
+
+
+
+==================================
+best kernel: rbf
+best C: 256.0
+best avg accuracy: 0.6728801038490988
+
+
+==================================
+final training accuracy: 0.9993924665856622
+confusion matrix: 
+[1644    2]
+[   0 1646]
+
+
+==================================
+final testing accuracy: 0.72
+confusion matrix: 
+[25  0]
+[14 11]

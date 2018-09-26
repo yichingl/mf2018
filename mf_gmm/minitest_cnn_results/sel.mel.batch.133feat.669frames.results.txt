@@ -1,0 +1,3 @@
+kernel type: linear
+	C: 0.00390625
+		gamma: auto

@@ -1,0 +1,7 @@
+TRAIN_DIR
+/home/yichingl/mf/data/miniset/boat/train/
+/home/yichingl/mf/data/miniset/heli/train/
+
+TEST_DIR
+/home/yichingl/mf/data/miniset/boat/test/
+/home/yichingl/mf/data/miniset/heli/test/

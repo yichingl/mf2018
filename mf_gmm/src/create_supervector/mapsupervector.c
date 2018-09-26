@@ -12,7 +12,7 @@
 
 int CMN, DELTA;
 
-void  getfeatures(char*,float***,int*,int*,int);
+void  getfeatures(char *ctlfile, char *infile, float ***feat, int *nfr, int *featdim, int cepdim, char ***tags);
 void  initialize(float**,int,int,int,float**,float***,float***);
 void  estimate_mixture_gau(float**,int,int,int,float**,float**,float*,float**,float**,float*,int);
 void  store_distribution(char*,int,int,float*,float**,float**);
@@ -91,7 +91,7 @@ int main(int argc, char **argv)
             nmean[i][j] = (1 - alpha)*mean[i][j] + alpha*nmean[i][j];
         nmixw[i] = (1 - alpha)*mixw[i][j] + alpha*nmixw[i][j];
     }
-    store_distribution(outfile,nmodes,featdim,mixw,mean,vars);
+    store_distribution(outdir,nmodes,featdim,mixw,mean,vars);
 
     // Gotta free stuff here. Too lazy for now.
     return 0;

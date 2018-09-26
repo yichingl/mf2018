@@ -1,0 +1,10 @@
+/home/yichingl/mf/feat_out/audio_all/heli/train/44Ml2WN2sE0_009_0.spec 1 849
+/home/yichingl/mf/feat_out/audio_all/heli/train/44Ml2WN2sE0_009_1.spec 1 849
+/home/yichingl/mf/feat_out/audio_all/heli/train/44Ml2WN2sE0_009_2.spec 1 849
+/home/yichingl/mf/feat_out/audio_all/heli/train/44Ml2WN2sE0_009_3.spec 1 849
+/home/yichingl/mf/feat_out/audio_all/heli/train/44Ml2WN2sE0_009_4.spec 1 849
+/home/yichingl/mf/feat_out/audio_all/heli/train/5fgItPlvGpM_032_0.spec 1 849
+/home/yichingl/mf/feat_out/audio_all/heli/train/5fgItPlvGpM_032_1.spec 1 849
+/home/yichingl/mf/feat_out/audio_all/heli/train/5fgItPlvGpM_032_2.spec 1 849
+/home/yichingl/mf/feat_out/audio_all/heli/train/5fgItPlvGpM_032_3.spec 1 849
+/home/yichingl/mf/feat_out/audio_all/heli/train/24iU7dhbNdA_009_0.spec 1 849

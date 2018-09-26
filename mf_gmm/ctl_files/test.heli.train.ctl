@@ -1,0 +1,10 @@
+/home/yichingl/mf/feat_out/audio_all/extra/heli/Fy6XdCmGf-E_51.spec
+/home/yichingl/mf/feat_out/audio_all/extra/heli/Fy6XdCmGf-E_52.spec
+/home/yichingl/mf/feat_out/audio_all/heli/train/5goYPsUoyQ0_072_0.spec
+/home/yichingl/mf/feat_out/audio_all/heli/train/3H1vJ4hzTLg_014_1.spec
+/home/yichingl/mf/feat_out/audio_all/heli/train/3H1vJ4hzTLg_014_2.spec
+/home/yichingl/mf/feat_out/audio_all/heli/train/3H1vJ4hzTLg_014_3.spec
+/home/yichingl/mf/feat_out/audio_all/heli/train/5fgItPlvGpM_002_0.spec
+/home/yichingl/mf/feat_out/audio_all/heli/train/5fgItPlvGpM_002_1.spec
+/home/yichingl/mf/feat_out/audio_all/heli/train/5fgItPlvGpM_002_2.spec
+/home/yichingl/mf/feat_out/audio_all/heli/train/5fgItPlvGpM_002_3.spec

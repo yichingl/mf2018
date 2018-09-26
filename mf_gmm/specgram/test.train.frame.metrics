@@ -1,0 +1,11 @@
+accuracy (time frame): 1.0
+confusion matrix: 
+[3 0]
+[0 3]
+true/predicted
+00 
+00 
+00 
+11 
+11 
+11 

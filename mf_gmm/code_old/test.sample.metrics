@@ -1,0 +1,9 @@
+accuracy (sample): 0.5
+confusion matrix: 
+[0 0]
+[2 2]
+predicted/true
+1 0
+1 0
+1 1
+1 1
