@@ -202,6 +202,7 @@ if GMM:
 	ax.set_ylabel('Y Label')
 	ax.set_zlabel('Z Label')
 	plt.savefig('../vis/tsne-gmm-spec-3d.png');
+	pickle.dump(ax, file('tsne-gmm-spec-3d.pickle', 'w'))
 	plt.close()
 
 	plt.scatter(feat_embedded[:, 2], feat_embedded[:, 0], c = labels_train);
@@ -209,7 +210,7 @@ if GMM:
 	plt.savefig('../vis/tsne-gmm-spec-3d-zx.png');
 	plt.close();
 
-	plt.scatter(feat_embedded[:, 2], feat_embedded[:, 2], c = labels_train);
+	plt.scatter(feat_embedded[:, 2], feat_embedded[:, 1], c = labels_train);
 	plt.tight_layout();
 	plt.savefig('../vis/tsne-gmm-spec-3d-zy.png');
 	plt.close();
@@ -224,6 +225,7 @@ else:
 	ax.set_ylabel('Y Label')
 	ax.set_zlabel('Z Label')
 	plt.savefig('../vis/tsne-cnn-spec-3d.png');
+	pickle.dump(ax, file('tsne-cnn-spec-3d.pickle', 'w'))
 	plt.close()
 
 	plt.scatter(feat_embedded[:, 2], feat_embedded[:, 0], c = labels_train);
@@ -231,7 +233,7 @@ else:
 	plt.savefig('../vis/tsne-cnn-spec-3d-zx.png');
 	plt.close();
 
-	plt.scatter(feat_embedded[:, 2], feat_embedded[:, 2], c = labels_train);
+	plt.scatter(feat_embedded[:, 2], feat_embedded[:, 1], c = labels_train);
 	plt.tight_layout();
 	plt.savefig('../vis/tsne-cnn-spec-3d-zy.png');
 	plt.close();
