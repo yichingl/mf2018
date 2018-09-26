@@ -1,6 +1,7 @@
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
 from sklearn.manifold import TSNE
 import numpy as np
@@ -200,6 +201,9 @@ else:
 	plt.scatter(feat_embedded[:, 0], feat_embedded[:, 1],  feat_embedded[:, 2],c = labels_train);
 	plt.tight_layout();
 	plt.savefig('../vis/tsne-cnn-spec-3d.png');
+	#plt.set_xlabel('X Label')
+	#plt.set_ylabel('Y Label')
+	#plt.set_zlabel('Z Label')
 
 
 
@@ -215,6 +219,8 @@ else:
 	plt.scatter(feat_embedded[:, 0], feat_embedded[:, 1], c = labels_train);
 	plt.tight_layout();
 	plt.savefig('../vis/tsne-cnn-spec-02d.png');
+	#plt.set_xlabel('X Label')
+	#plt.set_ylabel('Y Label')
 
 
 
