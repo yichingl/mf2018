@@ -147,6 +147,7 @@ labels = {'BOAT_N': BOAT_N, 'HELI_N': HELI_N};
 path_params = {'boat_train_ctl_name': boat_train_ctl_name, 'heli_train_ctl_name': heli_train_ctl_name, 'ctlset_path': ctlset_path};
 train_data = gmm_t.read_train_data(data_params, path_params, labels);
 feat_read = train_data['train_feat_read'];
+labels_train = train_data['labels_train'];
 
 TRAIN=0;
 if TRAIN:
@@ -165,6 +166,6 @@ else:
 pca_feat = pca.transform(feat_read);
 feat_embedded = TSNE(n_components=2).fit_transform(pca_feat)
 
-plt.scatter(feat_embedded[:, 0], feat_embedded[:, 1], cmap=plt.cm.Spectral);
+plt.scatter(feat_embedded[:, 0], feat_embedded[:, 1], c = labels_train);
 plt.tight_layout();
 plt.savefig('../vis/tsne-gmm-spec.png');
