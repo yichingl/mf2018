@@ -198,12 +198,15 @@ if GMM:
 	plt.savefig('../vis/tsne-gmm-spec-3d.png');
 
 else:
+	fig = plt.figure()
+	ax = fig.add_subplot(111,projection='3d');
 	plt.scatter(feat_embedded[:, 0], feat_embedded[:, 1],  feat_embedded[:, 2],c = labels_train);
-	plt.tight_layout();
+	
+	ax.set_xlabel('X Label')
+	ax.set_ylabel('Y Label')
+	ax.set_zlabel('Z Label')
 	plt.savefig('../vis/tsne-cnn-spec-3d.png');
-	#plt.set_xlabel('X Label')
-	#plt.set_ylabel('Y Label')
-	#plt.set_zlabel('Z Label')
+	plt.close()
 
 
 
