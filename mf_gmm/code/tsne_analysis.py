@@ -164,8 +164,16 @@ else:
 	pca = joblib.load(pcaobj_filepath);
 
 pca_feat = pca.transform(feat_read);
-feat_embedded = TSNE(n_components=2).fit_transform(pca_feat)
+feat_embedded = TSNE(n_components=3).fit_transform(pca_feat)
 
 plt.scatter(feat_embedded[:, 0], feat_embedded[:, 1], c = labels_train);
 plt.tight_layout();
-plt.savefig('../vis/tsne-gmm-spec.png');
+plt.savefig('../vis/tsne-gmm-spec-0-1.png');
+
+plt.scatter(feat_embedded[:, 1], feat_embedded[:, 2], c = labels_train);
+plt.tight_layout();
+plt.savefig('../vis/tsne-gmm-spec-1-2.png');
+
+plt.scatter(feat_embedded[:, 0], feat_embedded[:, 2], c = labels_train);
+plt.tight_layout();
+plt.savefig('../vis/tsne-gmm-spec-0-2.png');
