@@ -7,6 +7,7 @@ import numpy as np
 import gmm_top_helpers as gmm_t
 from sklearn.decomposition import PCA
 from sklearn.externals import joblib
+import svm_helper as svm_h
 
 TEST = 0;
 
@@ -69,7 +70,7 @@ covariance_type = 'diag';
 # SPECGRAM TYPE
 ##############################
 feat_types = ['mod','spec','mel','spec-pca','mel-pca','mod-pca'];
-feat_type = 'spec';
+feat_type = 'mel';
 
 if feat_type == 'spec':
 	#n_feats = 442;
@@ -140,40 +141,80 @@ pcaobj_filepath = '/home/yichingl/mf/mf2018/mf_gmm/trained_svm_gmm/'+full_name+'
 
 # Load supervects
 
-# pack shared parameters
-data_params = {'n_feats': n_feats,'n_clusters': n_clusters, 'feat_type': feat_type};
-labels = {'BOAT_N': BOAT_N, 'HELI_N': HELI_N};
-# read test files
-path_params = {'boat_train_ctl_name': boat_train_ctl_name, 'heli_train_ctl_name': heli_train_ctl_name, 'ctlset_path': ctlset_path};
-train_data = gmm_t.read_train_data(data_params, path_params, labels);
-feat_read = train_data['train_feat_read'];
-labels_train = train_data['labels_train'];
+## GMM
+GMM = 0;
+if GMM:
+	# pack shared parameters
+	data_params = {'n_feats': n_feats,'n_clusters': n_clusters, 'feat_type': feat_type};
+	labels = {'BOAT_N': BOAT_N, 'HELI_N': HELI_N};
+	# read test files
+	path_params = {'boat_train_ctl_name': boat_train_ctl_name, 'heli_train_ctl_name': heli_train_ctl_name, 'ctlset_path': ctlset_path};
+	train_data = gmm_t.read_train_data(data_params, path_params, labels);
+	feat_read = train_data['train_feat_read'];
+	labels_train = train_data['labels_train'];
 
-TRAIN=0;
-if TRAIN:
-	# fit pca
-	pca = PCA(n_components = 16);
-	pca.fit(feat_read);
-	var = pca.explained_variance_ratio_;
-	var1 = np.cumsum(np.round(var, decimals=4)*100);
-	print(var1);
-
-	# Save PCA transform obj
-	joblib.dump(pca, pcaobj_filepath); 
+## cnn 
 else:
-	pca = joblib.load(pcaobj_filepath);
+	# read control file for boat training data, create label vector, read group data
+	filename = ctlset_path+boat_train_ctl_name;
+	train_feat_read_boat = svm_h.read_cnn_features(filename+'.train.ctl',feat_type);
+	labels_boat = svm_h.create_labels(train_feat_read_boat, BOAT_N);
+	subgroups_boat = svm_h.read_subgroups(filename+'.train_subgroups.ctl');
+
+	# read control file for heli training data, create label vector, read group data
+	filename = ctlset_path+heli_train_ctl_name;
+	train_feat_read_heli = svm_h.read_cnn_features(filename+'.train.ctl',feat_type);
+	labels_heli = svm_h.create_labels(train_feat_read_heli, HELI_N);
+	subgroups_heli = svm_h.read_subgroups(filename+'.train_subgroups.ctl');
+
+	# concatenate boat and heli data
+	feat_read = np.vstack((train_feat_read_boat,train_feat_read_heli));
+	labels_train = np.concatenate((labels_boat,labels_heli));
+
+
+
+
+
+
+# fit pca
+pca = PCA(n_components = 50);
+pca.fit(feat_read);
+var = pca.explained_variance_ratio_;
+var1 = np.cumsum(np.round(var, decimals=4)*100);
+print(var1);
+
+# 	# Save PCA transform obj
+# 	joblib.dump(pca, pcaobj_filepath); 
+# else:
+# 	pca = joblib.load(pcaobj_filepath);
 
 pca_feat = pca.transform(feat_read);
 feat_embedded = TSNE(n_components=3).fit_transform(pca_feat)
 
-plt.scatter(feat_embedded[:, 0], feat_embedded[:, 1], c = labels_train);
-plt.tight_layout();
-plt.savefig('../vis/tsne-gmm-spec-0-1.png');
+if GMM:
+	plt.scatter(feat_embedded[:, 0], feat_embedded[:, 1], feat_embedded[:, 2],c = labels_train);
+	plt.tight_layout();
+	plt.savefig('../vis/tsne-gmm-spec-3d.png');
 
-plt.scatter(feat_embedded[:, 1], feat_embedded[:, 2], c = labels_train);
-plt.tight_layout();
-plt.savefig('../vis/tsne-gmm-spec-1-2.png');
+else:
+	plt.scatter(feat_embedded[:, 0], feat_embedded[:, 1],  feat_embedded[:, 2],c = labels_train);
+	plt.tight_layout();
+	plt.savefig('../vis/tsne-cnn-spec-3d.png');
 
-plt.scatter(feat_embedded[:, 0], feat_embedded[:, 2], c = labels_train);
-plt.tight_layout();
-plt.savefig('../vis/tsne-gmm-spec-0-2.png');
+
+
+
+feat_embedded = TSNE(n_components=2).fit_transform(pca_feat)
+
+if GMM:
+	plt.scatter(feat_embedded[:, 0], feat_embedded[:, 1], c = labels_train);
+	plt.tight_layout();
+	plt.savefig('../vis/tsne-gmm-spec-2d.png');
+
+else:
+	plt.scatter(feat_embedded[:, 0], feat_embedded[:, 1], c = labels_train);
+	plt.tight_layout();
+	plt.savefig('../vis/tsne-cnn-spec-02d.png');
+
+
+
