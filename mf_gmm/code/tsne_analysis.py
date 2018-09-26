@@ -9,6 +9,7 @@ import gmm_top_helpers as gmm_t
 from sklearn.decomposition import PCA
 from sklearn.externals import joblib
 import svm_helper as svm_h
+import pickle
 
 TEST = 0;
 
@@ -184,73 +185,28 @@ var = pca.explained_variance_ratio_;
 var1 = np.cumsum(np.round(var, decimals=4)*100);
 print(var1);
 
-# 	# Save PCA transform obj
-# 	joblib.dump(pca, pcaobj_filepath); 
-# else:
-# 	pca = joblib.load(pcaobj_filepath);
-
-pca_feat = pca.transform(feat_read);
-feat_embedded = TSNE(n_components=3).fit_transform(pca_feat)
-
 if GMM:
+	pca_feat = pca.transform(feat_read);
+	feat_embedded = TSNE(n_components=3).fit_transform(pca_feat)
+	feat_embedded = np.asarray(feat_embedded)
+	np.savetxt("../vis/gmm-3d-feat_embedded.csv", feat_embedded, delimiter=",");
 
-	fig = plt.figure()
-	ax = fig.add_subplot(111,projection='3d');
-	plt.scatter(feat_embedded[:, 0], feat_embedded[:, 1],  feat_embedded[:, 2],c = labels_train);
-	
-	ax.set_xlabel('X Label')
-	ax.set_ylabel('Y Label')
-	ax.set_zlabel('Z Label')
-	plt.savefig('../vis/tsne-gmm-spec-3d.png');
-	pickle.dump(ax, file('tsne-gmm-spec-3d.pickle', 'w'))
-	plt.close()
-
-	plt.scatter(feat_embedded[:, 2], feat_embedded[:, 0], c = labels_train);
-	plt.tight_layout();
-	plt.savefig('../vis/tsne-gmm-spec-3d-zx.png');
-	plt.close();
-
-	plt.scatter(feat_embedded[:, 2], feat_embedded[:, 1], c = labels_train);
-	plt.tight_layout();
-	plt.savefig('../vis/tsne-gmm-spec-3d-zy.png');
-	plt.close();
-
+	feat_embedded = TSNE(n_components=2).fit_transform(pca_feat)
+	feat_embedded = np.asarray(feat_embedded)
+	np.savetxt("../vis/gmm-2d-feat_embedded.csv", feat_embedded, delimiter=",");
 
 else:
-	fig = plt.figure()
-	ax = fig.add_subplot(111,projection='3d');
-	plt.scatter(feat_embedded[:, 0], feat_embedded[:, 1],  feat_embedded[:, 2],c = labels_train);
-	
-	ax.set_xlabel('X Label')
-	ax.set_ylabel('Y Label')
-	ax.set_zlabel('Z Label')
-	plt.savefig('../vis/tsne-cnn-spec-3d.png');
-	pickle.dump(ax, file('tsne-cnn-spec-3d.pickle', 'w'))
-	plt.close()
+	pca_feat = pca.transform(feat_read);
+	feat_embedded = TSNE(n_components=3).fit_transform(pca_feat)
+	feat_embedded = np.asarray(feat_embedded)
+	np.savetxt("../vis/cnn-3d-feat_embedded.csv", feat_embedded, delimiter=",");
 
-	plt.scatter(feat_embedded[:, 2], feat_embedded[:, 0], c = labels_train);
-	plt.tight_layout();
-	plt.savefig('../vis/tsne-cnn-spec-3d-zx.png');
-	plt.close();
+	feat_embedded = TSNE(n_components=2).fit_transform(pca_feat)
+	feat_embedded = np.asarray(feat_embedded)
+	np.savetxt("../vis/cnn-2d-feat_embedded.csv", feat_embedded, delimiter=",");
 
-	plt.scatter(feat_embedded[:, 2], feat_embedded[:, 1], c = labels_train);
-	plt.tight_layout();
-	plt.savefig('../vis/tsne-cnn-spec-3d-zy.png');
-	plt.close();
+np.savetxt("../vis/labels.csv", np.asarray(labels_train), delimiter=",");
 
-
-
-feat_embedded = TSNE(n_components=2).fit_transform(pca_feat)
-
-if GMM:
-	plt.scatter(feat_embedded[:, 0], feat_embedded[:, 1], c = labels_train);
-	plt.tight_layout();
-	plt.savefig('../vis/tsne-gmm-spec-2d.png');
-
-else:
-	plt.scatter(feat_embedded[:, 0], feat_embedded[:, 1], c = labels_train);
-	plt.tight_layout();
-	plt.savefig('../vis/tsne-cnn-spec-2d.png');
 
 
 
