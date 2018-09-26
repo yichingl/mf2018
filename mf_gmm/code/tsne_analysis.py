@@ -143,7 +143,7 @@ pcaobj_filepath = '/home/yichingl/mf/mf2018/mf_gmm/trained_svm_gmm/'+full_name+'
 # Load supervects
 
 ## GMM
-GMM = 0;
+GMM = 1;
 if GMM:
 	# pack shared parameters
 	data_params = {'n_feats': n_feats,'n_clusters': n_clusters, 'feat_type': feat_type};
@@ -193,9 +193,27 @@ pca_feat = pca.transform(feat_read);
 feat_embedded = TSNE(n_components=3).fit_transform(pca_feat)
 
 if GMM:
-	plt.scatter(feat_embedded[:, 0], feat_embedded[:, 1], feat_embedded[:, 2],c = labels_train);
-	plt.tight_layout();
+
+	fig = plt.figure()
+	ax = fig.add_subplot(111,projection='3d');
+	plt.scatter(feat_embedded[:, 0], feat_embedded[:, 1],  feat_embedded[:, 2],c = labels_train);
+	
+	ax.set_xlabel('X Label')
+	ax.set_ylabel('Y Label')
+	ax.set_zlabel('Z Label')
 	plt.savefig('../vis/tsne-gmm-spec-3d.png');
+	plt.close()
+
+	plt.scatter(feat_embedded[:, 2], feat_embedded[:, 0], c = labels_train);
+	plt.tight_layout();
+	plt.savefig('../vis/tsne-gmm-spec-3d-zx.png');
+	plt.close();
+
+	plt.scatter(feat_embedded[:, 2], feat_embedded[:, 2], c = labels_train);
+	plt.tight_layout();
+	plt.savefig('../vis/tsne-gmm-spec-3d-zy.png');
+	plt.close();
+
 
 else:
 	fig = plt.figure()
@@ -208,6 +226,15 @@ else:
 	plt.savefig('../vis/tsne-cnn-spec-3d.png');
 	plt.close()
 
+	plt.scatter(feat_embedded[:, 2], feat_embedded[:, 0], c = labels_train);
+	plt.tight_layout();
+	plt.savefig('../vis/tsne-cnn-spec-3d-zx.png');
+	plt.close();
+
+	plt.scatter(feat_embedded[:, 2], feat_embedded[:, 2], c = labels_train);
+	plt.tight_layout();
+	plt.savefig('../vis/tsne-cnn-spec-3d-zy.png');
+	plt.close();
 
 
 
@@ -221,9 +248,7 @@ if GMM:
 else:
 	plt.scatter(feat_embedded[:, 0], feat_embedded[:, 1], c = labels_train);
 	plt.tight_layout();
-	plt.savefig('../vis/tsne-cnn-spec-02d.png');
-	#plt.set_xlabel('X Label')
-	#plt.set_ylabel('Y Label')
+	plt.savefig('../vis/tsne-cnn-spec-2d.png');
 
 
 
