@@ -6,7 +6,7 @@ import numpy as np
 
 labels_train = np.loadtxt("labels.csv",dtype='float');
 
-GMM=0;
+GMM=1;
 # 3d
 if GMM:
 	fig = plt.figure()
@@ -137,13 +137,14 @@ if GMM:
 	feat_embedded = np.loadtxt("gmm-2d-feat_embedded.csv",dtype='float',delimiter=",");
 	plt.scatter(feat_embedded[:, 0], feat_embedded[:, 1], c = labels_train);
 	plt.tight_layout();
-	plt.show();
 	plt.savefig('../vis/tsne-gmm-spec-2d.png');
+	plt.show();
 
 else:
 	feat_embedded = np.loadtxt("gmm-3d-feat_embedded.csv",dtype='float',delimiter=",");
 	plt.scatter(feat_embedded[:, 0], feat_embedded[:, 1], c = labels_train);
 	plt.tight_layout();
-	plt.show();
 	plt.savefig('../vis/tsne-cnn-spec-2d.png');
+	plt.show();
+	
 
