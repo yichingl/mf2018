@@ -6,7 +6,7 @@ import numpy as np
 
 labels_train = np.loadtxt("labels.csv",dtype='float');
 
-GMM=1;
+GMM=0;
 # 3d
 if GMM:
 	fig = plt.figure()
