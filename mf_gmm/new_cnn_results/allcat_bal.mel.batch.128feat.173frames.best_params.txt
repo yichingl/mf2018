@@ -1,0 +1,3 @@
+linear
+16.0
+auto

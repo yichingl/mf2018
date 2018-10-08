@@ -93,7 +93,7 @@ def make_supervects(data_params, path_params):
 
 
 ##############################
-# READ TRAIN DATA
+# READ TRAIN DATA (SUPERVECTOR)
 ##############################
 def read_train_data(data_params, path_params, labels):
 	# Unpack data parameters

@@ -69,11 +69,9 @@ if TEST:
 ##############################
 # TOGGLE TASKS
 ##############################
-TRAIN_GMM = 1;
-MAKE_SUPERVECTS = 0;  # run this every time new timeframe or ncl
-LEARN_PARAMS = 1;
-TRAIN_SVM = 1; # must use learn_params together? for now
-CLASSIFY = 1;
+VIS_CORR = 1;
+LEARN_PCA = 1; 
+CREATE_FEATS = 0;
 
 ##############################
 # AUDIO PARAMETERS
@@ -116,6 +114,7 @@ if feat_type == 'spec':
 elif feat_type == 'mel':
 	n_feats = 128;
 	n_timeframes = 173;
+	#pca_ncomp = ''
 
 	# if LEARN_PARAMS == 0:
 	# 	best_kernel = 'rbf';
@@ -127,6 +126,7 @@ elif feat_type == 'mel':
 elif feat_type == 'mod':
 	n_feats = 128;
 	n_timeframes = 320;
+	#pca_ncomp = ;
 	# if LEARN_PARAMS == 0:
 	# 	best_kernel = 'rbf';
 	# 	best_C = 1024.0;
@@ -158,6 +158,8 @@ pretty_results_filepath = '../new_gmm_results/' + full_name +'.results.txt';
 best_params_filepath ='../new_gmm_results/' + full_name +'.best_params.txt';
 # Saving and reading trained PCA object
 pcaobj_filepath = '/home/yichingl/mf/mf2018/mf_gmm/trained_svm_gmm/'+full_name+'.pcaobj';
+# Save correlation matrix output
+corr_filepath = '../vis/' + full_name+'.corr_mat.jpg';
 ##############################
 # CNN PARAMETERS
 ##############################
@@ -182,7 +184,10 @@ elif norm_method == 'standard':
 ##############################
 # PCA
 ##############################
-pca = PCA(n_components = pca_ncomp);
+if LEARN_PCA:
+	pca = PCA();
+elif CREATE_FEATS:
+	pca = PCA(n_components = pca_ncomp);
 
 ##############################
 # MAIN CODE
@@ -227,19 +232,48 @@ for ctl_group_name in traingmm_ctl_names:
 scaler.fit(feat_all);
 feat_all = scaler.transform(feat_all);
 
-# Perform PCA
-pca.fit(feat_all);
+if VIS_CORR:
+	# visualize correlation heat map
+	corrmat = feat_all.corr(method='pearson');
+	mask = np.zeros_like(corrmat);
+	mask[np.triu_indices_from(mask)]=True;
+	corrmat_plot_full = sns.heatmap(corrmat,square=True,annot=True,fmt='.2f',mask=mask);
+	manager = plt.get_current_fig_manager();
+	manager.window.showMaximized(); # for QT matplotlib backend
+	plt.savefig(corr_filepath);
+	plt.close();
 
-# Load and transform training set
-# Process training set (boat, heli)
-for ctl_group_name_supervect in gensupervect_train_ctl_names: # boat, heli
-	ctl_path = '../ctl_files/' + ctl_group_name_supervect +'.train.ctl';
-	make_and_save_pcafeat(ctl_path, data_params, pca,feat_type);
+if LEARN_PCA or CREATE_FEATS:
+	# process data and remove correlated terms
 
-# Process testing set (boat, heli)
-for ctl_group_name_supervect in gensupervect_test_ctl_names: # boat, heli
-	ctl_path = '../ctl_files/' + ctl_group_name_supervect +'.test.ctl';
-	make_and_save_pcafeat(ctl_path, data_params, pca,feat_type);
+if LEARN_PCA:
 
-# Save PCA transform obj
-joblib.dump(pca, pcaobj_filepath); 
+	# Perform PCA
+	pca.fit(feat_all);
+
+	# Amount of variance that each PC explains
+	var = pca.explained_variance_ratio_;
+
+	# Cumulative Variance Explained
+	var_cum = np.cumsum(np.round(var, decimals=4)*100);
+
+	print(var_cum);
+
+elif CREATE_FEATS:
+
+	# Perform PCA
+	pca.fit(feat_all);
+
+	# Load and transform training set
+	# Process training set (boat, heli)
+	for ctl_group_name_supervect in gensupervect_train_ctl_names: # boat, heli
+		ctl_path = '../ctl_files/' + ctl_group_name_supervect +'.train.ctl';
+		make_and_save_pcafeat(ctl_path, data_params, pca,feat_type);
+
+	# Process testing set (boat, heli)
+	for ctl_group_name_supervect in gensupervect_test_ctl_names: # boat, heli
+		ctl_path = '../ctl_files/' + ctl_group_name_supervect +'.test.ctl';
+		make_and_save_pcafeat(ctl_path, data_params, pca,feat_type);
+
+	# Save PCA transform obj
+	joblib.dump(pca, pcaobj_filepath); 

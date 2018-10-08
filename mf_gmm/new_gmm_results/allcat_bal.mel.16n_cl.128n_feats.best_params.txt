@@ -1,0 +1,3 @@
+linear
+256.0
+auto

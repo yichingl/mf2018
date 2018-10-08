@@ -159,9 +159,12 @@ for feat_type in feat_types:
 		xval_num_splits = 3; #num folds?
 
 		param_grid = [
-		  {'C': np.logspace(-8.,12,num=11,base=2.0), 'gamma': ['auto'], 'kernel': ['linear']},
-		  {'C': np.logspace(-8.,12,num=11,base=2.0), 'gamma': np.append(np.logspace(-8.,3,num=7,base=2.0),[1./n_feats]), 'kernel': ['rbf']},
-		 ]
+		  {'C': np.logspace(-8.,12,num=11,base=2.0), 'gamma': ['auto'], 'kernel': ['linear']}]
+
+		# param_grid = [
+		#   {'C': np.logspace(-8.,12,num=11,base=2.0), 'gamma': ['auto'], 'kernel': ['linear']},
+		#   {'C': np.logspace(-8.,12,num=11,base=2.0), 'gamma': np.append(np.logspace(-8.,3,num=7,base=2.0),[1./n_feats]), 'kernel': ['rbf']},
+		#  ]
 
 		if TEST:
 			param_grid = [
@@ -174,9 +177,9 @@ for feat_type in feat_types:
 
 		# Project name and directory
 		group_name_full = group_name+'.'+feat_type+'.'+'batch.'+str(n_feats)+'feat.'+str(n_timeframes)+'frames';
-		best_params_filepath = '../new_gmm_results/' + group_name_full +'.best_params.txt';
+		best_params_filepath = '../new_cnn_results/' + group_name_full +'.best_params.txt';
 		# Pretty print results filepath
-		pretty_results_filepath = '../new_gmm_results/' + group_name_full +'.results.txt';
+		pretty_results_filepath = '../new_cnn_results/' + group_name_full +'.results.txt';
 
 		with open('../new_cnn_results/' + group_name_full +'.results.txt','w') as f:
 			ctlset_path = '../ctl_files/';
@@ -354,7 +357,7 @@ for feat_type in feat_types:
 
 		print('final training accuracy: ' + str(accuracy)+'\n');
 		print('final training mcc: ' + str(mcc)+'\n');
-		with open('../new_gmm_results/' + group_name_full +'.results.txt','a') as f:
+		with open('../new_cnn_results/' + group_name_full +'.results.txt','a') as f:
 			f.write('\n\n');
 			f.write('==================================\n');
 			f.write('Training Results');
@@ -399,7 +402,7 @@ for feat_type in feat_types:
 
 		print('final testing accuracy: ' + str(accuracy)+'\n');
 		print('final testing mcc: ' + str(mcc)+'\n');
-		with open('../new_gmm_results/' + full_name +'.results.txt','a') as f:
+		with open('../new_cnn_results/' + group_name_full +'.results.txt','a') as f:
 			f.write('\n\n');
 			f.write('==================================\n')
 			f.write('Test Results');

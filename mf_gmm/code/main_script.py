@@ -42,8 +42,8 @@ if TEST:
 ##############################
 # TOGGLE TASKS
 ##############################
-TRAIN_GMM = 0;
-MAKE_SUPERVECTS = 0;  # run this every time new n-feats or ncl
+TRAIN_GMM = 1;
+MAKE_SUPERVECTS = 1;  # run this every time new n-feats or ncl
 LEARN_PARAMS = 1; 
 TRAIN_SVM = 1; # must use learn_params together? for now
 CLASSIFY = 1;
@@ -57,7 +57,7 @@ clip_duration = 2; # audio clips will split into segments of this duration (in s
 ##############################
 # GMM PARAMETERS
 ##############################
-n_clusters = 64;
+n_clusters = 16;
 max_iter = 5;
 covariance_type = 'diag';
 
@@ -65,7 +65,7 @@ covariance_type = 'diag';
 # SPECGRAM TYPE
 ##############################
 feat_types = ['mod','spec','mel','spec-pca','mel-pca','mod-pca'];
-feat_type = 'spec';
+feat_type = 'mod';
 
 if feat_type == 'spec':
 	#n_feats = 442;

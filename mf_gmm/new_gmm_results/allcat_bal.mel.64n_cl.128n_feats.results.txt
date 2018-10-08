@@ -1,771 +1,4511 @@
 Kernel Type: linear
 	C: 0.00390625
 		gamma: auto
-			accuracy: 0.4781849912739965
-			accuracy: 0.11986863711001643
-			accuracy: 0.5145118733509235
-			average accuracy: 0.37085516724497875
+			Trial MCC: -0.1584325551071027
+				accuracy: 0.41710758377425045
+				precision: 0.41201716738197425
+				recall: 0.5353159851301115
+				f1: 0.465642683912692
+				confusion matrix: 
+					[185 411]
+					[250 288]
+			Trial MCC: 0.26704373165477807
+				accuracy: 0.5501489572989077
+				precision: 0.48375451263537905
+				recall: 0.9436619718309859
+				f1: 0.6396181384248211
+				confusion matrix: 
+					[152 429]
+					[ 24 402]
+			Trial MCC: -0.29516245521558554
+				accuracy: 0.39666666666666667
+				precision: 0.014705882352941176
+				recall: 0.0020964360587002098
+				f1: 0.0036697247706422025
+				confusion matrix: 
+					[356  67]
+					[476   1]
+			Average Accuracy: 0.4546410692466083
+			Average MCC: -0.06218375955597005
 
 	C: 0.015625
 		gamma: auto
-			accuracy: 0.530751708428246
-			accuracy: 0.37559808612440193
-			accuracy: 0.2578046324269889
-			average accuracy: 0.38805147565987896
+			Trial MCC: 0.12238930728776148
+				accuracy: 0.34086444007858546
+				precision: 0.9433962264150944
+				recall: 0.06963788300835655
+				f1: 0.12970168612191957
+				confusion matrix: 
+					[297   3]
+					[668  50]
+			Trial MCC: -0.13625595353205144
+				accuracy: 0.5067911714770797
+				precision: 0.0625
+				recall: 0.003616636528028933
+				f1: 0.006837606837606838
+				confusion matrix: 
+					[595  30]
+					[551   2]
+			Trial MCC: -0.014817293245675765
+				accuracy: 0.490134994807892
+				precision: 0.49333333333333335
+				recall: 0.22745901639344263
+				f1: 0.31136044880785413
+				confusion matrix: 
+					[361 114]
+					[377 111]
+			Average Accuracy: 0.4459302021211857
+			Average MCC: -0.009561313163321908
 
 	C: 0.0625
 		gamma: auto
-			accuracy: 0.4701946472019465
-			accuracy: 0.3511450381679389
-			accuracy: 0.44639376218323584
-			average accuracy: 0.42257781585104043
+			Trial MCC: -0.13958154907227224
+				accuracy: 0.43107769423558895
+				precision: 0.13636363636363635
+				recall: 0.00684931506849315
+				f1: 0.013043478260869565
+				confusion matrix: 
+					[341  19]
+					[435   3]
+			Trial MCC: -0.49701466133032174
+				accuracy: 0.2347235693501455
+				precision: 0.10702875399361023
+				recall: 0.2255892255892256
+				f1: 0.14517876489707476
+				confusion matrix: 
+					[175 559]
+					[230  67]
+			Trial MCC: -0.13214349199173403
+				accuracy: 0.4644243208279431
+				precision: 0.3246268656716418
+				recall: 0.271875
+				f1: 0.29591836734693877
+				confusion matrix: 
+					[272 181]
+					[233  87]
+			Average Accuracy: 0.37674186147122585
+			Average MCC: -0.256246567464776
 
 	C: 0.25
 		gamma: auto
-			accuracy: 0.6102941176470589
-			accuracy: 0.59392575928009
-			accuracy: 0.4355263157894737
-			average accuracy: 0.5465820642388742
+			Trial MCC: -0.19123390824843964
+				accuracy: 0.27742749054224464
+				precision: 0.11764705882352941
+				recall: 0.0035714285714285713
+				f1: 0.006932409012131715
+				confusion matrix: 
+					[218  15]
+					[558   2]
+			Trial MCC: -0.16576889218238397
+				accuracy: 0.43980738362760835
+				precision: 0.31896551724137934
+				recall: 0.2792452830188679
+				f1: 0.2977867203219316
+				confusion matrix: 
+					[200 158]
+					[191  74]
+			Trial MCC: 0.19337999640872758
+				accuracy: 0.5655339805825242
+				precision: 0.7142857142857143
+				recall: 0.2693208430913349
+				f1: 0.39115646258503406
+				confusion matrix: 
+					[351  46]
+					[312 115]
+			Average Accuracy: 0.4275896182507924
+			Average MCC: -0.05454093467403201
 
 	C: 1.0
 		gamma: auto
-			accuracy: 0.4018348623853211
-			accuracy: 0.47716535433070867
-			accuracy: 0.6446578631452581
-			average accuracy: 0.5078860266204294
+			Trial MCC: -0.09542344612843955
+				accuracy: 0.2444113263785395
+				precision: 0.75
+				recall: 0.13953488372093023
+				f1: 0.2352941176470588
+				confusion matrix: 
+					[86 26]
+					[481  78]
+			Trial MCC: -0.03375133579612971
+				accuracy: 0.491025641025641
+				precision: 0.45930232558139533
+				recall: 0.206266318537859
+				f1: 0.2846846846846847
+				confusion matrix: 
+					[304  93]
+					[304  79]
+			Trial MCC: -0.10999102996969777
+				accuracy: 0.38461538461538464
+				precision: 0.43243243243243246
+				recall: 0.06477732793522267
+				f1: 0.11267605633802817
+				confusion matrix: 
+					[283  42]
+					[462  32]
+			Average Accuracy: 0.3733507840065217
+			Average MCC: -0.07972193729808902
 
 	C: 4.0
 		gamma: auto
-			accuracy: 0.6292352371732817
-			accuracy: 0.5463917525773195
-			accuracy: 0.5953757225433526
-			average accuracy: 0.590334237431318
+			Trial MCC: 0.15614996506459106
+				accuracy: 0.5938735177865613
+				precision: 0.5637583892617449
+				recall: 0.3741648106904232
+				f1: 0.44979919678714864
+				confusion matrix: 
+					[433 130]
+					[281 168]
+			Trial MCC: 0.04675032416779617
+				accuracy: 0.2043343653250774
+				precision: 0.9333333333333333
+				recall: 0.026565464895635674
+				f1: 0.05166051660516605
+				confusion matrix: 
+					[118   1]
+					[513  14]
+			Trial MCC: 0.2722984449145196
+				accuracy: 0.5917065390749602
+				precision: 0.7991071428571429
+				recall: 0.45897435897435895
+				f1: 0.5830618892508144
+				confusion matrix: 
+					[192  45]
+					[211 179]
+			Average Accuracy: 0.463304807395533
+			Average MCC: 0.15839957804896895
 
 	C: 16.0
 		gamma: auto
-			accuracy: 0.7988450433108758
-			accuracy: 0.5953259532595326
-			accuracy: 0.6193379790940766
-			average accuracy: 0.6711696585548284
+			Trial MCC: 0.21443782943803263
+				accuracy: 0.6313432835820896
+				precision: 0.5633802816901409
+				recall: 0.43795620437956206
+				f1: 0.49281314168377827
+				confusion matrix: 
+					[303  93]
+					[154 120]
+			Trial MCC: 0.23300815815274742
+				accuracy: 0.6576131687242799
+				precision: 0.36774193548387096
+				recall: 0.5836177474402731
+				f1: 0.4511873350923483
+				confusion matrix: 
+					[628 294]
+					[122 171]
+			Trial MCC: 0.03783786787204893
+				accuracy: 0.5842696629213483
+				precision: 0.38396624472573837
+				recall: 0.28888888888888886
+				f1: 0.3297101449275362
+				confusion matrix: 
+					[429 146]
+					[224  91]
+			Average Accuracy: 0.624408705075906
+			Average MCC: 0.16176128515427632
 
 	C: 64.0
 		gamma: auto
-			accuracy: 0.5316455696202531
-			accuracy: 0.5809716599190283
-			accuracy: 0.6899606299212598
-			average accuracy: 0.600859286486847
+			Trial MCC: 0.24281079911630513
+				accuracy: 0.6852559205500381
+				precision: 0.535031847133758
+				recall: 0.3870967741935484
+				f1: 0.44919786096256686
+				confusion matrix: 
+					[729 146]
+					[266 168]
+			Trial MCC: -0.05442978381102389
+				accuracy: 0.6904761904761905
+				precision: 0.12598425196850394
+				recall: 0.1415929203539823
+				f1: 0.13333333333333333
+				confusion matrix: 
+					[448 111]
+					[97 16]
+			Trial MCC: -0.20770862475904153
+				accuracy: 0.3218884120171674
+				precision: 0.5
+				recall: 0.16877637130801687
+				f1: 0.25236593059936907
+				confusion matrix: 
+					[145  80]
+					[394  80]
+			Average Accuracy: 0.565873507681132
+			Average MCC: -0.006442536484586768
 
 	C: 256.0
 		gamma: auto
-			accuracy: 0.41041162227602906
-			accuracy: 0.5463414634146342
-			accuracy: 0.5053554040895814
-			average accuracy: 0.48736949659341483
+			Trial MCC: -0.13675139514690052
+				accuracy: 0.2668428005284016
+				precision: 0.6692307692307692
+				recall: 0.14524207011686144
+				f1: 0.23868312757201648
+				confusion matrix: 
+					[115  43]
+					[512  87]
+			Trial MCC: 0.26807707793470514
+				accuracy: 0.6540084388185654
+				precision: 0.6414342629482072
+				recall: 0.40350877192982454
+				f1: 0.4953846153846153
+				confusion matrix: 
+					[459  90]
+					[238 161]
+			Trial MCC: 0.21597443470096603
+				accuracy: 0.5843137254901961
+				precision: 0.7035175879396985
+				recall: 0.3508771929824561
+				f1: 0.46822742474916385
+				confusion matrix: 
+					[307  59]
+					[259 140]
+			Average Accuracy: 0.5017216549457211
+			Average MCC: 0.11576670582959021
 
 	C: 1024.0
 		gamma: auto
-			accuracy: 0.626
-			accuracy: 0.6819787985865724
-			accuracy: 0.6253943217665615
-			average accuracy: 0.6444577067843779
+			Trial MCC: 0.05292626484260499
+				accuracy: 0.6297640653357531
+				precision: 0.16010498687664043
+				recall: 0.40939597315436244
+				f1: 0.23018867924528305
+				confusion matrix: 
+					[633 320]
+					[88 61]
+			Trial MCC: 0.28711963556833187
+				accuracy: 0.6694915254237288
+				precision: 0.6023166023166023
+				recall: 0.4785276073619632
+				f1: 0.5333333333333334
+				confusion matrix: 
+					[397 103]
+					[170 156]
+			Trial MCC: 0.29787250968565415
+				accuracy: 0.6183017312448474
+				precision: 0.7760252365930599
+				recall: 0.38557993730407525
+				f1: 0.5151832460732985
+				confusion matrix: 
+					[504  71]
+					[392 246]
+			Average Accuracy: 0.6391857740014432
+			Average MCC: 0.212639470032197
 
 	C: 4096.0
 		gamma: auto
-			accuracy: 0.6924034869240349
-			accuracy: 0.7297297297297297
-			accuracy: 0.3875
-			average accuracy: 0.6032110722179215
+			Trial MCC: 0.09802424241419136
+				accuracy: 0.525
+				precision: 0.6238938053097345
+				recall: 0.2186046511627907
+				f1: 0.32376578645235365
+				confusion matrix: 
+					[510  85]
+					[504 141]
+			Trial MCC: -0.07799142843920083
+				accuracy: 0.42668136714443217
+				precision: 0.5498281786941581
+				recall: 0.29143897996357016
+				f1: 0.380952380952381
+				confusion matrix: 
+					[227 131]
+					[389 160]
+			Trial MCC: 0.198955964457968
+				accuracy: 0.575192096597146
+				precision: 0.6933333333333334
+				recall: 0.4135188866799205
+				f1: 0.5180572851805729
+				confusion matrix: 
+					[316  92]
+					[295 208]
+			Average Accuracy: 0.5089578212471927
+			Average MCC: 0.07299625947765286
 
 Kernel Type: rbf
 	C: 0.00390625
 		gamma: 0.00390625
-			accuracy: 0.3232227488151659
-			accuracy: 0.38860103626943004
-			accuracy: 0.44136191677175285
-			average accuracy: 0.3843952339521162
+			Trial MCC: 0.0
+				accuracy: 0.5591623036649215
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[534   0]
+					[421   0]
+			Trial MCC: 0.0
+				accuracy: 0.2871939736346516
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[305   0]
+					[757   0]
+			Trial MCC: 0.0
+				accuracy: 0.47959183673469385
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[423   0]
+					[459   0]
+			Average Accuracy: 0.4419827046780889
+			Average MCC: 0.0
 
-		gamma: 0.008373230176064788
-			accuracy: 0.11945812807881774
-			accuracy: 0.19710144927536233
-			accuracy: 0.36806342015855037
-			average accuracy: 0.22820766583757682
+		gamma: 0.0139202924709428
+			Trial MCC: 0.0
+				accuracy: 0.3381389252948886
+				precision: 0.3381389252948886
+				recall: 1.0
+				f1: 0.505386875612145
+				confusion matrix: 
+					[  0 505]
+					[  0 258]
+			Trial MCC: 0.0
+				accuracy: 0.40337423312883436
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[263   0]
+					[389   0]
+			Trial MCC: 0.0
+				accuracy: 0.24912280701754386
+				precision: 0.24912280701754386
+				recall: 1.0
+				f1: 0.39887640449438205
+				confusion matrix: 
+					[  0 642]
+					[  0 213]
+			Average Accuracy: 0.33021198848042227
+			Average MCC: 0.0
 
-		gamma: 0.017948411796828673
-			accuracy: 0.42027455121436114
-			accuracy: 0.42896362388469456
-			accuracy: 0.3713991769547325
-			average accuracy: 0.4068791173512627
-
-		gamma: 0.038473262917028656
-			accuracy: 0.3511520737327189
-			accuracy: 0.34394250513347024
-			accuracy: 0.4937984496124031
-			average accuracy: 0.3962976761595307
-
-		gamma: 0.08246924442330592
-			accuracy: 0.547683923705722
-			accuracy: 0.17898832684824903
-			accuracy: 0.23333333333333334
-			average accuracy: 0.3200018612957682
+		gamma: 0.049606282874006216
+			Trial MCC: 0.0
+				accuracy: 0.2669260700389105
+				precision: 0.2669260700389105
+				recall: 1.0
+				f1: 0.4213759213759214
+				confusion matrix: 
+					[  0 942]
+					[  0 343]
+			Trial MCC: 0.0
+				accuracy: 0.3973451327433628
+				precision: 0.3973451327433628
+				recall: 1.0
+				f1: 0.5687143761874603
+				confusion matrix: 
+					[  0 681]
+					[  0 449]
+			Trial MCC: 0.0
+				accuracy: 0.2667269439421338
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[295   0]
+					[811   0]
+			Average Accuracy: 0.31033271557480235
+			Average MCC: 0.0
 
 		gamma: 0.1767766952966369
-			accuracy: 0.5175517551755175
-			accuracy: 0.4650959860383944
-			accuracy: 0.39863130881094955
-			average accuracy: 0.4604263500082872
+			Trial MCC: 0.0
+				accuracy: 0.5420641803989592
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[625   0]
+					[528   0]
+			Trial MCC: 0.0
+				accuracy: 0.2387332521315469
+				precision: 0.2387332521315469
+				recall: 1.0
+				f1: 0.38544739429695185
+				confusion matrix: 
+					[  0 625]
+					[  0 196]
+			Trial MCC: 0.0
+				accuracy: 0.23386342376052385
+				precision: 0.23386342376052385
+				recall: 1.0
+				f1: 0.3790750568612585
+				confusion matrix: 
+					[  0 819]
+					[  0 250]
+			Average Accuracy: 0.3382202854303433
+			Average MCC: 0.0
 
-		gamma: 0.37892914162759966
-			accuracy: 0.5271049596309112
+		gamma: 0.6299605249474365
+			Trial MCC: 0.0
+				accuracy: 0.3877068557919622
+				precision: 0.3877068557919622
+				recall: 1.0
+				f1: 0.5587734241908007
+				confusion matrix: 
+					[  0 777]
+					[  0 492]
+			Trial MCC: 0.0
+				accuracy: 0.13734939759036144
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[114   0]
+					[716   0]
+			Trial MCC: 0.0
+				accuracy: 0.37140509449465897
+				precision: 0.37140509449465897
+				recall: 1.0
+				f1: 0.5416417016177352
+				confusion matrix: 
+					[  0 765]
+					[  0 452]
+			Average Accuracy: 0.29882044929232754
+			Average MCC: 0.0
+
+		gamma: 2.244924096618745
+			Trial MCC: 0.0
+				accuracy: 0.4983853606027987
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[463   0]
+					[466   0]
+			Trial MCC: 0.0
+				accuracy: 0.349609375
+				precision: 0.349609375
+				recall: 1.0
+				f1: 0.5180897250361794
+				confusion matrix: 
+					[  0 666]
+					[  0 358]
+			Trial MCC: 0.0
+				accuracy: 0.15726495726495726
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[92  0]
+					[493   0]
+			Average Accuracy: 0.335086564289252
+			Average MCC: 0.0
+
+		gamma: 8.0
+			Trial MCC: 0.0
+				accuracy: 0.04766734279918864
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[47  0]
+					[939   0]
+			Trial MCC: 0.0
+				accuracy: 0.28513071895424835
+				precision: 0.28513071895424835
+				recall: 1.0
+				f1: 0.4437380801017165
+				confusion matrix: 
+					[  0 875]
+					[  0 349]
+			Trial MCC: 0.0
+				accuracy: 0.3247988295537674
+				precision: 0.3247988295537674
+				recall: 1.0
+				f1: 0.49033683048039756
+				confusion matrix: 
+					[  0 923]
+					[  0 444]
+			Average Accuracy: 0.2191989637690681
+			Average MCC: 0.0
+
+		gamma: 0.0078125
+			Trial MCC: 0.0
+				accuracy: 0.30230414746543777
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[328   0]
+					[757   0]
+			Trial MCC: 0.0
+				accuracy: 0.32532347504621073
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[352   0]
+					[730   0]
+			Trial MCC: 0.0
+				accuracy: 0.5375722543352601
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[372   0]
+					[320   0]
+			Average Accuracy: 0.38839995894896956
+			Average MCC: 0.0
+
+	C: 0.015625
+		gamma: 0.00390625
+			Trial MCC: 0.0
+				accuracy: 0.37735849056603776
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[320   0]
+					[528   0]
+			Trial MCC: 0.0
+				accuracy: 0.27164804469273746
+				precision: 0.27164804469273746
+				recall: 1.0
+				f1: 0.42723778143876995
+				confusion matrix: 
+					[   0 1043]
+					[  0 389]
+			Trial MCC: 0.0
+				accuracy: 0.4224082421120412
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[656   0]
+					[897   0]
+			Average Accuracy: 0.3571382591236055
+			Average MCC: 0.0
+
+		gamma: 0.0139202924709428
+			Trial MCC: 0.0
+				accuracy: 0.34066901408450706
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[387   0]
+					[749   0]
+			Trial MCC: 0.12932837662444735
+				accuracy: 0.5658012533572068
+				precision: 0.5466666666666666
+				recall: 0.5374531835205992
+				f1: 0.5420207743153919
+				confusion matrix: 
+					[345 238]
+					[247 287]
+			Trial MCC: 0.0
+				accuracy: 0.3093607305936073
+				precision: 0.3093607305936073
+				recall: 1.0
+				f1: 0.4725370531822145
+				confusion matrix: 
+					[  0 605]
+					[  0 271]
+			Average Accuracy: 0.405276999345107
+			Average MCC: 0.043109458874815786
+
+		gamma: 0.049606282874006216
+			Trial MCC: 0.34100862383414643
+				accuracy: 0.5383647798742138
+				precision: 0.36619718309859156
+				recall: 0.9674418604651163
+				f1: 0.5312899106002554
+				confusion matrix: 
+					[220 360]
+					[  7 208]
+			Trial MCC: 0.0
+				accuracy: 0.1485543369890329
+				precision: 0.1485543369890329
+				recall: 1.0
+				f1: 0.2586805555555555
+				confusion matrix: 
+					[  0 854]
+					[  0 149]
+			Trial MCC: 0.0
+				accuracy: 0.03495145631067961
+				precision: 0.03495145631067961
+				recall: 1.0
+				f1: 0.0675422138836773
+				confusion matrix: 
+					[  0 994]
+					[ 0 36]
+			Average Accuracy: 0.24062352439130877
+			Average MCC: 0.1136695412780488
+
+		gamma: 0.1767766952966369
+			Trial MCC: 0.0
+				accuracy: 0.26294820717131473
+				precision: 0.26294820717131473
+				recall: 1.0
+				f1: 0.41640378548895896
+				confusion matrix: 
+					[  0 925]
+					[  0 330]
+			Trial MCC: 0.0
+				accuracy: 0.2705749718151071
+				precision: 0.2705749718151071
+				recall: 1.0
+				f1: 0.42590949423247554
+				confusion matrix: 
+					[  0 647]
+					[  0 240]
+			Trial MCC: 0.0294972109776195
+				accuracy: 0.4498069498069498
+				precision: 0.33
+				recall: 0.6957831325301205
+				f1: 0.4476744186046512
+				confusion matrix: 
+					[235 469]
+					[101 231]
+			Average Accuracy: 0.32777670959779054
+			Average MCC: 0.0098324036592065
+
+		gamma: 0.6299605249474365
+			Trial MCC: 0.0
+				accuracy: 0.14
+				precision: 0.14
+				recall: 1.0
+				f1: 0.24561403508771928
+				confusion matrix: 
+					[  0 559]
+					[ 0 91]
+			Trial MCC: 0.0
+				accuracy: 0.40569395017793597
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[342   0]
+					[501   0]
+			Trial MCC: 0.0
+				accuracy: 0.3321212121212121
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[274   0]
+					[551   0]
+			Average Accuracy: 0.29260505409971604
+			Average MCC: 0.0
+
+		gamma: 2.244924096618745
+			Trial MCC: 0.0
+				accuracy: 0.2245088868101029
+				precision: 0.2245088868101029
+				recall: 1.0
+				f1: 0.36669213139801377
+				confusion matrix: 
+					[  0 829]
+					[  0 240]
+			Trial MCC: 0.0
+				accuracy: 0.1423982869379015
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[133   0]
+					[801   0]
+			Trial MCC: 0.0
+				accuracy: 0.34864864864864864
+				precision: 0.34864864864864864
+				recall: 1.0
+				f1: 0.5170340681362725
+				confusion matrix: 
+					[  0 723]
+					[  0 387]
+			Average Accuracy: 0.238518607465551
+			Average MCC: 0.0
+
+		gamma: 8.0
+			Trial MCC: 0.0
+				accuracy: 0.27756653992395436
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[219   0]
+					[570   0]
+			Trial MCC: 0.0
+				accuracy: 0.34405940594059403
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[139   0]
+					[265   0]
+			Trial MCC: 0.0
+				accuracy: 0.390748031496063
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[397   0]
+					[619   0]
+			Average Accuracy: 0.3374579924535371
+			Average MCC: 0.0
+
+		gamma: 0.0078125
+			Trial MCC: 0.0
+				accuracy: 0.379281537176274
+				precision: 0.379281537176274
+				recall: 1.0
+				f1: 0.549969715324046
+				confusion matrix: 
+					[  0 743]
+					[  0 454]
+			Trial MCC: -0.38330151228909753
+				accuracy: 0.18617511520737326
+				precision: 0.11224489795918367
+				recall: 0.49748743718592964
+				f1: 0.18316373728029603
+				confusion matrix: 
+					[103 783]
+					[100  99]
+			Trial MCC: 0.0
+				accuracy: 0.3966165413533835
+				precision: 0.3966165413533835
+				recall: 1.0
+				f1: 0.5679676985195155
+				confusion matrix: 
+					[  0 642]
+					[  0 422]
+			Average Accuracy: 0.32069106457901025
+			Average MCC: -0.1277671707630325
+
+	C: 0.0625
+		gamma: 0.00390625
+			Trial MCC: 0.1988416187086743
+				accuracy: 0.42315573770491804
+				precision: 0.38199780461031835
+				recall: 1.0
+				f1: 0.5528196981731534
+				confusion matrix: 
+					[ 65 563]
+					[  0 348]
+			Trial MCC: -0.24292180084881515
+				accuracy: 0.3697247706422018
+				precision: 0.37763975155279506
+				recall: 0.6204081632653061
+				f1: 0.4694980694980695
+				confusion matrix: 
+					[ 99 501]
+					[186 304]
+			Trial MCC: 0.02356577186285062
+				accuracy: 0.4238921001926782
+				precision: 0.3714622641509434
+				recall: 0.8289473684210527
+				f1: 0.5130293159609121
+				confusion matrix: 
+					[125 533]
+					[ 65 315]
+			Average Accuracy: 0.405590869513266
+			Average MCC: -0.006838136759096739
+
+		gamma: 0.0139202924709428
+			Trial MCC: -0.1799430563970528
+				accuracy: 0.5072115384615384
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[422  31]
+					[379   0]
+			Trial MCC: 0.1401235980390392
+				accuracy: 0.42531120331950206
+				precision: 0.048109965635738834
+				recall: 1.0
+				f1: 0.09180327868852459
+				confusion matrix: 
+					[191 277]
+					[ 0 14]
+			Trial MCC: -0.03413261048025849
+				accuracy: 0.4229452054794521
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[494   1]
+					[673   0]
+			Average Accuracy: 0.45182264908683084
+			Average MCC: -0.024650689612757362
+
+		gamma: 0.049606282874006216
+			Trial MCC: -0.1373376525248749
+				accuracy: 0.41807348560079444
+				precision: 0.16029143897996356
+				recall: 0.4131455399061033
+				f1: 0.23097112860892385
+				confusion matrix: 
+					[333 461]
+					[125  88]
+			Trial MCC: -0.03924610719517295
+				accuracy: 0.38045540796963945
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[401   1]
+					[652   0]
+			Trial MCC: -0.07874749344116673
+				accuracy: 0.5018541409147095
+				precision: 0.35585585585585583
+				recall: 0.23303834808259588
+				f1: 0.2816399286987522
+				confusion matrix: 
+					[327 143]
+					[260  79]
+			Average Accuracy: 0.43346101149504773
+			Average MCC: -0.08511041772040485
+
+		gamma: 0.1767766952966369
+			Trial MCC: -0.00399836500300231
+				accuracy: 0.4120715350223547
+				precision: 0.5769230769230769
+				recall: 0.018915510718789406
+				f1: 0.036630036630036625
+				confusion matrix: 
+					[538  11]
+					[778  15]
+			Trial MCC: 0.05041161807342829
+				accuracy: 0.2321167883211679
+				precision: 1.0
+				recall: 0.011278195488721804
+				f1: 0.022304832713754646
+				confusion matrix: 
+					[153   0]
+					[526   6]
+			Trial MCC: -0.018840322469941516
+				accuracy: 0.5720771850170261
+				precision: 0.18769230769230769
+				recall: 0.3505747126436782
+				f1: 0.24448897795591182
+				confusion matrix: 
+					[443 264]
+					[113  61]
+			Average Accuracy: 0.4054218361201829
+			Average MCC: 0.009190976866828154
+
+		gamma: 0.6299605249474365
+			Trial MCC: 0.0
+				accuracy: 0.18981481481481483
+				precision: 0.18981481481481483
+				recall: 1.0
+				f1: 0.31906614785992216
+				confusion matrix: 
+					[  0 875]
+					[  0 205]
+			Trial MCC: 0.0
+				accuracy: 0.21150442477876105
+				precision: 0.21150442477876105
+				recall: 1.0
+				f1: 0.3491599707815924
+				confusion matrix: 
+					[  0 891]
+					[  0 239]
+			Trial MCC: -0.08990426694785
+				accuracy: 0.592
+				precision: 0.2261904761904762
+				recall: 0.07307692307692308
+				f1: 0.11046511627906977
+				confusion matrix: 
+					[425  65]
+					[241  19]
+			Average Accuracy: 0.3311064131978586
+			Average MCC: -0.02996808898261667
+
+		gamma: 2.244924096618745
+			Trial MCC: 0.0
+				accuracy: 0.2860696517412935
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[230   0]
+					[574   0]
+			Trial MCC: 0.015716541892852095
+				accuracy: 0.22731614135625597
+				precision: 0.8571428571428571
+				recall: 0.007371007371007371
+				f1: 0.014616321559074299
+				confusion matrix: 
+					[232   1]
+					[808   6]
+			Trial MCC: -0.052114182680460495
+				accuracy: 0.33675564681724846
+				precision: 0.33157338965153116
+				recall: 0.9602446483180428
+				f1: 0.4929356357927787
+				confusion matrix: 
+					[ 14 633]
+					[ 13 314]
+			Average Accuracy: 0.2833804799715993
+			Average MCC: -0.0121325469292028
+
+		gamma: 8.0
+			Trial MCC: 0.0
+				accuracy: 0.31724627395315824
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[447   0]
+					[962   0]
+			Trial MCC: 0.05428483653171762
+				accuracy: 0.2613390928725702
+				precision: 1.0
+				recall: 0.011560693641618497
+				f1: 0.022857142857142854
+				confusion matrix: 
+					[117   0]
+					[342   4]
+			Trial MCC: 0.0
+				accuracy: 0.4139240506329114
+				precision: 0.4139240506329114
+				recall: 1.0
+				f1: 0.585496866606983
+				confusion matrix: 
+					[  0 463]
+					[  0 327]
+			Average Accuracy: 0.33083647248621323
+			Average MCC: 0.01809494551057254
+
+		gamma: 0.0078125
+			Trial MCC: 0.0
+				accuracy: 0.3212962962962963
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[347   0]
+					[733   0]
+			Trial MCC: -0.1580776050141582
+				accuracy: 0.39091718610863757
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[439  19]
+					[665   0]
+			Trial MCC: 0.0
+				accuracy: 0.14550853749072012
+				precision: 0.14550853749072012
+				recall: 1.0
+				f1: 0.254050550874919
+				confusion matrix: 
+					[   0 1151]
+					[  0 196]
+			Average Accuracy: 0.285907339965218
+			Average MCC: -0.052692535004719404
+
+	C: 0.25
+		gamma: 0.00390625
+			Trial MCC: -0.21772761431668397
+				accuracy: 0.40825285338015804
+				precision: 0.28781512605042014
+				recall: 0.2902542372881356
+				f1: 0.2890295358649789
+				confusion matrix: 
+					[328 339]
+					[335 137]
+			Trial MCC: 0.3515128121190559
+				accuracy: 0.5667125171939478
+				precision: 0.44036697247706424
+				recall: 0.96
+				f1: 0.6037735849056604
+				confusion matrix: 
+					[172 305]
+					[ 10 240]
+			Trial MCC: 0.11853832933845258
+				accuracy: 0.4749240121580547
+				precision: 0.38585858585858585
+				recall: 0.821505376344086
+				f1: 0.5250859106529209
+				confusion matrix: 
+					[243 608]
+					[ 83 382]
+			Average Accuracy: 0.48329646091072015
+			Average MCC: 0.08410784238027484
+
+		gamma: 0.0139202924709428
+			Trial MCC: 0.294608474596618
+				accuracy: 0.5718990120746432
+				precision: 0.453416149068323
+				recall: 0.8848484848484849
+				f1: 0.5995893223819302
+				confusion matrix: 
+					[229 352]
+					[ 38 292]
+			Trial MCC: -0.0982019236513294
+				accuracy: 0.5774834437086093
+				precision: 0.06666666666666667
+				recall: 0.0032679738562091504
+				f1: 0.006230529595015576
+				confusion matrix: 
+					[435  14]
+					[305   1]
+			Trial MCC: -0.12621966950807992
+				accuracy: 0.38538538538538536
+				precision: 0.40217391304347827
+				recall: 0.06208053691275168
+				f1: 0.10755813953488372
+				confusion matrix: 
+					[348  55]
+					[559  37]
+			Average Accuracy: 0.511589280389546
+			Average MCC: 0.02339562714573622
+
+		gamma: 0.049606282874006216
+			Trial MCC: -0.4189520783108927
+				accuracy: 0.27421758569299554
+				precision: 0.22355769230769232
+				recall: 0.36186770428015563
+				f1: 0.2763744427934621
+				confusion matrix: 
+					[ 91 323]
+					[164  93]
+			Trial MCC: -0.043983043407063285
+				accuracy: 0.5823412698412699
+				precision: 0.3162393162393162
+				recall: 0.09788359788359788
+				f1: 0.1494949494949495
+				confusion matrix: 
+					[550  80]
+					[341  37]
+			Trial MCC: 0.0
+				accuracy: 0.3194321206743567
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[360   0]
+					[767   0]
+			Average Accuracy: 0.3919969920695407
+			Average MCC: -0.15431170723931867
+
+		gamma: 0.1767766952966369
+			Trial MCC: 0.03325091358903129
+				accuracy: 0.5555555555555556
+				precision: 0.46956521739130436
+				recall: 0.18947368421052632
+				f1: 0.27
+				confusion matrix: 
+					[311  61]
+					[231  54]
+			Trial MCC: 0.042314133554273416
+				accuracy: 0.5545224006762468
+				precision: 0.5531914893617021
+				recall: 0.04887218045112782
+				f1: 0.08981001727115716
+				confusion matrix: 
+					[630  21]
+					[506  26]
+			Trial MCC: -0.40656743968503645
+				accuracy: 0.37267080745341613
+				precision: 0.056022408963585436
+				recall: 0.06920415224913495
+				f1: 0.061919504643962855
+				confusion matrix: 
+					[340 337]
+					[269  20]
+			Average Accuracy: 0.49424958789507284
+			Average MCC: -0.11033413084724392
+
+		gamma: 0.6299605249474365
+			Trial MCC: -0.3343940571504337
+				accuracy: 0.2259663032705649
+				precision: 0.17375455650060753
+				recall: 0.5860655737704918
+				f1: 0.26804123711340205
+				confusion matrix: 
+					[ 85 680]
+					[101 143]
+			Trial MCC: -0.2845981598243634
+				accuracy: 0.4409044193216855
+				precision: 0.12429378531073447
+				recall: 0.0535279805352798
+				f1: 0.07482993197278912
+				confusion matrix: 
+					[407 155]
+					[389  22]
+			Trial MCC: -0.05279613726443608
+				accuracy: 0.5300668151447662
+				precision: 0.36363636363636365
+				recall: 0.08040201005025126
+				f1: 0.1316872427983539
+				confusion matrix: 
+					[222  28]
+					[183  16]
+			Average Accuracy: 0.3989791792456722
+			Average MCC: -0.2239294514130777
+
+		gamma: 2.244924096618745
+			Trial MCC: 0.16374090572321928
+				accuracy: 0.6045751633986928
+				precision: 0.7454545454545455
+				recall: 0.10512820512820513
+				f1: 0.1842696629213483
+				confusion matrix: 
+					[514  14]
+					[349  41]
+			Trial MCC: 0.07327417475339523
+				accuracy: 0.578853046594982
+				precision: 0.5454545454545454
+				recall: 0.1127348643006263
+				f1: 0.18685121107266436
+				confusion matrix: 
+					[592  45]
+					[425  54]
+			Trial MCC: 0.047487301991866564
+				accuracy: 0.46963562753036436
+				precision: 0.75
+				recall: 0.016981132075471698
+				f1: 0.033210332103321034
+				confusion matrix: 
+					[455   3]
+					[521   9]
+			Average Accuracy: 0.5510212791746797
+			Average MCC: 0.0948341274894937
+
+		gamma: 8.0
+			Trial MCC: 0.071298148658801
+				accuracy: 0.512273212379936
+				precision: 0.7857142857142857
+				recall: 0.023655913978494623
+				f1: 0.04592901878914405
+				confusion matrix: 
+					[469   3]
+					[454  11]
+			Trial MCC: 0.0
+				accuracy: 0.28761514841351077
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[281   0]
+					[696   0]
+			Trial MCC: -0.15231271391708953
+				accuracy: 0.3247422680412371
+				precision: 0.3469387755102041
+				recall: 0.0265625
+				f1: 0.04934687953555878
+				confusion matrix: 
+					[298  32]
+					[623  17]
+			Average Accuracy: 0.37487687627822797
+			Average MCC: -0.027004855086096177
+
+		gamma: 0.0078125
+			Trial MCC: 0.0
+				accuracy: 0.33467336683417087
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[333   0]
+					[662   0]
+			Trial MCC: -0.09817530679163138
+				accuracy: 0.4360746371803732
+				precision: 0.4006514657980456
+				recall: 0.5829383886255924
+				f1: 0.4749034749034749
+				confusion matrix: 
+					[262 552]
+					[264 369]
+			Trial MCC: 0.018794874044132607
+				accuracy: 0.1580952380952381
+				precision: 1.0
+				recall: 0.002257336343115124
+				f1: 0.0045045045045045045
+				confusion matrix: 
+					[82  0]
+					[442   1]
+			Average Accuracy: 0.309614414036594
+			Average MCC: -0.02646014424916626
+
+	C: 1.0
+		gamma: 0.00390625
+			Trial MCC: -0.15439754797850666
+				accuracy: 0.5034280117531832
+				precision: 0.15625
+				recall: 0.02159827213822894
+				f1: 0.03795066413662239
+				confusion matrix: 
+					[504  54]
+					[453  10]
+			Trial MCC: -0.4887523327768268
+				accuracy: 0.2470713525026624
+				precision: 0.31362467866323906
+				recall: 0.21708185053380782
+				f1: 0.2565720294426919
+				confusion matrix: 
+					[110 267]
+					[440 122]
+			Trial MCC: -0.29311228934381767
+				accuracy: 0.4252400548696845
+				precision: 0.14189189189189189
+				recall: 0.0670926517571885
+				f1: 0.0911062906724512
+				confusion matrix: 
+					[289 127]
+					[292  21]
+			Average Accuracy: 0.39191313970851005
+			Average MCC: -0.31208739003305036
+
+		gamma: 0.0139202924709428
+			Trial MCC: -0.35565142569252767
+				accuracy: 0.36853448275862066
+				precision: 0.15714285714285714
+				recall: 0.1116751269035533
+				f1: 0.13056379821958455
+				confusion matrix: 
+					[149 118]
+					[175  22]
+			Trial MCC: 0.0424769094565187
+				accuracy: 0.16035353535353536
+				precision: 1.0
+				recall: 0.01188707280832095
+				f1: 0.023494860499265784
+				confusion matrix: 
+					[119   0]
+					[665   8]
+			Trial MCC: -0.05502261809287152
+				accuracy: 0.5219435736677116
+				precision: 0.3673469387755102
+				recall: 0.20300751879699247
+				f1: 0.26150121065375304
+				confusion matrix: 
+					[279  93]
+					[212  54]
+			Average Accuracy: 0.3502771972599559
+			Average MCC: -0.12273237810962682
+
+		gamma: 0.049606282874006216
+			Trial MCC: 0.32905677568441405
+				accuracy: 0.6979445933869526
+				precision: 0.38461538461538464
+				recall: 0.6903765690376569
+				f1: 0.4940119760479042
+				confusion matrix: 
+					[616 264]
+					[ 74 165]
+			Trial MCC: 0.14584325660720684
+				accuracy: 0.58125
+				precision: 0.5789473684210527
+				recall: 0.3557951482479784
+				f1: 0.4407345575959933
+				confusion matrix: 
+					[333  96]
+					[239 132]
+			Trial MCC: 0.29422697495631367
+				accuracy: 0.6883116883116883
+				precision: 0.4391691394658754
+				recall: 0.5991902834008097
+				f1: 0.5068493150684932
+				confusion matrix: 
+					[488 189]
+					[ 99 148]
+			Average Accuracy: 0.6558354272328804
+			Average MCC: 0.25637566908264486
+
+		gamma: 0.1767766952966369
+			Trial MCC: -0.039381824909580636
+				accuracy: 0.5032851511169514
+				precision: 0.40476190476190477
+				recall: 0.04594594594594595
+				f1: 0.08252427184466021
+				confusion matrix: 
+					[366  25]
+					[353  17]
+			Trial MCC: -0.03664220980191605
+				accuracy: 0.40313549832026874
+				precision: 0.5384615384615384
+				recall: 0.06505576208178439
+				f1: 0.11608623548922055
+				confusion matrix: 
+					[325  30]
+					[503  35]
+			Trial MCC: -0.11211075888767162
+				accuracy: 0.4720194647201946
+				precision: 0.3621621621621622
+				recall: 0.17493472584856398
+				f1: 0.23591549295774647
+				confusion matrix: 
+					[321 118]
+					[316  67]
+			Average Accuracy: 0.45948003805247156
+			Average MCC: -0.06271159786638943
+
+		gamma: 0.6299605249474365
+			Trial MCC: 0.05162579347429084
+				accuracy: 0.5330143540669856
+				precision: 0.5918367346938775
+				recall: 0.05835010060362173
+				f1: 0.10622710622710622
+				confusion matrix: 
+					[528  20]
+					[468  29]
+			Trial MCC: -0.10538892137246549
+				accuracy: 0.5658227848101266
+				precision: 0.23076923076923078
+				recall: 0.12406015037593984
+				f1: 0.16136919315403425
+				confusion matrix: 
+					[414 110]
+					[233  33]
+			Trial MCC: 0.07510700986006444
+				accuracy: 0.5830039525691699
+				precision: 0.5
+				recall: 0.1990521327014218
+				f1: 0.28474576271186436
+				confusion matrix: 
+					[506  84]
+					[338  84]
+			Average Accuracy: 0.5606136971487606
+			Average MCC: 0.007114627320629931
+
+		gamma: 2.244924096618745
+			Trial MCC: 0.08433356472733412
+				accuracy: 0.4891304347826087
+				precision: 0.7090909090909091
+				recall: 0.07222222222222222
+				f1: 0.13109243697478992
+				confusion matrix: 
+					[456  16]
+					[501  39]
+			Trial MCC: 0.0005427786891320851
+				accuracy: 0.5981804397270659
+				precision: 0.37681159420289856
+				recall: 0.10483870967741936
+				f1: 0.1640378548895899
+				confusion matrix: 
+					[737  86]
+					[444  52]
+			Trial MCC: -0.09223267115421299
+				accuracy: 0.5318744053282588
+				precision: 0.30057803468208094
+				recall: 0.12293144208037825
+				f1: 0.174496644295302
+				confusion matrix: 
+					[507 121]
+					[371  52]
+			Average Accuracy: 0.5397284266126445
+			Average MCC: -0.0024521092459155965
+
+		gamma: 8.0
+			Trial MCC: 0.07220984323494663
+				accuracy: 0.50997150997151
+				precision: 0.7096774193548387
+				recall: 0.04158790170132325
+				f1: 0.07857142857142857
+				confusion matrix: 
+					[515   9]
+					[507  22]
+			Trial MCC: 0.10185773707482128
+				accuracy: 0.31285551763367464
+				precision: 1.0
+				recall: 0.03514376996805112
+				f1: 0.06790123456790124
+				confusion matrix: 
+					[253   0]
+					[604  22]
+			Trial MCC: -0.19180536399919287
+				accuracy: 0.5777777777777777
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[208  22]
+					[130   0]
+			Average Accuracy: 0.46686826846098745
+			Average MCC: -0.005912594563141656
+
+		gamma: 0.0078125
+			Trial MCC: -0.38725730631676364
+				accuracy: 0.26506024096385544
+				precision: 0.2807017543859649
+				recall: 0.08971962616822429
+				f1: 0.13597733711048157
+				confusion matrix: 
+					[172 123]
+					[487  48]
+			Trial MCC: -0.23788852578263806
+				accuracy: 0.45795795795795796
+				precision: 0.023809523809523808
+				recall: 0.003115264797507788
+				f1: 0.005509641873278237
+				confusion matrix: 
+					[304  41]
+					[320   1]
+			Trial MCC: -0.36180646189692856
+				accuracy: 0.2675879396984925
+				precision: 0.31210191082802546
+				recall: 0.09351145038167939
+				f1: 0.14390602055800295
+				confusion matrix: 
+					[164 108]
+					[475  49]
+			Average Accuracy: 0.33020204620676863
+			Average MCC: -0.32898409799877676
+
+	C: 4.0
+		gamma: 0.00390625
+			Trial MCC: 0.04029306199586454
+				accuracy: 0.44727592267135324
+				precision: 0.29333333333333333
+				recall: 0.6896551724137931
+				f1: 0.411599625818522
+				confusion matrix: 
+					[289 530]
+					[ 99 220]
+			Trial MCC: -0.183543753756013
+				accuracy: 0.4214202561117579
+				precision: 0.29533678756476683
+				recall: 0.336283185840708
+				f1: 0.3144827586206897
+				confusion matrix: 
+					[248 272]
+					[225 114]
+			Trial MCC: -0.11468485989760202
+				accuracy: 0.38325471698113206
+				precision: 0.48120300751879697
+				recall: 0.12355212355212356
+				f1: 0.1966205837173579
+				confusion matrix: 
+					[261  69]
+					[454  64]
+			Average Accuracy: 0.4173169652547477
+			Average MCC: -0.08597851721925016
+
+		gamma: 0.0139202924709428
+			Trial MCC: 0.005861568423734534
+				accuracy: 0.5309278350515464
+				precision: 0.37467018469656993
+				recall: 0.39444444444444443
+				f1: 0.38430311231393777
+				confusion matrix: 
+					[373 237]
+					[218 142]
+			Trial MCC: -0.41928533266583723
+				accuracy: 0.268762677484787
+				precision: 0.27238805970149255
+				recall: 0.12186978297161936
+				f1: 0.16839677047289506
+				confusion matrix: 
+					[192 195]
+					[526  73]
+			Trial MCC: 0.04740304566143457
+				accuracy: 0.5656279508970727
+				precision: 0.4823529411764706
+				recall: 0.18061674008810572
+				f1: 0.26282051282051283
+				confusion matrix: 
+					[517  88]
+					[372  82]
+			Average Accuracy: 0.45510615447780206
+			Average MCC: -0.12200690619355604
+
+		gamma: 0.049606282874006216
+			Trial MCC: -0.035916210961458105
+				accuracy: 0.5301944728761515
+				precision: 0.3968253968253968
+				recall: 0.11547344110854503
+				f1: 0.17889087656529515
+				confusion matrix: 
+					[468  76]
+					[383  50]
+			Trial MCC: -0.23983357233247476
+				accuracy: 0.1645077720207254
+				precision: 0.589041095890411
+				recall: 0.06534954407294832
+				f1: 0.1176470588235294
+				confusion matrix: 
+					[84 30]
+					[615  43]
+			Trial MCC: 0.12005041028128426
+				accuracy: 0.5928667563930013
+				precision: 0.34318555008210183
+				recall: 0.5048309178743962
+				f1: 0.4086021505376345
+				confusion matrix: 
+					[672 400]
+					[205 209]
+			Average Accuracy: 0.42918966709662615
+			Average MCC: -0.05189979100421619
+
+		gamma: 0.1767766952966369
+			Trial MCC: 0.19679360324309733
+				accuracy: 0.6287593984962406
+				precision: 0.49604221635883905
+				recall: 0.47959183673469385
+				f1: 0.4876783398184176
+				confusion matrix: 
+					[481 191]
+					[204 188]
+			Trial MCC: -0.003829533603220491
+				accuracy: 0.5828065739570164
+				precision: 0.37606837606837606
+				recall: 0.1461794019933555
+				f1: 0.21052631578947367
+				confusion matrix: 
+					[417  73]
+					[257  44]
+			Trial MCC: 0.24732736590948537
+				accuracy: 0.6253393665158371
+				precision: 0.7586206896551724
+				recall: 0.2249488752556237
+				f1: 0.3470031545741325
+				confusion matrix: 
+					[581  35]
+					[379 110]
+			Average Accuracy: 0.6123017796563647
+			Average MCC: 0.1467638118497874
+
+		gamma: 0.6299605249474365
+			Trial MCC: 0.01385209672364369
+				accuracy: 0.4053751399776036
+				precision: 0.13908450704225353
+				recall: 0.6528925619834711
+				f1: 0.22931785195936144
+				confusion matrix: 
+					[283 489]
+					[42 79]
+			Trial MCC: 0.020497918342149816
+				accuracy: 0.4478203434610304
+				precision: 0.6074766355140186
+				recall: 0.1473922902494331
+				f1: 0.23722627737226273
+				confusion matrix: 
+					[274  42]
+					[376  65]
+			Trial MCC: 0.14913223231758546
+				accuracy: 0.583625730994152
+				precision: 0.7166666666666667
+				recall: 0.112565445026178
+				f1: 0.1945701357466063
+				confusion matrix: 
+					[456  17]
+					[339  43]
+			Average Accuracy: 0.47894040481092864
+			Average MCC: 0.06116074912779299
+
+		gamma: 2.244924096618745
+			Trial MCC: -0.2864300237237053
+				accuracy: 0.2463157894736842
+				precision: 0.14305364511691884
+				recall: 0.5279187817258884
+				f1: 0.22510822510822512
+				confusion matrix: 
+					[130 623]
+					[ 93 104]
+			Trial MCC: 0.18937373594333407
+				accuracy: 0.6384839650145773
+				precision: 0.5755395683453237
+				recall: 0.29739776951672864
+				f1: 0.39215686274509803
+				confusion matrix: 
+					[358  59]
+					[189  80]
+			Trial MCC: -0.26739654767185256
+				accuracy: 0.47086991221069435
+				precision: 0.08620689655172414
+				recall: 0.028901734104046242
+				f1: 0.04329004329004329
+				confusion matrix: 
+					[575 159]
+					[504  15]
+			Average Accuracy: 0.4518898888996519
+			Average MCC: -0.1214842784840746
+
+		gamma: 8.0
+			Trial MCC: 0.1062035932934783
+				accuracy: 0.3684210526315789
+				precision: 0.9523809523809523
+				recall: 0.04106776180698152
+				f1: 0.07874015748031496
+				confusion matrix: 
+					[253   1]
+					[467  20]
+			Trial MCC: -0.06772854614785964
+				accuracy: 0.2857142857142857
+				precision: 0.5
+				recall: 0.013986013986013986
+				f1: 0.0272108843537415
+				confusion matrix: 
+					[276  10]
+					[705  10]
+			Trial MCC: 0.08881674830202078
+				accuracy: 0.7443082311733801
+				precision: 0.3333333333333333
+				recall: 0.14960629921259844
+				f1: 0.20652173913043478
+				confusion matrix: 
+					[406  38]
+					[108  19]
+			Average Accuracy: 0.4661478565064148
+			Average MCC: 0.04243059848254648
+
+		gamma: 0.0078125
+			Trial MCC: -0.21859137886858263
+				accuracy: 0.5039370078740157
+				precision: 0.14522821576763487
+				recall: 0.08838383838383838
+				f1: 0.1098901098901099
+				confusion matrix: 
+					[541 206]
+					[361  35]
+			Trial MCC: -0.06406601708518145
+				accuracy: 0.2799552071668533
+				precision: 0.5263157894736842
+				recall: 0.015527950310559006
+				f1: 0.030165912518853692
+				confusion matrix: 
+					[240   9]
+					[634  10]
+			Trial MCC: -0.18361417558181808
+				accuracy: 0.5345911949685535
+				precision: 0.14906832298136646
+				recall: 0.05925925925925926
+				f1: 0.08480565371024736
+				confusion matrix: 
+					[571 137]
+					[381  24]
+			Average Accuracy: 0.43949447000314085
+			Average MCC: -0.15542385717852739
+
+	C: 16.0
+		gamma: 0.00390625
+			Trial MCC: -0.1000355800450856
+				accuracy: 0.46413793103448275
+				precision: 0.3498402555910543
+				recall: 0.37181663837011886
+				f1: 0.36049382716049383
+				confusion matrix: 
+					[454 407]
+					[370 219]
+			Trial MCC: -0.171231264445911
+				accuracy: 0.45989304812834225
+				precision: 0.285140562248996
+				recall: 0.17839195979899497
 Kernel Type: linear
 	C: 0.00390625
 		gamma: auto
-			accuracy: 0.30724396336386345
-			accuracy: 0.40196882690730107
-			accuracy: 0.40931372549019607
-			average accuracy: 0.3728421719204535
+			Trial MCC: 0.3414084316339687
+				accuracy: 0.6382575757575758
+				precision: 0.5560283687943263
+				recall: 0.8503253796095445
+				f1: 0.6723842195540309
+				confusion matrix: 
+					[282 313]
+					[ 69 392]
+			Trial MCC: 0.3774940345546004
+				accuracy: 0.5779141104294478
+				precision: 0.45746388443017655
+				recall: 0.979381443298969
+				f1: 0.6236323851203501
+				confusion matrix: 
+					[186 338]
+					[  6 285]
+			Trial MCC: -0.37699728009674105
+				accuracy: 0.31734006734006737
+				precision: 0.2568627450980392
+				recall: 0.23268206039076378
+				f1: 0.24417520969245107
+				confusion matrix: 
+					[246 379]
+					[432 131]
+			Average Accuracy: 0.5111705845090304
+			Average MCC: 0.1139683953639427
 
 	C: 0.015625
 		gamma: auto
-			accuracy: 0.4505363528009535
-			accuracy: 0.22193877551020408
-			accuracy: 0.4857849196538937
-			average accuracy: 0.3860866826550171
+			Trial MCC: -0.04427928429519431
+				accuracy: 0.46584362139917695
+				precision: 0.4790697674418605
+				recall: 0.1609375
+				f1: 0.2409356725146199
+				confusion matrix: 
+					[463 112]
+					[537 103]
+			Trial MCC: -0.16021636926998536
+				accuracy: 0.368575624082232
+				precision: 0.3592400690846287
+				recall: 0.7790262172284644
+				f1: 0.4917257683215131
+				confusion matrix: 
+					[ 43 371]
+					[ 59 208]
+			Trial MCC: -0.2048236018055488
+				accuracy: 0.540948275862069
+				precision: 0.07608695652173914
+				recall: 0.020114942528735632
+				f1: 0.031818181818181815
+				confusion matrix: 
+					[495  85]
+					[341   7]
+			Average Accuracy: 0.458455840447826
+			Average MCC: -0.1364397517902428
 
 	C: 0.0625
 		gamma: auto
-			accuracy: 0.494140625
-			accuracy: 0.5166002656042497
-			accuracy: 0.27313769751693
-			average accuracy: 0.42795952937372655
+			Trial MCC: -0.06333419226800574
+				accuracy: 0.5558194774346793
+				precision: 0.313953488372093
+				recall: 0.07894736842105263
+				f1: 0.1261682242990654
+				confusion matrix: 
+					[441  59]
+					[315  27]
+			Trial MCC: 0.06687080765279176
+				accuracy: 0.4585365853658537
+				precision: 0.3092909535452323
+				recall: 0.7146892655367232
+				f1: 0.431740614334471
+				confusion matrix: 
+					[311 565]
+					[101 253]
+			Trial MCC: 0.09536677177295344
+				accuracy: 0.5810055865921788
+				precision: 0.44625407166123776
+				recall: 0.40058479532163743
+				f1: 0.4221879815100154
+				confusion matrix: 
+					[383 170]
+					[205 137]
+			Average Accuracy: 0.5317872164642373
+			Average MCC: 0.03296779571924648
 
 	C: 0.25
 		gamma: auto
-			accuracy: 0.33085106382978724
-			accuracy: 0.5358139534883721
-			accuracy: 0.5601415094339622
-			average accuracy: 0.4756021755840405
+			Trial MCC: -0.2660959772810888
+				accuracy: 0.3736842105263158
+				precision: 0.24248927038626608
+				recall: 0.3183098591549296
+				f1: 0.2752740560292326
+				confusion matrix: 
+					[242 353]
+					[242 113]
+			Trial MCC: -0.08614667775857061
+				accuracy: 0.4591549295774648
+				precision: 0.43258426966292135
+				recall: 0.21388888888888888
+				f1: 0.2862453531598513
+				confusion matrix: 
+					[249 101]
+					[283  77]
+			Trial MCC: 0.036934360789121275
+				accuracy: 0.18778625954198475
+				precision: 1.0
+				recall: 0.007462686567164179
+				f1: 0.014814814814814815
+				confusion matrix: 
+					[119   0]
+					[532   4]
+			Average Accuracy: 0.34020846654858844
+			Average MCC: -0.10510276475017938
 
 	C: 1.0
 		gamma: auto
-			accuracy: 0.4653361344537815
-			accuracy: 0.5320404721753794
-			accuracy: 0.3921901528013582
-			average accuracy: 0.46318891981017307
+			Trial MCC: -0.06629407363881464
+				accuracy: 0.4098867147270855
+				precision: 0.5580357142857143
+				recall: 0.20868113522537562
+				f1: 0.3037667071688943
+				confusion matrix: 
+					[273  99]
+					[474 125]
+			Trial MCC: 0.22511197973812094
+				accuracy: 0.5858041329739443
+				precision: 0.45975232198142413
+				recall: 0.726161369193154
+				f1: 0.5630331753554502
+				confusion matrix: 
+					[355 349]
+					[112 297]
+			Trial MCC: 0.1934002646299012
+				accuracy: 0.5348837209302325
+				precision: 0.7628205128205128
+				recall: 0.25757575757575757
+				f1: 0.3851132686084142
+				confusion matrix: 
+					[318  37]
+					[343 119]
+			Average Accuracy: 0.5101915228770874
+			Average MCC: 0.11740605690973582
 
 	C: 4.0
 		gamma: auto
-			accuracy: 0.5522088353413654
-			accuracy: 0.6784452296819788
-			accuracy: 0.2703639514731369
-			average accuracy: 0.5003393388321604
+			Trial MCC: 0.16650922530841403
+				accuracy: 0.5998134328358209
+				precision: 0.27941176470588236
+				recall: 0.6073059360730594
+				f1: 0.38273381294964026
+				confusion matrix: 
+					[510 343]
+					[ 86 133]
+			Trial MCC: -0.008509434284297417
+				accuracy: 0.46618106139438087
+				precision: 0.5467289719626168
+				recall: 0.21951219512195122
+				f1: 0.3132530120481928
+				confusion matrix: 
+					[331  97]
+					[416 117]
+			Trial MCC: -0.08194956706252775
+				accuracy: 0.34049079754601225
+				precision: 0.42857142857142855
+				recall: 0.0187207488299532
+				f1: 0.035874439461883414
+				confusion matrix: 
+					[321  16]
+					[629  12]
+			Average Accuracy: 0.46882843059207135
+			Average MCC: 0.02535007465386295
 
 	C: 16.0
 		gamma: auto
-			accuracy: 0.5280898876404494
-			accuracy: 0.4638868205510052
-			accuracy: 0.54858934169279
-			average accuracy: 0.5135220166280815
+			Trial MCC: 0.34129796346722213
+				accuracy: 0.6709346991037132
+				precision: 0.5862068965517241
+				recall: 0.6863354037267081
+				f1: 0.6323319027181687
+				confusion matrix: 
+					[303 156]
+					[101 221]
+			Trial MCC: 0.3503661782453611
+				accuracy: 0.7067209775967414
+				precision: 0.43466666666666665
+				recall: 0.6820083682008368
+				f1: 0.530944625407166
+				confusion matrix: 
+					[531 212]
+					[ 76 163]
+			Trial MCC: -0.1614706826314195
+				accuracy: 0.4007009345794392
+				precision: 0.4682274247491639
+				recall: 0.2834008097165992
+				f1: 0.35308953341740223
+				confusion matrix: 
+					[203 159]
+					[354 140]
+			Average Accuracy: 0.592785537093298
+			Average MCC: 0.17673115302705458
 
 	C: 64.0
 		gamma: auto
-			accuracy: 0.65860400829302
-			accuracy: 0.5455882352941176
-			accuracy: 0.592436974789916
-			average accuracy: 0.5988764061256845
+			Trial MCC: 0.48275892467997883
+				accuracy: 0.7481559536354057
+				precision: 0.6262135922330098
+				recall: 0.7521865889212828
+				f1: 0.6834437086092715
+				confusion matrix: 
+					[452 154]
+					[ 85 258]
+			Trial MCC: 0.20997904918210722
+				accuracy: 0.5920398009950248
+				precision: 0.6866028708133971
+				recall: 0.5070671378091873
+				f1: 0.5833333333333334
+				confusion matrix: 
+					[308 131]
+					[279 287]
+			Trial MCC: 0.10411911721112238
+				accuracy: 0.27340823970037453
+				precision: 0.9397590361445783
+				recall: 0.09187279151943463
+				f1: 0.16738197424892703
+				confusion matrix: 
+					[214   5]
+					[771  78]
+			Average Accuracy: 0.5378679981102684
+			Average MCC: 0.26561903035773615
 
 	C: 256.0
 		gamma: auto
-			accuracy: 0.3609845031905196
-			accuracy: 0.6037037037037037
-			accuracy: 0.40119760479041916
-			average accuracy: 0.45529527056154745
+			Trial MCC: 0.15828131964001746
+				accuracy: 0.6272401433691757
+				precision: 0.4584527220630373
+				recall: 0.4134366925064599
+				f1: 0.43478260869565216
+				confusion matrix: 
+					[540 189]
+					[227 160]
+			Trial MCC: -0.03148754616548477
+				accuracy: 0.5256281407035176
+				precision: 0.3156498673740053
+				recall: 0.35735735735735735
+				f1: 0.3352112676056338
+				confusion matrix: 
+					[404 258]
+					[214 119]
+			Trial MCC: 0.06524010198170811
+				accuracy: 0.45223880597014926
+				precision: 0.6785714285714286
+				recall: 0.18673218673218672
+				f1: 0.2928709055876686
+				confusion matrix: 
+					[227  36]
+					[331  76]
+			Average Accuracy: 0.5350356966809474
+			Average MCC: 0.06401129181874693
 
 	C: 1024.0
 		gamma: auto
-			accuracy: 0.5439367311072056
-			accuracy: 0.44251626898047725
-			accuracy: 0.3610567514677104
-			average accuracy: 0.4491699171851311
+			Trial MCC: 0.17948538349041213
+				accuracy: 0.584070796460177
+				precision: 0.44476744186046513
+				recall: 0.6270491803278688
+				f1: 0.5204081632653061
+				confusion matrix: 
+					[243 191]
+					[ 91 153]
+			Trial MCC: 0.10847502325354937
+				accuracy: 0.4820809248554913
+				precision: 0.7194570135746606
+				recall: 0.29174311926605506
+				f1: 0.4151436031331593
+				confusion matrix: 
+					[258  62]
+					[386 159]
+			Trial MCC: 0.3412654523915422
+				accuracy: 0.645320197044335
+				precision: 0.889168765743073
+				recall: 0.5912897822445561
+				f1: 0.710261569416499
+				confusion matrix: 
+					[171  44]
+					[244 353]
+			Average Accuracy: 0.5704906394533344
+			Average MCC: 0.20974195304516793
 
 	C: 4096.0
 		gamma: auto
-			accuracy: 0.5515873015873016
-			accuracy: 0.5782442748091603
-			accuracy: 0.5155844155844156
-			average accuracy: 0.5484719973269592
+			Trial MCC: 0.07538454978606271
+				accuracy: 0.5357710651828299
+				precision: 0.7246835443037974
+				recall: 0.5276497695852534
+				f1: 0.6106666666666667
+				confusion matrix: 
+					[108  87]
+					[205 229]
+			Trial MCC: -0.35245086433471445
+				accuracy: 0.271356783919598
+				precision: 0.6496350364963503
+				recall: 0.2688821752265861
+				f1: 0.3803418803418803
+				confusion matrix: 
+					[19 48]
+					[242  89]
+			Trial MCC: 0.2011325101918599
+				accuracy: 0.4817073170731707
+				precision: 0.9852941176470589
+				recall: 0.44370860927152317
+				f1: 0.6118721461187214
+				confusion matrix: 
+					[48  4]
+					[336 268]
+			Average Accuracy: 0.4296117220585329
+			Average MCC: -0.025311268118930603
 
 Kernel Type: rbf
 	C: 0.00390625
 		gamma: 0.00390625
-			accuracy: 0.35500515995872034
-			accuracy: 0.24293785310734464
-			accuracy: 0.39897435897435896
-			average accuracy: 0.3323057906801413
+			Trial MCC: 0.0
+				accuracy: 0.2393574297188755
+				precision: 0.2393574297188755
+				recall: 1.0
+				f1: 0.3862605314322748
+				confusion matrix: 
+					[  0 947]
+					[  0 298]
+			Trial MCC: 0.0
+				accuracy: 0.37723424270931327
+				precision: 0.37723424270931327
+				recall: 1.0
+				f1: 0.5478142076502732
+				confusion matrix: 
+					[  0 662]
+					[  0 401]
+			Trial MCC: 0.0
+				accuracy: 0.3302277432712215
+				precision: 0.3302277432712215
+				recall: 1.0
+				f1: 0.49649805447470813
+				confusion matrix: 
+					[  0 647]
+					[  0 319]
+			Average Accuracy: 0.31560647189980345
+			Average MCC: 0.0
 
 		gamma: 0.0139202924709428
-			accuracy: 0.2721584984358707
-			accuracy: 0.2890551917680075
-			accuracy: 0.5311942959001783
-			average accuracy: 0.3641359953680188
+			Trial MCC: 0.0
+				accuracy: 0.36571952337305225
+				precision: 0.36571952337305225
+				recall: 1.0
+				f1: 0.5355704697986576
+				confusion matrix: 
+					[  0 692]
+					[  0 399]
+			Trial MCC: 0.0
+				accuracy: 0.53125
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[544   0]
+					[480   0]
+			Trial MCC: 0.0
+				accuracy: 0.4232394366197183
+				precision: 0.4232394366197183
+				recall: 1.0
+				f1: 0.5947550717466601
+				confusion matrix: 
+					[  0 819]
+					[  0 601]
+			Average Accuracy: 0.44006965333092357
+			Average MCC: 0.0
 
 		gamma: 0.049606282874006216
-			accuracy: 0.46650998824911866
-			accuracy: 0.4217749313815188
-			accuracy: 0.5299420476497102
-			average accuracy: 0.47274232242678255
+			Trial MCC: 0.0
+				accuracy: 0.3888888888888889
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[210   0]
+					[330   0]
+			Trial MCC: 0.0
+				accuracy: 0.4215686274509804
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[301   0]
+					[413   0]
+			Trial MCC: 0.0
+				accuracy: 0.32849364791288566
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[362   0]
+					[740   0]
+			Average Accuracy: 0.37965038808425167
+			Average MCC: 0.0
 
 		gamma: 0.1767766952966369
-			accuracy: 0.4104183109707972
-			accuracy: 0.3333333333333333
-			accuracy: 0.3916015625
-			average accuracy: 0.3784510689347102
+			Trial MCC: 0.0
+				accuracy: 0.35642570281124497
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[355   0]
+					[641   0]
+			Trial MCC: 0.0
+				accuracy: 0.49627791563275436
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[600   0]
+					[609   0]
+			Trial MCC: 0.0
+				accuracy: 0.34231200897867564
+				precision: 0.34231200897867564
+				recall: 1.0
+				f1: 0.5100334448160535
+				confusion matrix: 
+					[  0 586]
+					[  0 305]
+			Average Accuracy: 0.39833854247422495
+			Average MCC: 0.0
 
 		gamma: 0.6299605249474365
-			accuracy: 0.4247135842880524
-			accuracy: 0.33851276359600446
-			accuracy: 0.13846153846153847
-			average accuracy: 0.30056262878186507
+			Trial MCC: 0.0
+				accuracy: 0.3672431332655137
+				precision: 0.3672431332655137
+				recall: 1.0
+				f1: 0.5372023809523809
+				confusion matrix: 
+					[  0 622]
+					[  0 361]
+			Trial MCC: 0.0
+				accuracy: 0.422360248447205
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[408   0]
+					[558   0]
+			Trial MCC: 0.0
+				accuracy: 0.39195678271308526
+				precision: 0.39195678271308526
+				recall: 1.0
+				f1: 0.5631737818025011
+				confusion matrix: 
+					[   0 1013]
+					[  0 653]
+			Average Accuracy: 0.39385338814193466
+			Average MCC: 0.0
 
 		gamma: 2.244924096618745
-			accuracy: 0.15508021390374332
-			accuracy: 0.42955801104972374
-			accuracy: 0.42772612003381233
-			average accuracy: 0.3374547816624265
+			Trial MCC: 0.0
+				accuracy: 0.43813847900113506
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[386   0]
+					[495   0]
+			Trial MCC: 0.0
+				accuracy: 0.5453416149068323
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[439   0]
+					[366   0]
+			Trial MCC: 0.0
+				accuracy: 0.18334985133795836
+				precision: 0.18334985133795836
+				recall: 1.0
+				f1: 0.3098827470686767
+				confusion matrix: 
+					[  0 824]
+					[  0 185]
+			Average Accuracy: 0.3889433150819752
+			Average MCC: 0.0
 
 		gamma: 8.0
-			accuracy: 0.16767676767676767
-			accuracy: 0.4262295081967213
-			accuracy: 0.5372340425531915
-			average accuracy: 0.3770467728088935
+			Trial MCC: 0.0
+				accuracy: 0.3696060037523452
+				precision: 0.3696060037523452
+				recall: 1.0
+				f1: 0.5397260273972603
+				confusion matrix: 
+					[  0 672]
+					[  0 394]
+			Trial MCC: 0.0
+				accuracy: 0.3933547695605573
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[367   0]
+					[566   0]
+			Trial MCC: 0.0
+				accuracy: 0.23935666982024598
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[253   0]
+					[804   0]
+			Average Accuracy: 0.3341058143777162
+			Average MCC: 0.0
 
 		gamma: 0.0078125
-			accuracy: 0.31693077564637195
-			accuracy: 0.2558139534883721
-			accuracy: 0.06659939455095863
-			average accuracy: 0.21311470789523423
+			Trial MCC: 0.0
+				accuracy: 0.374910394265233
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[523   0]
+					[872   0]
+			Trial MCC: 0.0
+				accuracy: 0.29191090269636577
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[249   0]
+					[604   0]
+			Trial MCC: 0.0
+				accuracy: 0.075046904315197
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[40  0]
+					[493   0]
+			Average Accuracy: 0.24728940042559858
+			Average MCC: 0.0
 
 	C: 0.015625
 		gamma: 0.00390625
-			accuracy: 0.2932761087267525
-			accuracy: 0.5435294117647059
-			accuracy: 0.5141414141414141
-			average accuracy: 0.45031564487762415
+			Trial MCC: -0.26783584539812866
+				accuracy: 0.2550930026572188
+				precision: 0.2260061919504644
+				recall: 0.7064516129032258
+				f1: 0.3424550430023455
+				confusion matrix: 
+					[ 69 750]
+					[ 91 219]
+			Trial MCC: 0.0
+				accuracy: 0.3198473282442748
+				precision: 0.3198473282442748
+				recall: 1.0
+				f1: 0.48467322151532677
+				confusion matrix: 
+					[  0 891]
+					[  0 419]
+			Trial MCC: -0.18576467797713772
+				accuracy: 0.3215962441314554
+				precision: 0.29704797047970477
+				recall: 0.7540983606557377
+				f1: 0.4262078093977498
+				confusion matrix: 
+					[ 89 762]
+					[105 322]
+			Average Accuracy: 0.298845525010983
+			Average MCC: -0.15120017445842213
 
 		gamma: 0.0139202924709428
-			accuracy: 0.45380710659898477
-			accuracy: 0.2530009233610342
-			accuracy: 0.5299145299145299
-			average accuracy: 0.4122408532915163
+			Trial MCC: 0.0
+				accuracy: 0.34890965732087226
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[336   0]
+					[627   0]
+			Trial MCC: 0.05724569072179001
+				accuracy: 0.28019925280199254
+				precision: 0.27386934673366836
+				recall: 1.0
+				f1: 0.4299802761341223
+				confusion matrix: 
+					[  7 578]
+					[  0 218]
+			Trial MCC: -0.12217900889482035
+				accuracy: 0.5407725321888412
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[378  13]
+					[308   0]
+			Average Accuracy: 0.3899604807705687
+			Average MCC: -0.02164443939101011
 
 		gamma: 0.049606282874006216
-			accuracy: 0.3049907578558225
-			accuracy: 0.4833948339483395
-			accuracy: 0.2721217887725975
-			average accuracy: 0.3535024601922532
+			Trial MCC: 0.0
+				accuracy: 0.4229390681003584
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[472   0]
+					[644   0]
+			Trial MCC: 0.0
+				accuracy: 0.4767691208005718
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[667   0]
+					[732   0]
+			Trial MCC: -0.1496061594301852
+				accuracy: 0.4248046875
+				precision: 0.38076923076923075
+				recall: 0.4258064516129032
+				f1: 0.4020304568527918
+				confusion matrix: 
+					[237 322]
+					[267 198]
+			Average Accuracy: 0.4415042921336434
+			Average MCC: -0.04986871981006174
 
 		gamma: 0.1767766952966369
-			accuracy: 0.09270516717325228
-			accuracy: 0.3902932254802831
-			accuracy: 0.5557011795543906
-			average accuracy: 0.3462331907359753
+			Trial MCC: 0.0
+				accuracy: 0.2955665024630542
+				precision: 0.2955665024630542
+				recall: 1.0
+				f1: 0.45627376425855515
+				confusion matrix: 
+					[  0 858]
+					[  0 360]
+			Trial MCC: 0.0
+				accuracy: 0.2712765957446808
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[306   0]
+					[822   0]
+			Trial MCC: 0.0
+				accuracy: 0.3400211193241816
+				precision: 0.3400211193241816
+				recall: 1.0
+				f1: 0.5074862096138691
+				confusion matrix: 
+					[  0 625]
+					[  0 322]
+			Average Accuracy: 0.3022880725106389
+			Average MCC: 0.0
 
 		gamma: 0.6299605249474365
-			accuracy: 0.5185185185185185
-			accuracy: 0.22851002865329512
-			accuracy: 0.3887673231218089
-			average accuracy: 0.37859862343120754
+			Trial MCC: 0.0
+				accuracy: 0.12652608213096558
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[114   0]
+					[787   0]
+			Trial MCC: -0.46978200837835193
+				accuracy: 0.2558613659531091
+				precision: 0.2809587217043941
+				recall: 0.5261845386533666
+				f1: 0.3663194444444444
+				confusion matrix: 
+					[ 40 540]
+					[190 211]
+			Trial MCC: 0.0
+				accuracy: 0.3984287317620651
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[355   0]
+					[536   0]
+			Average Accuracy: 0.2602720599487132
+			Average MCC: -0.156594002792784
 
 		gamma: 2.244924096618745
-			accuracy: 0.06752873563218391
-			accuracy: 0.32
-			accuracy: 0.5130434782608696
-			average accuracy: 0.3001907379643512
+			Trial MCC: 0.0
+				accuracy: 0.012195121951219513
+				precision: 0.012195121951219513
+				recall: 1.0
+				f1: 0.024096385542168676
+				confusion matrix: 
+					[   0 1134]
+					[ 0 14]
+			Trial MCC: 0.0
+				accuracy: 0.17765567765567766
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[97  0]
+					[449   0]
+			Trial MCC: 0.0
+				accuracy: 0.1983739837398374
+				precision: 0.1983739837398374
+				recall: 1.0
+				f1: 0.3310719131614654
+				confusion matrix: 
+					[  0 986]
+					[  0 244]
+			Average Accuracy: 0.1294082611155782
+			Average MCC: 0.0
 
 		gamma: 8.0
-			accuracy: 0.266162310866575
-			accuracy: 0.47478070175438597
-			accuracy: 0.45535714285714285
-			average accuracy: 0.3987667184927013
+			Trial MCC: 0.0
+				accuracy: 0.3605236656596173
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[358   0]
+					[635   0]
+			Trial MCC: 0.0
+				accuracy: 0.22560335781741866
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[215   0]
+					[738   0]
+			Trial MCC: 0.0
+				accuracy: 0.3725
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[447   0]
+					[753   0]
+			Average Accuracy: 0.319542341159012
+			Average MCC: 0.0
 
 		gamma: 0.0078125
-			accuracy: 0.28187919463087246
-			accuracy: 0.49129852744310576
-			accuracy: 0.4869067103109656
-			average accuracy: 0.42002814412831463
+			Trial MCC: -0.4296623208884388
+				accuracy: 0.34933333333333333
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[393 182]
+					[550   0]
+			Trial MCC: 0.0
+				accuracy: 0.31727272727272726
+				precision: 0.31727272727272726
+				recall: 1.0
+				f1: 0.481711525189786
+				confusion matrix: 
+					[  0 751]
+					[  0 349]
+			Trial MCC: 0.04992478195498703
+				accuracy: 0.510840108401084
+				precision: 0.45248868778280543
+				recall: 0.6269592476489029
+				f1: 0.5256241787122208
+				confusion matrix: 
+					[177 242]
+					[119 200]
+			Average Accuracy: 0.3924820563357148
+			Average MCC: -0.12657917964448392
 
 	C: 0.0625
 		gamma: 0.00390625
-			accuracy: 0.5239005736137667
-			accuracy: 0.09966777408637874
-			accuracy: 0.2038095238095238
-			average accuracy: 0.2757926238365564
+			Trial MCC: 0.0
+				accuracy: 0.2099712368168744
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[219   0]
+					[824   0]
+			Trial MCC: 0.0
+				accuracy: 0.3103756708407871
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[347   0]
+					[771   0]
+			Trial MCC: -0.20225835577862417
+				accuracy: 0.30912659470068693
+				precision: 0.15211267605633802
+				recall: 0.5142857142857142
+				f1: 0.23478260869565218
+				confusion matrix: 
+					[207 602]
+					[102 108]
+			Average Accuracy: 0.2764911674527828
+			Average MCC: -0.06741945192620806
 
 		gamma: 0.0139202924709428
-			accuracy: 0.39578713968957874
-			accuracy: 0.43373493975903615
-			accuracy: 0.3774422735346359
-			average accuracy: 0.4023214509944169
+			Trial MCC: 0.0
+				accuracy: 0.31496062992125984
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[320   0]
+					[696   0]
+			Trial MCC: 0.0
+				accuracy: 0.24118207816968543
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[253   0]
+					[796   0]
+			Trial MCC: 0.0
+				accuracy: 0.18506493506493507
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[114   0]
+					[502   0]
+			Average Accuracy: 0.24706921438529342
+			Average MCC: 0.0
 
 		gamma: 0.049606282874006216
-			accuracy: 0.16748768472906403
-			accuracy: 0.3953488372093023
-			accuracy: 0.4072476272648835
-			average accuracy: 0.3233613830677499
+			Trial MCC: 0.4109214191783222
+				accuracy: 0.5825242718446602
+				precision: 0.4145234493192133
+				recall: 1.0
+				f1: 0.586096256684492
+				confusion matrix: 
+					[266 387]
+					[  0 274]
+			Trial MCC: -0.07618551256420744
+				accuracy: 0.4641350210970464
+				precision: 0.4727272727272727
+				recall: 0.6610169491525424
+				f1: 0.5512367491166078
+				confusion matrix: 
+					[ 96 261]
+					[120 234]
+			Trial MCC: 0.037621935456357204
+				accuracy: 0.09648127128263337
+				precision: 0.01728395061728395
+				recall: 1.0
+				f1: 0.03398058252427184
+				confusion matrix: 
+					[ 71 796]
+					[ 0 14]
+			Average Accuracy: 0.38104685474144656
+			Average MCC: 0.12411928069015733
 
 		gamma: 0.1767766952966369
-			accuracy: 0.41227229146692235
-			accuracy: 0.5626043405676127
-			accuracy: 0.510221465076661
-			average accuracy: 0.4950326990370653
+			Trial MCC: -0.20287582726839562
+				accuracy: 0.32765151515151514
+				precision: 0.2714819427148194
+				recall: 0.6355685131195336
+				f1: 0.38045375218150085
+				confusion matrix: 
+					[128 585]
+					[125 218]
+			Trial MCC: -0.22891917327009284
+				accuracy: 0.42115572967678744
+				precision: 0.25120772946859904
+				recall: 0.10655737704918032
+				f1: 0.14964028776978416
+				confusion matrix: 
+					[378 155]
+					[436  52]
+			Trial MCC: 0.11350484906603897
+				accuracy: 0.5424013434089001
+				precision: 0.6142506142506142
+				recall: 0.39184952978056425
+				f1: 0.4784688995215311
+				confusion matrix: 
+					[396 157]
+					[388 250]
+			Average Accuracy: 0.4304028627457342
+			Average MCC: -0.10609671715748316
 
 		gamma: 0.6299605249474365
-			accuracy: 0.13220675944333996
-			accuracy: 0.4652833200319234
-			accuracy: 0.259105098855359
-			average accuracy: 0.28553172611020744
+			Trial MCC: -0.15017990741719636
+				accuracy: 0.4346123727486296
+				precision: 0.037037037037037035
+				recall: 0.0014347202295552368
+				f1: 0.0027624309392265197
+				confusion matrix: 
+					[554  26]
+					[696   1]
+			Trial MCC: -0.038805436050855735
+				accuracy: 0.3798994974874372
+				precision: 0.5161290322580645
+				recall: 0.025889967637540454
+				f1: 0.04930662557781202
+				confusion matrix: 
+					[362  15]
+					[602  16]
+			Trial MCC: 0.02802116307077132
+				accuracy: 0.23357664233576642
+				precision: 0.85
+				recall: 0.05167173252279635
+				f1: 0.09742120343839543
+				confusion matrix: 
+					[79  3]
+					[312  17]
+			Average Accuracy: 0.34936283752394437
+			Average MCC: -0.05365472679909359
 
 		gamma: 2.244924096618745
-			accuracy: 0.23666666666666666
-			accuracy: 0.40525838621940163
-			accuracy: 0.3137472283813747
-			average accuracy: 0.31855742708914764
+			Trial MCC: 0.0
+				accuracy: 0.23319755600814665
+				precision: 0.23319755600814665
+				recall: 1.0
+				f1: 0.3781998348472337
+				confusion matrix: 
+					[  0 753]
+					[  0 229]
+			Trial MCC: 0.0
+				accuracy: 0.05013927576601671
+				precision: 0.05013927576601671
+				recall: 1.0
+				f1: 0.09549071618037136
+				confusion matrix: 
+					[  0 682]
+					[ 0 36]
+			Trial MCC: 0.0
+				accuracy: 0.012453300124533
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[10  0]
+					[793   0]
+			Average Accuracy: 0.09859671063289878
+			Average MCC: 0.0
 
 		gamma: 8.0
-			accuracy: 0.4034034034034034
-			accuracy: 0.4292565947242206
-			accuracy: 0.27015057573073514
-			average accuracy: 0.36760352461945306
+			Trial MCC: -0.18478377130570026
+				accuracy: 0.33158995815899583
+				precision: 0.3306818181818182
+				recall: 0.8533724340175953
+				f1: 0.47665847665847666
+				confusion matrix: 
+					[ 26 589]
+					[ 50 291]
+			Trial MCC: 0.048534450015632224
+				accuracy: 0.25444839857651247
+				precision: 1.0
+				recall: 0.009456264775413711
+				f1: 0.01873536299765808
+				confusion matrix: 
+					[139   0]
+					[419   4]
+			Trial MCC: 0.0
+				accuracy: 0.23479729729729729
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[139   0]
+					[453   0]
+			Average Accuracy: 0.27361188467760184
+			Average MCC: -0.04541644043002268
 
 		gamma: 0.0078125
-			accuracy: 0.21945432977461446
-			accuracy: 0.21936459909228442
-			accuracy: 0.48896434634974534
-			average accuracy: 0.3092610917388814
+			Trial MCC: -0.22173557826083454
+				accuracy: 0.25766871165644173
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[168  12]
+					[472   0]
+			Trial MCC: 0.26534333829440127
+				accuracy: 0.5858895705521472
+				precision: 0.5064516129032258
+				recall: 0.8532608695652174
+				f1: 0.6356275303643725
+				confusion matrix: 
+					[293 459]
+					[ 81 471]
+			Trial MCC: 0.03710181018305038
+				accuracy: 0.4363507779349364
+				precision: 0.368755676657584
+				recall: 0.7992125984251969
+				f1: 0.5046612802983219
+				confusion matrix: 
+					[211 695]
+					[102 406]
+			Average Accuracy: 0.42663635338117506
+			Average MCC: 0.026903190072205704
 
 	C: 0.25
 		gamma: 0.00390625
-			accuracy: 0.32068965517241377
-			accuracy: 0.42555831265508687
-			accuracy: 0.3911719939117199
-			average accuracy: 0.3791399872464069
+			Trial MCC: 0.03396897254923203
+				accuracy: 0.44964539007092197
+				precision: 1.0
+				recall: 0.002570694087403599
+				f1: 0.005128205128205128
+				confusion matrix: 
+					[316   0]
+					[388   1]
+			Trial MCC: 0.26715128405801225
+				accuracy: 0.5022789425706472
+				precision: 0.42735042735042733
+				recall: 0.975609756097561
+				f1: 0.5943536404160474
+				confusion matrix: 
+					[151 536]
+					[ 10 400]
+			Trial MCC: -0.3625371488579298
+				accuracy: 0.15169366715758467
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[103  19]
+					[557   0]
+			Average Accuracy: 0.3678726665997179
+			Average MCC: -0.020472297416895175
 
 		gamma: 0.0139202924709428
-			accuracy: 0.3297394429469901
-			accuracy: 0.45836109260493
-			accuracy: 0.2372528616024974
-			average accuracy: 0.3417844657181392
+			Trial MCC: 0.16577639173862027
+				accuracy: 0.5927272727272728
+				precision: 0.4582210242587601
+				recall: 0.5573770491803278
+				f1: 0.5029585798816568
+				confusion matrix: 
+					[319 201]
+					[135 170]
+			Trial MCC: 0.23936214310397366
+				accuracy: 0.6008935219657483
+				precision: 0.508301404853129
+				recall: 0.7249544626593807
+				f1: 0.5975975975975977
+				confusion matrix: 
+					[409 385]
+					[151 398]
+			Trial MCC: 0.12902421288786406
+				accuracy: 0.5404101326899879
+				precision: 0.2383177570093458
+				recall: 0.6496815286624203
+				f1: 0.3487179487179487
+				confusion matrix: 
+					[346 326]
+					[ 55 102]
+			Average Accuracy: 0.5780103091276697
+			Average MCC: 0.178054249243486
 
 		gamma: 0.049606282874006216
-			accuracy: 0.45095367847411444
-			accuracy: 0.30712788259958074
-			accuracy: 0.45454545454545453
-			average accuracy: 0.4042090052063832
+			Trial MCC: 0.5522158042529798
+				accuracy: 0.7192691029900332
+				precision: 0.5596816976127321
+				recall: 0.985981308411215
+				f1: 0.7140439932318106
+				confusion matrix: 
+					[222 166]
+					[  3 211]
+			Trial MCC: -0.14795834362258464
+				accuracy: 0.4269387755102041
+				precision: 0.38079470198675497
+				recall: 0.4121863799283154
+				f1: 0.3958691910499139
+				confusion matrix: 
+					[293 374]
+					[328 230]
+			Trial MCC: -0.3136945960073144
+				accuracy: 0.33205128205128204
+				precision: 0.34600760456273766
+				recall: 0.20681818181818182
+				f1: 0.25889046941678523
+				confusion matrix: 
+					[168 172]
+					[349  91]
+			Average Accuracy: 0.49275305351717313
+			Average MCC: 0.030187621541026905
 
 		gamma: 0.1767766952966369
-			accuracy: 0.5771889400921659
-			accuracy: 0.4257178526841448
-			accuracy: 0.25736568457538994
-			average accuracy: 0.4200908257839002
+			Trial MCC: -0.21537220497255669
+				accuracy: 0.27232142857142855
+				precision: 0.4032258064516129
+				recall: 0.05241090146750524
+				f1: 0.09276437847866419
+				confusion matrix: 
+					[158  37]
+					[452  25]
+			Trial MCC: 0.012264926422142138
+				accuracy: 0.1843687374749499
+				precision: 0.18382352941176472
+				recall: 1.0
+				f1: 0.31055900621118016
+				confusion matrix: 
+					[   1 1221]
+					[  0 275]
+			Trial MCC: -0.08330719841742422
+				accuracy: 0.30254476908576816
+				precision: 0.3
+				recall: 0.004076086956521739
+				f1: 0.00804289544235925
+				confusion matrix: 
+					[318   7]
+					[733   3]
+			Average Accuracy: 0.25307831171071554
+			Average MCC: -0.09547149232261293
 
 		gamma: 0.6299605249474365
-			accuracy: 0.6200564971751412
-			accuracy: 0.7186495176848875
-			accuracy: 0.4447278911564626
-			average accuracy: 0.5944779686721637
+			Trial MCC: 0.4141010008480372
+				accuracy: 0.7332782824112304
+				precision: 0.5195652173913043
+				recall: 0.7008797653958945
+				f1: 0.5967540574282147
+				confusion matrix: 
+					[649 221]
+					[102 239]
+			Trial MCC: 0.12220160690638364
+				accuracy: 0.3520900321543408
+				precision: 1.0
+				recall: 0.045023696682464455
+				f1: 0.08616780045351474
+				confusion matrix: 
+					[200   0]
+					[403  19]
+			Trial MCC: -0.005471928090796896
+				accuracy: 0.5904872389791184
+				precision: 0.38636363636363635
+				recall: 0.04956268221574344
+				f1: 0.08785529715762273
+				confusion matrix: 
+					[492  27]
+					[326  17]
+			Average Accuracy: 0.5586185178482298
+			Average MCC: 0.17694355988787466
 
 		gamma: 2.244924096618745
-			accuracy: 0.5895372233400402
-			accuracy: 0.4979035639412998
-			accuracy: 0.21289537712895376
-			average accuracy: 0.4334453881367646
+			Trial MCC: -0.18568022022167419
+				accuracy: 0.36380090497737555
+				precision: 0.19607843137254902
+				recall: 0.01488095238095238
+				f1: 0.0276625172890733
+				confusion matrix: 
+					[392  41]
+					[662  10]
+			Trial MCC: -0.15269655294761844
+				accuracy: 0.611969111969112
+				precision: 0.03571428571428571
+				recall: 0.005714285714285714
+				f1: 0.009852216748768473
+				confusion matrix: 
+					[632  54]
+					[348   2]
+			Trial MCC: -0.2578550974965394
+				accuracy: 0.35403726708074534
+				precision: 0.21428571428571427
+				recall: 0.038135593220338986
+				f1: 0.06474820143884893
+				confusion matrix: 
+					[267  66]
+					[454  18]
+			Average Accuracy: 0.4432690946757443
+			Average MCC: -0.19874395688861068
 
 		gamma: 8.0
-			accuracy: 0.2948430493273543
-			accuracy: 0.5753768844221105
-			accuracy: 0.19954389965792474
-			average accuracy: 0.35658794446912984
+			Trial MCC: 0.0
+				accuracy: 0.5365551425030979
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[433   0]
+					[374   0]
+			Trial MCC: 0.06104075599537068
+				accuracy: 0.5159010600706714
+				precision: 1.0
+				recall: 0.007246376811594203
+				f1: 0.014388489208633093
+				confusion matrix: 
+					[580   0]
+					[548   4]
+			Trial MCC: 0.1289008231425912
+				accuracy: 0.5625841184387618
+				precision: 1.0
+				recall: 0.029850746268656716
+				f1: 0.05797101449275362
+				confusion matrix: 
+					[408   0]
+					[325  10]
+			Average Accuracy: 0.5383467736708436
+			Average MCC: 0.06331385971265395
 
 		gamma: 0.0078125
-			accuracy: 0.1776061776061776
-			accuracy: 0.48783783783783785
-			accuracy: 0.5349544072948328
-			average accuracy: 0.40013280757961606
+			Trial MCC: -0.22580668429059728
+				accuracy: 0.5043782837127846
+				precision: 0.07272727272727272
+				recall: 0.01694915254237288
+				f1: 0.027491408934707907
+				confusion matrix: 
+					[284  51]
+					[232   4]
+			Trial MCC: 0.12026665147339063
+				accuracy: 0.41518578352180935
+				precision: 0.3422562141491396
+				recall: 0.9086294416243654
+				f1: 0.4972222222222222
+				confusion matrix: 
+					[ 78 344]
+					[ 18 179]
+			Trial MCC: -0.1249437932350934
+				accuracy: 0.40378197997775306
+				precision: 0.35384615384615387
+				recall: 0.04448742746615087
+				f1: 0.07903780068728523
+				confusion matrix: 
+					[340  42]
+					[494  23]
+			Average Accuracy: 0.44111534907078237
+			Average MCC: -0.07682794201743336
 
 	C: 1.0
 		gamma: 0.00390625
-			accuracy: 0.27882599580712786
-			accuracy: 0.3011542497376705
-			accuracy: 0.546875
-			average accuracy: 0.3756184151815995
+			Trial MCC: -0.6230717828376605
+				accuracy: 0.18779904306220097
+				precision: 0.233502538071066
+				recall: 0.19616204690831557
+				f1: 0.21320973348783318
+				confusion matrix: 
+					[ 65 302]
+					[377  92]
+			Trial MCC: 0.26387700543462633
+				accuracy: 0.42250740375123397
+				precision: 0.3010752688172043
+				recall: 1.0
+				f1: 0.4628099173553719
+				confusion matrix: 
+					[176 585]
+					[  0 252]
+			Trial MCC: -0.05719691238389659
+				accuracy: 0.44221698113207547
+				precision: 0.35471698113207545
+				recall: 0.5893416927899686
+				f1: 0.4428739693757362
+				confusion matrix: 
+					[187 342]
+					[131 188]
+			Average Accuracy: 0.35084114264850347
+			Average MCC: -0.13879722992897692
 
 		gamma: 0.0139202924709428
-			accuracy: 0.3464180569185476
-			accuracy: 0.514052583862194
-			accuracy: 0.28004956629491945
-			average accuracy: 0.3801734023585537
+			Trial MCC: -0.030518075223475674
+				accuracy: 0.3129432624113475
+				precision: 0.5454545454545454
+				recall: 0.007731958762886598
+				f1: 0.015247776365946633
+				confusion matrix: 
+					[347   5]
+					[770   6]
+			Trial MCC: -0.07063427085379571
+				accuracy: 0.4589403973509934
+				precision: 0.453416149068323
+				recall: 0.1855146124523507
+				f1: 0.26330027051397653
+				confusion matrix: 
+					[547 176]
+					[641 146]
+			Trial MCC: -0.024174719049259462
+				accuracy: 0.32222222222222224
+				precision: 0.5555555555555556
+				recall: 0.0068212824010914054
+				f1: 0.013477088948787063
+				confusion matrix: 
+					[343   4]
+					[728   5]
+			Average Accuracy: 0.364701960661521
+			Average MCC: -0.04177568837551029
 
 		gamma: 0.049606282874006216
-			accuracy: 0.27110694183864914
-			accuracy: 0.050359712230215826
-			accuracy: 0.4471264367816092
-			average accuracy: 0.25619769695015804
+			Trial MCC: -0.1143836817776263
+				accuracy: 0.45202952029520294
+				precision: 0.3482142857142857
+				recall: 0.06964285714285715
+				f1: 0.11607142857142859
+				confusion matrix: 
+					[451  73]
+					[521  39]
+			Trial MCC: -0.05856804816289102
+				accuracy: 0.4059171597633136
+				precision: 0.5657142857142857
+				recall: 0.18857142857142858
+				f1: 0.28285714285714286
+				confusion matrix: 
+					[244  76]
+					[426  99]
+			Trial MCC: -0.18956683267161045
+				accuracy: 0.41368421052631577
+				precision: 0.33796296296296297
+				recall: 0.14989733059548255
+				f1: 0.20768136557610242
+				confusion matrix: 
+					[320 143]
+					[414  73]
+			Average Accuracy: 0.42387696352827736
+			Average MCC: -0.12083952087070926
 
 		gamma: 0.1767766952966369
-			accuracy: 0.6440037771482531
-			accuracy: 0.5929919137466307
-			accuracy: 0.7428288822947576
-			average accuracy: 0.6599415243965471
+			Trial MCC: -0.29756044826733047
+				accuracy: 0.18478260869565216
+				precision: 0.559322033898305
+				recall: 0.09579100145137881
+				f1: 0.16356877323420072
+				confusion matrix: 
+					[87 52]
+					[623  66]
+			Trial MCC: 0.041206524279869726
+				accuracy: 0.5279329608938548
+				precision: 0.5185185185185185
+				recall: 0.2441860465116279
+				f1: 0.33201581027667987
+				confusion matrix: 
+					[294  78]
+					[260  84]
+			Trial MCC: 0.32821213396936433
+				accuracy: 0.7176724137931034
+				precision: 0.5086505190311419
+				recall: 0.550561797752809
+				f1: 0.5287769784172662
+				confusion matrix: 
+					[519 142]
+					[120 147]
+			Average Accuracy: 0.4767959944608701
+			Average MCC: 0.02395273666063452
 
 		gamma: 0.6299605249474365
-			accuracy: 0.4003322259136213
-			accuracy: 0.3594704684317719
-			accuracy: 0.6194029850746269
-			average accuracy: 0.45973522647334003
+			Trial MCC: 0.410146628507513
+				accuracy: 0.739010989010989
+				precision: 0.43859649122807015
+				recall: 0.7415254237288136
+				f1: 0.5511811023622047
+				confusion matrix: 
+					[632 224]
+					[ 61 175]
+			Trial MCC: 0.05067285638533329
+				accuracy: 0.5247844827586207
+				precision: 0.5806451612903226
+				recall: 0.07982261640798226
+				f1: 0.14035087719298245
+				confusion matrix: 
+					[451  26]
+					[415  36]
+			Trial MCC: -0.0379857394187796
+				accuracy: 0.2916256157635468
+				precision: 0.631578947368421
+				recall: 0.03292181069958848
+				f1: 0.06258148631029989
+				confusion matrix: 
+					[272  14]
+					[705  24]
+			Average Accuracy: 0.5184736958443855
+			Average MCC: 0.1409445818246889
 
 		gamma: 2.244924096618745
-			accuracy: 0.6129032258064516
-			accuracy: 0.5705521472392638
-			accuracy: 0.4552083333333333
-			average accuracy: 0.5462212354596829
+			Trial MCC: 0.00998003992015968
+				accuracy: 0.019762845849802372
+				precision: 1.0
+				recall: 0.00998003992015968
+				f1: 0.019762845849802372
+				confusion matrix: 
+					[5 0]
+					[496   5]
+			Trial MCC: -0.07262187918945921
+				accuracy: 0.32669322709163345
+				precision: 0.5294117647058824
+				recall: 0.039764359351988215
+				f1: 0.07397260273972603
+				confusion matrix: 
+					[301  24]
+					[652  27]
+			Trial MCC: 0.16490654456260617
+				accuracy: 0.6495098039215687
+				precision: 0.675
+				recall: 0.11816192560175055
+				f1: 0.2011173184357542
+				confusion matrix: 
+					[741  26]
+					[403  54]
+			Average Accuracy: 0.33198862562100145
+			Average MCC: 0.03408823509776888
 
 		gamma: 8.0
-			accuracy: 0.6644295302013423
-			accuracy: 0.4395491803278688
-			accuracy: 0.2903225806451613
-			average accuracy: 0.46476709705812413
+			Trial MCC: -0.09469208687810902
+				accuracy: 0.46441947565543074
+				precision: 0.3076923076923077
+				recall: 0.028985507246376812
+				f1: 0.05298013245033112
+				confusion matrix: 
+					[360  27]
+					[402  12]
+			Trial MCC: 0.028059860934114122
+				accuracy: 0.7188703465982028
+				precision: 0.20930232558139536
+				recall: 0.1875
+				f1: 0.1978021978021978
+				confusion matrix: 
+					[533 102]
+					[117  27]
+			Trial MCC: 0.08662223082257507
+				accuracy: 0.43922018348623854
+				precision: 0.8333333333333334
+				recall: 0.039603960396039604
+				f1: 0.07561436672967864
+				confusion matrix: 
+					[363   4]
+					[485  20]
+			Average Accuracy: 0.5408366685799574
+			Average MCC: 0.0066633349595267245
 
 		gamma: 0.0078125
-			accuracy: 0.5102711585866886
-			accuracy: 0.35243243243243244
-			accuracy: 0.4106925880923451
-			average accuracy: 0.42446539303715536
+			Trial MCC: -0.25733659422609007
+				accuracy: 0.4295942720763723
+				precision: 0.04838709677419355
+				recall: 0.0071090047393364926
+				f1: 0.012396694214876033
+				confusion matrix: 
+					[357  59]
+					[419   3]
+			Trial MCC: 0.22128060243381048
+				accuracy: 0.5877926421404682
+				precision: 0.3813291139240506
+				recall: 0.7026239067055393
+				f1: 0.4943589743589743
+				confusion matrix: 
+					[462 391]
+					[102 241]
+			Trial MCC: 0.2552515900697366
+				accuracy: 0.4077306733167082
+				precision: 0.24
+				recall: 1.0
+				f1: 0.3870967741935484
+				confusion matrix: 
+					[177 475]
+					[  0 150]
+			Average Accuracy: 0.4750391958445162
+			Average MCC: 0.073065199425819
 
 	C: 4.0
 		gamma: 0.00390625
-			accuracy: 0.3272377285851781
-			accuracy: 0.2520080321285141
-			accuracy: 0.5119926199261993
-			average accuracy: 0.36374612687996377
+			Trial MCC: -0.07804120202753627
+				accuracy: 0.4854368932038835
+				precision: 0.392
+				recall: 0.14244186046511628
+				f1: 0.208955223880597
+				confusion matrix: 
+					[301  76]
+					[295  49]
+			Trial MCC: -0.07922574603148676
+				accuracy: 0.42746913580246915
+				precision: 0.42424242424242425
+				recall: 0.0577716643741403
+				f1: 0.10169491525423728
+				confusion matrix: 
+					[512  57]
+					[685  42]
+			Trial MCC: -0.0015175545262013717
+				accuracy: 0.49651741293532337
+				precision: 0.39728682170542634
+				recall: 0.5125
+				f1: 0.4475982532751091
+				confusion matrix: 
+					[294 311]
+					[195 205]
+			Average Accuracy: 0.46980781398055865
+			Average MCC: -0.05292816752840813
 
 		gamma: 0.0139202924709428
-			accuracy: 0.5740402193784278
-			accuracy: 0.5784172661870504
-			accuracy: 0.4421148587055606
-			average accuracy: 0.5315241147570129
+			Trial MCC: -0.13139762815290068
+				accuracy: 0.4796215429403202
+				precision: 0.3167701863354037
+				recall: 0.1708542713567839
+				f1: 0.22198041349292708
+				confusion matrix: 
+					[557 220]
+					[495 102]
+			Trial MCC: -0.038569865002877575
+				accuracy: 0.5305343511450382
+				precision: 0.3786008230452675
+				recall: 0.21247113163972287
+				f1: 0.27218934911242604
+				confusion matrix: 
+					[464 151]
+					[341  92]
+			Trial MCC: 0.3843974493843779
+				accuracy: 0.7078228086710651
+				precision: 0.4760820045558087
+				recall: 0.7231833910034602
+				f1: 0.5741758241758241
+				confusion matrix: 
+					[542 230]
+					[ 80 209]
+			Average Accuracy: 0.5726595675854744
+			Average MCC: 0.0714766520761999
 
 		gamma: 0.049606282874006216
-			accuracy: 0.625
-			accuracy: 0.39502762430939226
-			accuracy: 0.6318742985409652
-			average accuracy: 0.5506339742834525
+			Trial MCC: 0.09958007557789253
+				accuracy: 0.6475675675675676
+				precision: 0.2791519434628975
+				recall: 0.39303482587064675
+				f1: 0.3264462809917355
+				confusion matrix: 
+					[520 204]
+					[122  79]
+			Trial MCC: 0.179603203669263
+				accuracy: 0.7329842931937173
+				precision: 0.2753623188405797
+				recall: 0.4175824175824176
+				f1: 0.331877729257642
+				confusion matrix: 
+					[382 100]
+					[53 38]
+			Trial MCC: 0.19611877622662624
+				accuracy: 0.6012345679012345
+				precision: 0.7047619047619048
+				recall: 0.20218579234972678
+				f1: 0.31422505307855625
+				confusion matrix: 
+					[413  31]
+					[292  74]
+			Average Accuracy: 0.6605954762208398
+			Average MCC: 0.1584340184912606
 
 		gamma: 0.1767766952966369
-			accuracy: 0.507380073800738
-			accuracy: 0.5580071174377225
-			accuracy: 0.3090909090909091
-			average accuracy: 0.4581593667764565
+			Trial MCC: -0.12485987376906152
+				accuracy: 0.5139013452914798
+				precision: 0.27167630057803466
+				recall: 0.10151187904967603
+				f1: 0.14779874213836477
+				confusion matrix: 
+					[526 126]
+					[416  47]
+			Trial MCC: 0.04322662323782706
+				accuracy: 0.47175732217573224
+				precision: 0.6231884057971014
+				recall: 0.08237547892720307
+				f1: 0.1455160744500846
+				confusion matrix: 
+					[408  26]
+					[479  43]
+			Trial MCC: -0.19606763657779092
+				accuracy: 0.3717391304347826
+				precision: 0.3888888888888889
+				recall: 0.13011152416356878
+				f1: 0.19498607242339833
+				confusion matrix: 
+					[272 110]
+					[468  70]
+			Average Accuracy: 0.4524659326339982
+			Average MCC: -0.09256696236967514
 
 		gamma: 0.6299605249474365
-			accuracy: 0.5153631284916201
-			accuracy: 0.6416349809885932
-			accuracy: 0.33678756476683935
-			average accuracy: 0.4979285580823509
+			Trial MCC: -0.004695989616362993
+				accuracy: 0.5645161290322581
+				precision: 0.25
+				recall: 0.3617021276595745
+				f1: 0.2956521739130435
+				confusion matrix: 
+					[264 153]
+					[90 51]
+			Trial MCC: -0.1989295822859682
+				accuracy: 0.5023212627669452
+				precision: 0.10227272727272728
+				recall: 0.019313304721030045
+				f1: 0.032490974729241874
+				confusion matrix: 
+					[532  79]
+					[457   9]
+			Trial MCC: -0.04442942171510877
+				accuracy: 0.5164473684210527
+				precision: 0.4
+				recall: 0.16974169741697417
+				f1: 0.2383419689119171
+				confusion matrix: 
+					[268  69]
+					[225  46]
+			Average Accuracy: 0.5277615867400853
+			Average MCC: -0.08268499787247999
 
 		gamma: 2.244924096618745
-			accuracy: 0.5743298131600325
-			accuracy: 0.7020997375328084
-			accuracy: 0.2648401826484018
-			average accuracy: 0.5137565777804142
+			Trial MCC: -0.042270261076767235
+				accuracy: 0.5044802867383512
+				precision: 0.39285714285714285
+				recall: 0.04066543438077634
+				f1: 0.07370184254606364
+				confusion matrix: 
+					[541  34]
+					[519  22]
+			Trial MCC: 0.21441263085171156
+				accuracy: 0.7511415525114156
+				precision: 0.4189189189189189
+				recall: 0.31958762886597936
+				f1: 0.3625730994152047
+				confusion matrix: 
+					[298  43]
+					[66 31]
+			Trial MCC: 0.08055270711380763
+				accuracy: 0.2322015334063527
+				precision: 0.030428769017980636
+				recall: 1.0
+				f1: 0.059060402684563765
+				confusion matrix: 
+					[190 701]
+					[ 0 22]
+			Average Accuracy: 0.49594112421870645
+			Average MCC: 0.08423169229625065
 
 		gamma: 8.0
-			accuracy: 0.29213483146067415
-			accuracy: 0.2861788617886179
-			accuracy: 0.5188679245283019
-			average accuracy: 0.36572720592586466
+			Trial MCC: -0.11326175900814116
+				accuracy: 0.7172523961661342
+				precision: 0.05660377358490566
+				recall: 0.023076923076923078
+				f1: 0.03278688524590164
+				confusion matrix: 
+					[446  50]
+					[127   3]
+			Trial MCC: 0.07308686491382427
+				accuracy: 0.2300556586270872
+				precision: 0.967741935483871
+				recall: 0.034924330616996506
+				f1: 0.06741573033707865
+				confusion matrix: 
+					[218   1]
+					[829  30]
+			Trial MCC: -0.05424032132134661
+				accuracy: 0.3958333333333333
+				precision: 0.5079365079365079
+				recall: 0.057971014492753624
+				f1: 0.1040650406504065
+				confusion matrix: 
+					[329  31]
+					[520  32]
+			Average Accuracy: 0.4477137960421849
+			Average MCC: -0.03147173847188783
 
 		gamma: 0.0078125
-			accuracy: 0.46217616580310883
-			accuracy: 0.4776931447225245
-			accuracy: 0.3457831325301205
-			average accuracy: 0.4285508143519179
+			Trial MCC: -0.23520391134844795
+				accuracy: 0.48220064724919093
+				precision: 0.1284722222222222
+				recall: 0.13909774436090225
+				f1: 0.1335740072202166
+				confusion matrix: 
+					[410 251]
+					[229  37]
+			Trial MCC: 0.08580357603406637
+				accuracy: 0.49800796812749004
+				precision: 0.37183544303797467
+				recall: 0.6871345029239766
+				f1: 0.48254620123203285
+				confusion matrix: 
+					[265 397]
+					[107 235]
+			Trial MCC: 0.1836673003863269
+				accuracy: 0.6112054329371817
+				precision: 0.3831041257367387
+				recall: 0.5752212389380531
+				f1: 0.45990566037735847
+				confusion matrix: 
+					[525 314]
+					[144 195]
+			Average Accuracy: 0.5304713494379542
+			Average MCC: 0.01142232169064844
 
 	C: 16.0
 		gamma: 0.00390625
-			accuracy: 0.13440860215053763
-			accuracy: 0.3550185873605948
-			accuracy: 0.4254079254079254
-			average accuracy: 0.3049450383063526
+			Trial MCC: -0.44101389974388866
+				accuracy: 0.27578215527230593
+				precision: 0.2680722891566265
+				recall: 0.18895966029723993
+				f1: 0.22166874221668745
+				confusion matrix: 
+					[149 243]
+					[382  89]
+			Trial MCC: -0.032093671762405566
+				accuracy: 0.3105906313645621
+				precision: 0.5
+				recall: 0.004431314623338257
+				f1: 0.008784773060029283
+				confusion matrix: 
+					[302   3]
+					[674   3]
+			Trial MCC: -0.045704329290385495
+				accuracy: 0.5018633540372671
+				precision: 0.42105263157894735
+				recall: 0.16976127320954906
+				f1: 0.24196597353497162
+				confusion matrix: 
+					[340  88]
+					[313  64]
+			Average Accuracy: 0.36274538022471176
+			Average MCC: -0.1729373002655599
 
 		gamma: 0.0139202924709428
-			accuracy: 0.4264036418816389
-			accuracy: 0.5383177570093458
-			accuracy: 0.719327731092437
-			average accuracy: 0.5613497099944739
+			Trial MCC: 0.14978783223279826
+				accuracy: 0.527972027972028
+				precision: 0.7
+				recall: 0.2765072765072765
+				f1: 0.3964232488822653
+				confusion matrix: 
+					[320  57]
+					[348 133]
+			Trial MCC: -0.029444125439485352
+				accuracy: 0.6122840690978887
+				precision: 0.2953020134228188
+				recall: 0.1282798833819242
+				f1: 0.17886178861788618
+				confusion matrix: 
+					[594 105]
+					[299  44]
+			Trial MCC: 0.12876334526067792
+				accuracy: 0.6398058252427185
+				precision: 0.436
+				recall: 0.3215339233038348
+				f1: 0.3701188455008489
+				confusion matrix: 
+					[550 141]
+					[230 109]
+			Average Accuracy: 0.5933539741042116
+			Average MCC: 0.08303568401799695
 
 		gamma: 0.049606282874006216
-			accuracy: 0.258751902587519
-			accuracy: 0.4206257242178447
-			accuracy: 0.32957393483709274
-			average accuracy: 0.33631718721415216
+			Trial MCC: 0.24701392934626665
+				accuracy: 0.5443425076452599
+				precision: 0.8407079646017699
+				recall: 0.25333333333333335
+				f1: 0.38934426229508196
+				confusion matrix: 
+					[261  18]
+					[280  95]
+			Trial MCC: 0.29163330849448665
+				accuracy: 0.6778350515463918
+				precision: 0.5034965034965035
+				recall: 0.5714285714285714
+				f1: 0.5353159851301116
+				confusion matrix: 
+					[573 213]
+					[162 216]
+			Trial MCC: 0.25021136149361517
+				accuracy: 0.6690777576853526
+				precision: 0.5331325301204819
+				recall: 0.45618556701030927
+				f1: 0.4916666666666667
+				confusion matrix: 
+					[563 155]
+					[211 177]
+			Average Accuracy: 0.6304184389590014
+			Average MCC: 0.2629528664447895
 
 		gamma: 0.1767766952966369
-			accuracy: 0.33993743482794575
-			accuracy: 0.5280095351609059
-			accuracy: 0.6410256410256411
-			average accuracy: 0.5029908703381643
+			Trial MCC: 0.2665100360260542
+				accuracy: 0.5241809672386896
+				precision: 0.8916666666666667
+				recall: 0.2681704260651629
+				f1: 0.4123314065510597
+				confusion matrix: 
+					[229  13]
+					[292 107]
+			Trial MCC: -0.08044330518105616
+				accuracy: 0.577922077922078
+				precision: 0.25773195876288657
+				recall: 0.0728862973760933
+				f1: 0.11363636363636363
+				confusion matrix: 
+					[509  72]
+					[318  25]
+			Trial MCC: -0.1114171447802809
+				accuracy: 0.5607985480943739
+				precision: 0.23076923076923078
+				recall: 0.10880829015544041
+				f1: 0.14788732394366197
+				confusion matrix: 
+					[288  70]
+					[172  21]
+			Average Accuracy: 0.5543005310850472
+			Average MCC: 0.024883195354905716
 
 		gamma: 0.6299605249474365
-			accuracy: 0.604951560818084
-			accuracy: 0.5460674157303371
-			accuracy: 0.3589076723016905
-			average accuracy: 0.5033088829500372
+			Trial MCC: 0.2930006066322425
+				accuracy: 0.7207661290322581
+				precision: 0.4349315068493151
+				recall: 0.5313807531380753
+				f1: 0.47834274952919026
+				confusion matrix: 
+					[588 165]
+					[112 127]
+			Trial MCC: 0.007990666121488365
+				accuracy: 0.4623955431754875
+				precision: 0.5606060606060606
+				recall: 0.06303236797274275
+				f1: 0.11332312404287903
+				confusion matrix: 
+					[461  29]
+					[550  37]
+			Trial MCC: 0.039696606901787744
+				accuracy: 0.5763157894736842
+				precision: 0.49122807017543857
+				recall: 0.08722741433021806
+				f1: 0.14814814814814814
+				confusion matrix: 
+					[410  29]
+					[293  28]
+			Average Accuracy: 0.5864924872271433
+			Average MCC: 0.11356262655183952
 
 		gamma: 2.244924096618745
-			accuracy: 0.5402521823472357
-			accuracy: 0.3598790322580645
-			accuracy: 0.41675977653631285
-			average accuracy: 0.438963663713871
+			Trial MCC: 0.2122643794813806
+				accuracy: 0.7342657342657343
+				precision: 0.42857142857142855
+				recall: 0.3333333333333333
+				f1: 0.375
+				confusion matrix: 
+					[468  76]
+					[114  57]
+			Trial MCC: -0.08140734398506999
+				accuracy: 0.6058519793459552
+				precision: 0.2
+				recall: 0.031026252983293555
+				f1: 0.053719008264462804
+				confusion matrix: 
+					[691  52]
+					[406  13]
+			Trial MCC: -0.2641017258316306
+				accuracy: 0.5483271375464684
+				precision: 0.0
+				recall: 0.0
+				f1: 0.0
+				confusion matrix: 
+					[295  68]
+					[175   0]
+			Average Accuracy: 0.6294816170527193
+			Average MCC: -0.044414896778439995
 
 		gamma: 8.0
-			accuracy: 0.07295719844357977
-			accuracy: 0.6913145539906104
-			accuracy: 0.4557823129251701
-			average accuracy: 0.40668468845312006
+			Trial MCC: 0.04487605696966721
+				accuracy: 0.3622317596566524
+				precision: 0.3048180924287119
+				recall: 0.8959537572254336
+				f1: 0.4548789435069699
+				confusion matrix: 
+					[112 707]
+					[ 36 310]
+			Trial MCC: 0.018152546322333964
+				accuracy: 0.5606207565470417
+				precision: 0.47368421052631576
+				recall: 0.06
+				f1: 0.10650887573964496
+				confusion matrix: 
+					[551  30]
+					[423  27]
+			Trial MCC: -0.0670873568350078
+				accuracy: 0.6088050314465409
+				precision: 0.24107142857142858
+				recall: 0.1067193675889328
+				f1: 0.14794520547945206
+				confusion matrix: 
+					[457  85]
+					[226  27]
+			Average Accuracy: 0.5105525158834117
+			Average MCC: -0.0013529178476688747
 
 		gamma: 0.0078125
-			accuracy: 0.44739756367663347
-			accuracy: 0.3037475345167653
-			accuracy: 0.7018043684710351
-			average accuracy: 0.4843164888881446
+			Trial MCC: -0.10575207271962835
+				accuracy: 0.5694980694980695
+				precision: 0.22727272727272727
+				recall: 0.11428571428571428
+				f1: 0.1520912547528517
+				confusion matrix: 
+					[550 136]
+					[310  40]
+			Trial MCC: 0.04310205665140415
+				accuracy: 0.5261845386533666
+				precision: 0.496
+				recall: 0.4381625441696113
+				f1: 0.4652908067542214
+				confusion matrix: 
+					[385 252]
+					[318 248]
+			Trial MCC: -0.017798885268474448
+				accuracy: 0.5344827586206896
+				precision: 0.42342342342342343
+				recall: 0.10633484162895927
+				f1: 0.16998191681735988
+				confusion matrix: 
+					[480  64]
+					[395  47]
+			Average Accuracy: 0.5433884555907085
+			Average MCC: -0.026816300445566214
 
 	C: 64.0
 		gamma: 0.00390625
-			accuracy: 0.5726227795193313
-			accuracy: 0.6078286558345642
-			accuracy: 0.4706766917293233
-			average accuracy: 0.550376042361073
+			Trial MCC: -0.24833714634771506
+				accuracy: 0.45135406218655966
+				precision: 0.16721311475409836
+				recall: 0.14825581395348839
+				f1: 0.15716486902927582
+				confusion matrix: 
+					[399 254]
+					[293  51]
+			Trial MCC: 0.26195403647673293
+				accuracy: 0.5842696629213483
+				precision: 0.36650082918739635
+				recall: 0.7809187279151943
+				f1: 0.4988713318284424
+				confusion matrix: 
+					[403 382]
+					[ 62 221]
+			Trial MCC: -0.037308254860266295
+				accuracy: 0.5206407886629698
+				precision: 0.40384615384615385
+				recall: 0.08422459893048129
+				f1: 0.13938053097345132
+				confusion matrix: 
+					[782  93]
+					[685  63]
+			Average Accuracy: 0.5187548379236259
+			Average MCC: -0.007897121577082807
 
 		gamma: 0.0139202924709428
-			accuracy: 0.5054054054054054
-			accuracy: 0.6318289786223278
-			accuracy: 0.5467565290648694
-			average accuracy: 0.5613303043642008
+			Trial MCC: 0.12460434694428658
+				accuracy: 0.530360531309298
+				precision: 0.7
+				recall: 0.1308411214953271
+				f1: 0.22047244094488186
+				confusion matrix: 
+					[489  30]
+					[465  70]
+			Trial MCC: -0.12609750932234645
+				accuracy: 0.4444444444444444
+				precision: 0.288135593220339
+				recall: 0.03505154639175258
+				f1: 0.0625
+				confusion matrix: 
+					[391  42]
+					[468  17]
+			Trial MCC: -0.170180506984376
+				accuracy: 0.46467065868263474
+				precision: 0.27607361963190186
+				recall: 0.12032085561497326
+				f1: 0.16759776536312848
+				confusion matrix: 
+					[343 118]
+					[329  45]
+			Average Accuracy: 0.47982521147879237
+			Average MCC: -0.057224556454145294
 
 		gamma: 0.049606282874006216
-			accuracy: 0.62982689747004
-			accuracy: 0.39493136219640973
-			accuracy: 0.3526530612244898
-			average accuracy: 0.4591371069636465
+			Trial MCC: 0.10417831393587064
+				accuracy: 0.1900138696255201
+				precision: 1.0
+				recall: 0.09316770186335403
+				f1: 0.17045454545454544
+				confusion matrix: 
+					[77  0]
+					[584  60]
+			Trial MCC: 0.07110968949742222
+				accuracy: 0.45153061224489793
+				precision: 0.6888888888888889
+				recall: 0.1336206896551724
+				f1: 0.22382671480144403
+				confusion matrix: 
+					[292  28]
+					[402  62]
+			Trial MCC: -0.20830069648281282
+				accuracy: 0.4481818181818182
+				precision: 0.23952095808383234
+				recall: 0.18475750577367206
+				f1: 0.20860495436766624
+				confusion matrix: 
+					[413 254]
+					[353  80]
+			Average Accuracy: 0.36324210001741203
+			Average MCC: -0.011004231016506652
 
 		gamma: 0.1767766952966369
-			accuracy: 0.7210884353741497
-			accuracy: 0.4668218859138533
-			accuracy: 0.513671875
-			average accuracy: 0.5671940654293343
+			Trial MCC: 0.057992800227979445
+				accuracy: 0.15578947368421053
+				precision: 0.975609756097561
+				recall: 0.09090909090909091
+				f1: 0.16632016632016636
+				confusion matrix: 
+					[34  1]
+					[400  40]
+			Trial MCC: 0.010325347673480065
+				accuracy: 0.45514950166112955
+				precision: 0.5742574257425742
+				recall: 0.08643815201192251
+				f1: 0.15025906735751296
+				confusion matrix: 
+					[490  43]
+					[613  58]
+			Trial MCC: 0.07458750835644468
+				accuracy: 0.633377135348226
+				precision: 0.3672316384180791
+				recall: 0.2801724137931034
+				f1: 0.3178484107579462
+				confusion matrix: 
+					[417 112]
+					[167  65]
+			Average Accuracy: 0.41477203689785536
+			Average MCC: 0.04763521875263473
 
 		gamma: 0.6299605249474365
-			accuracy: 0.5728952772073922
-			accuracy: 0.5399449035812672
-			accuracy: 0.5636070853462157
-			average accuracy: 0.5588157553782916
+			Trial MCC: 0.009997588148194009
+				accuracy: 0.6575342465753424
+				precision: 0.3177570093457944
+				recall: 0.10932475884244373
+				f1: 0.16267942583732056
+				confusion matrix: 
+					[638  73]
+					[277  34]
+			Trial MCC: -0.4246640641705824
+				accuracy: 0.21782178217821782
+				precision: 0.10387984981226533
+				recall: 0.3516949152542373
+				f1: 0.1603864734299517
+				confusion matrix: 
+					[159 716]
+					[153  83]
+			Trial MCC: -0.04369350436994019
+				accuracy: 0.3475533249686324
+				precision: 0.6056338028169014
+				recall: 0.08037383177570094
+				f1: 0.14191419141914194
+				confusion matrix: 
+					[234  28]
+					[492  43]
+			Average Accuracy: 0.4076364512407309
+			Average MCC: -0.1527866601307762
 
 		gamma: 2.244924096618745
-			accuracy: 0.3947681331747919
-			accuracy: 0.33400402414486924
-			accuracy: 0.48214285714285715
-			average accuracy: 0.40363833815417277
+			Trial MCC: 0.2660611226051955
+				accuracy: 0.6
+				precision: 0.8297872340425532
+				recall: 0.222011385199241
+				f1: 0.35029940119760483
+				confusion matrix: 
+					[534  24]
+					[410 117]
+			Trial MCC: -0.07190664032214394
+				accuracy: 0.4977973568281938
+				precision: 0.3448275862068966
+				recall: 0.045662100456621
+				f1: 0.08064516129032258
+				confusion matrix: 
+					[216  19]
+					[209  10]
+			Trial MCC: 0.18408851678486046
+				accuracy: 0.44265232974910396
+				precision: 0.8983050847457628
+				recall: 0.14804469273743018
+				f1: 0.2541966426858513
+				confusion matrix: 
+					[194   6]
+					[305  53]
+			Average Accuracy: 0.5134832288590992
+			Average MCC: 0.126080999689304
 
 		gamma: 8.0
-			accuracy: 0.45068027210884354
-			accuracy: 0.23978919631093545
-			accuracy: 0.5589941972920697
-			average accuracy: 0.41648788857061625
+			Trial MCC: 0.04008846966467487
+				accuracy: 0.3237150586113616
+				precision: 0.8888888888888888
+				recall: 0.010568031704095112
+				f1: 0.020887728459530026
+				confusion matrix: 
+					[351   1]
+					[749   8]
+			Trial MCC: 0.09992517583229255
+				accuracy: 0.6378466557911908
+				precision: 0.7272727272727273
+				recall: 0.03524229074889868
+				f1: 0.06722689075630252
+				confusion matrix: 
+					[383   3]
+					[219   8]
+			Trial MCC: 0.016044864185837705
+				accuracy: 0.5363735070575462
+				precision: 0.49206349206349204
+				recall: 0.07276995305164319
+				f1: 0.12678936605316973
+				confusion matrix: 
+					[463  32]
+					[395  31]
+			Average Accuracy: 0.4993117404866995
+			Average MCC: 0.05201950322760171
 
 		gamma: 0.0078125
-			accuracy: 0.49365750528541225
-			accuracy: 0.5910652920962199
-			accuracy: 0.21206225680933852
-			average accuracy: 0.43226168473032356
+			Trial MCC: 0.029688844914634176
+				accuracy: 0.45828295042321643
+				precision: 0.6075949367088608
+				recall: 0.1032258064516129
+				f1: 0.17647058823529413
+				confusion matrix: 
+					[331  31]
+					[417  48]
+			Trial MCC: 0.05370485944250469
+				accuracy: 0.2985553772070626
+				precision: 0.8387096774193549
+				recall: 0.056768558951965066
+				f1: 0.10633946830265849
+				confusion matrix: 
+					[320  10]
+					[864  52]
+			Trial MCC: -0.010951246906037703
+				accuracy: 0.5058977719528178
+				precision: 0.46994535519125685
+				recall: 0.23497267759562843
+				f1: 0.3132969034608379
+				confusion matrix: 
+					[300  97]
+					[280  86]
+			Average Accuracy: 0.4209120331943656
+			Average MCC: 0.024147485817033725
 
 	C: 256.0
 		gamma: 0.00390625
-			accuracy: 0.5536912751677853
-			accuracy: 0.3825136612021858
-			accuracy: 0.4460352422907489
-			average accuracy: 0.46074672622024
+			Trial MCC: 0.010510781351755457
+				accuracy: 0.4799685781618225
+				precision: 0.5447154471544715
+				recall: 0.09955423476968796
+				f1: 0.16834170854271358
+				confusion matrix: 
+					[544  56]
+					[606  67]
+			Trial MCC: 0.24261106694913595
+				accuracy: 0.6844660194174758
+				precision: 0.47651006711409394
+				recall: 0.4565916398713826
+				f1: 0.4663382594417077
+				confusion matrix: 
+					[563 156]
+					[169 142]
+			Trial MCC: 0.1381890037928788
+				accuracy: 0.599009900990099
+				precision: 0.4961832061068702
+				recall: 0.40372670807453415
+				f1: 0.44520547945205474
+				confusion matrix: 
+					[354 132]
+					[192 130]
+			Average Accuracy: 0.5878148328564657
+			Average MCC: 0.1304369506979234
 
 		gamma: 0.0139202924709428
-			accuracy: 0.4333034914950761
-			accuracy: 0.6512378902045209
-			accuracy: 0.4232299124900557
-			average accuracy: 0.5025904313965509
+			Trial MCC: 0.3257268363886976
+				accuracy: 0.5432220039292731
+				precision: 0.9572192513368984
+				recall: 0.28144654088050314
+				f1: 0.4349939246658566
+				confusion matrix: 
+					[374   8]
+					[457 179]
+			Trial MCC: -0.022021350583092784
+				accuracy: 0.5694444444444444
+				precision: 0.3492647058823529
+				recall: 0.1873767258382643
+				f1: 0.2439024390243903
+				confusion matrix: 
+					[684 177]
+					[412  95]
+			Trial MCC: -0.09177426484314768
+				accuracy: 0.5162755488266465
+				precision: 0.30386740331491713
+				recall: 0.22132796780684105
+				f1: 0.2561117578579744
+				confusion matrix: 
+					[572 252]
+					[387 110]
+			Average Accuracy: 0.5429806657334547
+			Average MCC: 0.07064374032081903
 
 		gamma: 0.049606282874006216
-			accuracy: 0.32186732186732187
-			accuracy: 0.2459605026929982
-			accuracy: 0.5156110615521855
-			average accuracy: 0.36114629537083526
+			Trial MCC: 0.02351314460875238
+				accuracy: 0.5957671957671957
+				precision: 0.3961038961038961
+				recall: 0.1742857142857143
+				f1: 0.2420634920634921
+				confusion matrix: 
+					[502  93]
+					[289  61]
+			Trial MCC: -0.1304421164107175
+				accuracy: 0.5183776932826363
+				precision: 0.24623115577889448
+				recall: 0.17562724014336917
+				f1: 0.20502092050209203
+				confusion matrix: 
+					[360 150]
+					[230  49]
+			Trial MCC: -0.09457183317883788
+				accuracy: 0.17391304347826086
+				precision: 0.7555555555555555
+				recall: 0.06827309236947791
+				f1: 0.1252302025782689
+				confusion matrix: 
+					[66 11]
+					[464  34]
+			Average Accuracy: 0.4293526441760309
+			Average MCC: -0.067166934993601
 
 		gamma: 0.1767766952966369
-			accuracy: 0.7696428571428572
-			accuracy: 0.2554858934169279
-			accuracy: 0.6838124054462935
-			average accuracy: 0.5696470520020261
+			Trial MCC: 0.2239259082014394
+				accuracy: 0.6750330250990753
+				precision: 0.19708029197080293
+				recall: 0.675
+				f1: 0.3050847457627119
+				confusion matrix: 
+					[457 220]
+					[26 54]
+			Trial MCC: 0.17767649592141238
+				accuracy: 0.632965165675446
+				precision: 0.504424778761062
+				recall: 0.3931034482758621
+				f1: 0.4418604651162791
+				confusion matrix: 
+					[574 168]
+					[264 171]
+			Trial MCC: 0.08063043488639468
+				accuracy: 0.19790104947526238
+				precision: 0.971830985915493
+				recall: 0.11461794019933555
+				f1: 0.20505200594353643
+				confusion matrix: 
+					[63  2]
+					[533  69]
+			Average Accuracy: 0.5019664134165945
+			Average MCC: 0.1607442796697488
 
 		gamma: 0.6299605249474365
-			accuracy: 0.4451345755693582
-			accuracy: 0.20575022461814915
-			accuracy: 0.4853658536585366
-			average accuracy: 0.3787502179486813
+			Trial MCC: 0.06959502515399756
+				accuracy: 0.6595940959409594
+				precision: 0.3836477987421384
+				recall: 0.18373493975903615
+				f1: 0.24847250509164973
+				confusion matrix: 
+					[654  98]
+					[271  61]
+			Trial MCC: 0.06210337646537317
+				accuracy: 0.5766270118964311
+				precision: 0.4222737819025522
+				recall: 0.3382899628252788
+				f1: 0.3756449948400412
+				confusion matrix: 
+					[642 249]
+					[356 182]
+			Trial MCC: -0.09363196189794566
+				accuracy: 0.3996669442131557
+				precision: 0.4632352941176471
+				recall: 0.08860759493670886
+				f1: 0.1487603305785124
+				confusion matrix: 
+					[417  73]
+					[648  63]
+			Average Accuracy: 0.5452960173501821
+			Average MCC: 0.012688813240475027
 
 		gamma: 2.244924096618745
-			accuracy: 0.40827586206896554
-			accuracy: 0.5745192307692307
-			accuracy: 0.28097731239092494
-			average accuracy: 0.42125746840970707
+			Trial MCC: 0.06302208701151366
+				accuracy: 0.5156537753222836
+				precision: 0.625
+				recall: 0.07380073800738007
+				f1: 0.132013201320132
+				confusion matrix: 
+					[520  24]
+					[502  40]
+			Trial MCC: 0.08215417955477859
+				accuracy: 0.5816666666666667
+				precision: 0.7647058823529411
+				recall: 0.025440313111545987
+				f1: 0.04924242424242424
+				confusion matrix: 
+					[685   4]
+					[498  13]
+			Trial MCC: 0.202291754654152
+				accuracy: 0.7678321678321678
+				precision: 0.5
+				recall: 0.19879518072289157
+				f1: 0.28448275862068967
+				confusion matrix: 
+					[516  33]
+					[133  33]
+			Average Accuracy: 0.6217175366070393
+			Average MCC: 0.11582267374014808
 
 		gamma: 8.0
-			accuracy: 0.33515881708652795
-			accuracy: 0.5085995085995086
-			accuracy: 0.44739022369511183
-			average accuracy: 0.4303828497937161
+			Trial MCC: -0.005639397725036081
+				accuracy: 0.3498233215547703
+				precision: 0.625
+				recall: 0.009025270758122744
+				f1: 0.017793594306049824
+				confusion matrix: 
+					[292   3]
+					[549   5]
+			Trial MCC: -0.08864620617873309
+				accuracy: 0.4393939393939394
+				precision: 0.34615384615384615
+				recall: 0.02936378466557912
+				f1: 0.05413533834586467
+				confusion matrix: 
+					[475  34]
+					[595  18]
+			Trial MCC: 0.06802331812825305
+				accuracy: 0.3610859728506787
+				precision: 0.7972972972972973
+				recall: 0.07866666666666666
+				f1: 0.14320388349514562
+				confusion matrix: 
+					[340  15]
+					[691  59]
+			Average Accuracy: 0.38343441126646277
+			Average MCC: -0.008754095258505373
 
 		gamma: 0.0078125
-			accuracy: 0.5427927927927928
-			accuracy: 0.5707964601769911
-			accuracy: 0.5689810640216412
-			average accuracy: 0.560856772330475
+			Trial MCC: -0.14364687823654182
+				accuracy: 0.44626593806921677
+				precision: 0.234375
+				recall: 0.02613240418118467
+				f1: 0.04702194357366771
+				confusion matrix: 
+					[475  49]
+					[559  15]
+			Trial MCC: -0.05319003269393912
+				accuracy: 0.5943738656987296
+				precision: 0.2857142857142857
+				recall: 0.0916030534351145
+				f1: 0.13872832369942198
+				confusion matrix: 
+					[619  90]
+					[357  36]
+			Trial MCC: -0.023587281970422518
+				accuracy: 0.5841121495327103
+				precision: 0.3291139240506329
+				recall: 0.17218543046357615
+				f1: 0.2260869565217391
+				confusion matrix: 
+					[448 106]
+					[250  52]
+			Average Accuracy: 0.5415839844335523
+			Average MCC: -0.07347473096696781
 
 	C: 1024.0
 		gamma: 0.00390625
-			accuracy: 0.40611353711790393
-			accuracy: 0.2727272727272727
-			accuracy: 0.6130346232179226
-			average accuracy: 0.43062514435436644
+			Trial MCC: -0.0593513132779774
+				accuracy: 0.49559748427672956
+				precision: 0.4019607843137255
+				recall: 0.10761154855643044
+				f1: 0.1697722567287785
+				confusion matrix: 
+					[353  61]
+					[340  41]
+			Trial MCC: 0.12890889208355807
+				accuracy: 0.5479704797047971
+				precision: 0.6444444444444445
+				recall: 0.2140221402214022
+				f1: 0.32132963988919666
+				confusion matrix: 
+					[239  32]
+					[213  58]
+			Trial MCC: 0.05992477960291113
+				accuracy: 0.6113902847571189
+				precision: 0.3007915567282322
+				recall: 0.36421725239616615
+				f1: 0.32947976878612717
+				confusion matrix: 
+					[616 265]
+					[199 114]
+			Average Accuracy: 0.5516527495795485
+			Average MCC: 0.04316078613616393
 
 		gamma: 0.0139202924709428
-			accuracy: 0.5293132328308208
-			accuracy: 0.2928436911487759
-			accuracy: 0.3336439888164026
-			average accuracy: 0.3852669709319998
+			Trial MCC: -0.07449186366899908
+				accuracy: 0.5699558173784978
+				precision: 0.2777777777777778
+				recall: 0.07692307692307693
+				f1: 0.12048192771084337
+				confusion matrix: 
+					[367  52]
+					[240  20]
+			Trial MCC: 0.19169469178043047
+				accuracy: 0.6204863669859986
+				precision: 0.5688311688311688
+				recall: 0.3855633802816901
+				f1: 0.459601259181532
+				confusion matrix: 
+					[623 166]
+					[349 219]
+			Trial MCC: -0.04087944874153726
+				accuracy: 0.5541516245487365
+				precision: 0.31125827814569534
+				recall: 0.24736842105263157
+				f1: 0.27565982404692085
+				confusion matrix: 
+					[520 208]
+					[286  94]
+			Average Accuracy: 0.5815312696377443
+			Average MCC: 0.025441126456631376
 
 		gamma: 0.049606282874006216
-			accuracy: 0.742409402546523
-			accuracy: 0.4756554307116105
-			accuracy: 0.5164319248826291
-			average accuracy: 0.5781655860469209
+			Trial MCC: 0.0914142595081505
+				accuracy: 0.42625368731563423
+				precision: 0.7571428571428571
+				recall: 0.12470588235294118
+				f1: 0.21414141414141413
+				confusion matrix: 
+					[236  17]
+					[372  53]
+			Trial MCC: 0.14002199203259036
+				accuracy: 0.43990384615384615
+				precision: 0.8173076923076923
+				recall: 0.15977443609022557
+				f1: 0.2672955974842767
+				confusion matrix: 
+					[281  19]
+					[447  85]
+			Trial MCC: 0.05488300848645507
+				accuracy: 0.6949327817993796
+				precision: 0.3469387755102041
+				recall: 0.12830188679245283
+				f1: 0.18732782369146003
+				confusion matrix: 
+					[638  64]
+					[231  34]
+			Average Accuracy: 0.5203634384229533
+			Average MCC: 0.09543975334239864
 
 		gamma: 0.1767766952966369
-			accuracy: 0.623721881390593
-			accuracy: 0.27801724137931033
-			accuracy: 0.7742690058479532
-			average accuracy: 0.5586693762059523
+			Trial MCC: 0.16528374646605826
+				accuracy: 0.6215864759427828
+				precision: 0.41754385964912283
+				recall: 0.48770491803278687
+				f1: 0.44990548204158787
+				confusion matrix: 
+					[359 166]
+					[125 119]
+			Trial MCC: 0.31913348550525505
+				accuracy: 0.684931506849315
+				precision: 0.5533980582524272
+				recall: 0.5792682926829268
+				f1: 0.5660377358490565
+				confusion matrix: 
+					[665 230]
+					[207 285]
+			Trial MCC: 0.22066788765940384
+				accuracy: 0.5796497080900751
+				precision: 0.7336065573770492
+				recall: 0.2896440129449838
+				f1: 0.41531322505800466
+				confusion matrix: 
+					[516  65]
+					[439 179]
+			Average Accuracy: 0.628722563627391
+			Average MCC: 0.23502837321023906
 
 		gamma: 0.6299605249474365
-			accuracy: 0.7194163860830527
-			accuracy: 0.7504690431519699
-			accuracy: 0.7397020157756354
-			average accuracy: 0.736529148336886
+			Trial MCC: 0.32839841076977866
+				accuracy: 0.697196261682243
+				precision: 0.660377358490566
+				recall: 0.4278728606356968
+				f1: 0.5192878338278931
+				confusion matrix: 
+					[571  90]
+					[234 175]
+			Trial MCC: -0.006591739841459997
+				accuracy: 0.6254980079681275
+				precision: 0.23684210526315788
+				recall: 0.24725274725274726
+				f1: 0.24193548387096775
+				confusion matrix: 
+					[426 145]
+					[137  45]
+			Trial MCC: 0.003141093490189536
+				accuracy: 0.44243070362473347
+				precision: 0.5909090909090909
+				recall: 0.16515426497277677
+				f1: 0.25815602836879437
+				confusion matrix: 
+					[324  63]
+					[460  91]
+			Average Accuracy: 0.5883749910917013
+			Average MCC: 0.10831592147283607
 
 		gamma: 2.244924096618745
-			accuracy: 0.13167701863354037
-			accuracy: 0.48148148148148145
-			accuracy: 0.7037037037037037
-			average accuracy: 0.43895406793957514
+			Trial MCC: 0.16130226329808037
+				accuracy: 0.43640350877192985
+				precision: 0.8695652173913043
+				recall: 0.13745704467353953
+				f1: 0.2373887240356083
+				confusion matrix: 
+					[318  12]
+					[502  80]
+			Trial MCC: 0.05797149882604541
+				accuracy: 0.6193181818181818
+				precision: 0.4393939393939394
+				recall: 0.15025906735751296
+				f1: 0.22393822393822393
+				confusion matrix: 
+					[298  37]
+					[164  29]
+			Trial MCC: 0.48146389005599377
+				accuracy: 0.7460978147762747
+				precision: 0.4723618090452261
+				recall: 0.8468468468468469
+				f1: 0.6064516129032258
+				confusion matrix: 
+					[529 210]
+					[ 34 188]
+			Average Accuracy: 0.6006065017887955
+			Average MCC: 0.23357921739337317
 
 		gamma: 8.0
-			accuracy: 0.24471299093655588
-			accuracy: 0.23259052924791088
-			accuracy: 0.053610503282275714
-			average accuracy: 0.1769713411555808
+			Trial MCC: -0.17163982814771903
+				accuracy: 0.49036402569593146
+				precision: 0.21052631578947367
+				recall: 0.05853658536585366
+				f1: 0.0916030534351145
+				confusion matrix: 
+					[217  45]
+					[193  12]
+			Trial MCC: 0.2661239773298353
+				accuracy: 0.7583732057416268
+				precision: 0.3870967741935484
+				recall: 0.45
+				f1: 0.41618497109826585
+				confusion matrix: 
+					[281  57]
+					[44 36]
+			Trial MCC: -0.07611347723167569
+				accuracy: 0.2248062015503876
+				precision: 0.1791767554479419
+				recall: 0.8705882352941177
+				f1: 0.2971887550200803
+				confusion matrix: 
+					[ 55 678]
+					[ 22 148]
+			Average Accuracy: 0.49118114432931526
+			Average MCC: 0.0061235573168135216
 
 		gamma: 0.0078125
-			accuracy: 0.5028768699654775
-			accuracy: 0.33860045146726864
-			accuracy: 0.6571056062581486
-			average accuracy: 0.49952764256363164
+			Trial MCC: 0.1835164475014036
+				accuracy: 0.5961844197138315
+				precision: 0.5645756457564576
+				recall: 0.5294117647058824
+				f1: 0.5464285714285714
+				confusion matrix: 
+					[222 118]
+					[136 153]
+			Trial MCC: 0.12754764495928536
+				accuracy: 0.5911270983213429
+				precision: 0.5766423357664233
+				recall: 0.21823204419889503
+				f1: 0.3166332665330661
+				confusion matrix: 
+					[414  58]
+					[283  79]
+			Trial MCC: -0.015722475395206725
+				accuracy: 0.4826357969723954
+				precision: 0.48863636363636365
+				recall: 0.07426597582037997
+				f1: 0.12893553223388304
+				confusion matrix: 
+					[499  45]
+					[536  43]
+			Average Accuracy: 0.5566491050025233
+			Average MCC: 0.09844720568849409
 
 	C: 4096.0
 		gamma: 0.00390625
-			accuracy: 0.696969696969697
-			accuracy: 0.6585820895522388
-			accuracy: 0.5523504273504274
-			average accuracy: 0.635967404624121
+			Trial MCC: -0.3174240872986131
+				accuracy: 0.24417009602194786
+				precision: 0.2037037037037037
+				recall: 0.02119460500963391
+				f1: 0.03839441535776614
+				confusion matrix: 
+					[167  43]
+					[508  11]
+			Trial MCC: 0.0893494374912033
+				accuracy: 0.5061845861084682
+				precision: 0.6381909547738693
+				recall: 0.22125435540069685
+				f1: 0.32858990944372574
+				confusion matrix: 
+					[405  72]
+					[447 127]
+			Trial MCC: 0.1861834805130579
+				accuracy: 0.5518453427065027
+				precision: 0.7484276729559748
+				recall: 0.20203735144312393
+				f1: 0.3181818181818182
+				confusion matrix: 
+					[509  40]
+					[470 119]
+			Average Accuracy: 0.4340666749456396
+			Average MCC: -0.013963723098117303
 
 		gamma: 0.0139202924709428
-			accuracy: 0.40264026402640263
-			accuracy: 0.7192796610169492
-			accuracy: 0.6267006802721088
-			average accuracy: 0.5828735351051536
+			Trial MCC: 0.08652103331874508
+				accuracy: 0.3237657864523536
+				precision: 0.863013698630137
+				recall: 0.09813084112149532
+				f1: 0.17622377622377622
+				confusion matrix: 
+					[219  10]
+					[579  63]
+			Trial MCC: -0.1896471906604744
+				accuracy: 0.44638694638694637
+				precision: 0.2358490566037736
+				recall: 0.059665871121718374
+				f1: 0.09523809523809523
+				confusion matrix: 
+					[358  81]
+					[394  25]
+			Trial MCC: 0.01873877558760824
+				accuracy: 0.5531135531135531
+				precision: 0.33993399339933994
+				recall: 0.3828996282527881
+				f1: 0.36013986013986016
+				confusion matrix: 
+					[350 200]
+					[166 103]
+			Average Accuracy: 0.4410887619842844
+			Average MCC: -0.02812912725137369
 
 		gamma: 0.049606282874006216
-			accuracy: 0.5040106951871658
-			accuracy: 0.42037586547972305
-			accuracy: 0.07692307692307693
-			average accuracy: 0.33376987919665524
+			Trial MCC: 0.02739864643684347
+				accuracy: 0.44832826747720367
+				precision: 0.6153846153846154
+				recall: 0.10582010582010581
+				f1: 0.1805869074492099
+				confusion matrix: 
+					[255  25]
+					[338  40]
+			Trial MCC: -0.007216551884726478
+				accuracy: 0.36433365292425696
+				precision: 0.6571428571428571
+				recall: 0.09913793103448276
+				f1: 0.17228464419475653
+				confusion matrix: 
+					[311  36]
+					[627  69]
+			Trial MCC: -0.08302358589211117
+				accuracy: 0.49144914491449143
+				precision: 0.3704918032786885
+				recall: 0.23251028806584362
+				f1: 0.2857142857142857
+				confusion matrix: 
+					[433 192]
+					[373 113]
+			Average Accuracy: 0.43470368843865065
+			Average MCC: -0.02094716377999806
 
 		gamma: 0.1767766952966369
-			accuracy: 0.3443223443223443
-			accuracy: 0.5529531568228105
-			accuracy: 0.5899053627760252
-			average accuracy: 0.49572695464039335
+			Trial MCC: 0.06797324874638679
+				accuracy: 0.4815119145439606
+				precision: 0.6407766990291263
+				recall: 0.19158200290275762
+				f1: 0.2949720670391061
+				confusion matrix: 
+					[454  74]
+					[557 132]
+			Trial MCC: 0.08895280832339322
+				accuracy: 0.1656441717791411
+				precision: 1.0
+				recall: 0.10428100987925357
+				f1: 0.1888667992047714
+				confusion matrix: 
+					[67  0]
+					[816  95]
+			Trial MCC: 0.20482077714498345
+				accuracy: 0.422680412371134
+				precision: 0.9262295081967213
+				recall: 0.20471014492753623
+				f1: 0.33531157270029677
+				confusion matrix: 
+					[215   9]
+					[439 113]
+			Average Accuracy: 0.3566121662314119
+			Average MCC: 0.12058227807158783
 
 		gamma: 0.6299605249474365
-			accuracy: 0.612565445026178
-			accuracy: 0.25240641711229944
-			accuracy: 0.48430873621713316
-			average accuracy: 0.44976019945187024
+			Trial MCC: -0.1867424649746915
+				accuracy: 0.4939879759519038
+				precision: 0.12162162162162163
+				recall: 0.0200445434298441
+				f1: 0.03441682600382409
+				confusion matrix: 
+					[484  65]
+					[440   9]
+			Trial MCC: -0.028975607366177155
+				accuracy: 0.5176470588235295
+				precision: 0.4176470588235294
+				recall: 0.22152886115444617
+				f1: 0.28950050968399593
+				confusion matrix: 
+					[606 198]
+					[499 142]
+			Trial MCC: 0.3094738324402888
+				accuracy: 0.6649214659685864
+				precision: 0.7628865979381443
+				recall: 0.3045267489711934
+				f1: 0.43529411764705883
+				confusion matrix: 
+					[307  23]
+					[169  74]
+			Average Accuracy: 0.5588521669146732
+			Average MCC: 0.031251920033140056
 
 		gamma: 2.244924096618745
-			accuracy: 0.438953488372093
-			accuracy: 0.2758152173913043
-			accuracy: 0.43660418963616315
-			average accuracy: 0.38379096513318683
+			Trial MCC: 0.1820171098543989
+				accuracy: 0.6697936210131332
+				precision: 0.44485294117647056
+				recall: 0.37577639751552794
+				f1: 0.4074074074074074
+				confusion matrix: 
+					[593 151]
+					[201 121]
+			Trial MCC: -0.39128226493081664
+				accuracy: 0.23247232472324722
+				precision: 0.07192982456140351
+				recall: 0.3014705882352941
+				f1: 0.11614730878186968
+				confusion matrix: 
+					[148 529]
+					[95 41]
+			Trial MCC: -0.01397932637052229
+				accuracy: 0.5996488147497805
+				precision: 0.3424657534246575
+				recall: 0.12195121951219512
+				f1: 0.17985611510791366
+				confusion matrix: 
+					[633  96]
+					[360  50]
+			Average Accuracy: 0.5006382534953869
+			Average MCC: -0.07441482714898001
 
 		gamma: 8.0
-			accuracy: 0.05030674846625767
-			accuracy: 0.4243743199129489
-			accuracy: 0.5770975056689343
-			average accuracy: 0.3505928580160469
+			Trial MCC: 0.047355048813506544
+				accuracy: 0.5306122448979592
+				precision: 0.5692307692307692
+				recall: 0.07520325203252033
+				f1: 0.13285457809694795
+				confusion matrix: 
+					[509  28]
+					[455  37]
+			Trial MCC: -0.06189470785147726
+				accuracy: 0.32409972299168976
+				precision: 0.5555555555555556
+				recall: 0.04065040650406504
+				f1: 0.07575757575757576
+				confusion matrix: 
+					[214  16]
+					[472  20]
+			Trial MCC: -0.32801970844734596
+				accuracy: 0.40987654320987654
+				precision: 0.02197802197802198
+				recall: 0.005115089514066497
+				f1: 0.008298755186721992
+				confusion matrix: 
+					[330  89]
+					[389   2]
+			Average Accuracy: 0.4215295036998419
+			Average MCC: -0.1141864558284389
 
 		gamma: 0.0078125
-			accuracy: 0.38306878306878306
-			accuracy: 0.6400817995910021
-			accuracy: 0.6688172043010753
-			average accuracy: 0.5639892623202868
+			Trial MCC: 0.05120596387921789
+				accuracy: 0.5752753977968176
+				precision: 0.49
+				recall: 0.14202898550724638
+				f1: 0.2202247191011236
+				confusion matrix: 
+					[421  51]
+					[296  49]
+			Trial MCC: 0.29637595310230014
+				accuracy: 0.6755102040816326
+				precision: 0.5373961218836565
+				recall: 0.5623188405797102
+				f1: 0.5495750708215298
+				confusion matrix: 
+					[468 167]
+					[151 194]
+			Trial MCC: 0.08524021435589409
+				accuracy: 0.17206132879045996
+				precision: 1.0
+				recall: 0.05631067961165048
+				f1: 0.10661764705882354
+				confusion matrix: 
+					[72  0]
+					[486  29]
+			Average Accuracy: 0.47428231022297007
+			Average MCC: 0.14427404377913736
 
 
 
 ==================================
-best kernel: rbf
-best C: 1024.0
-best gamma: 0.6299605249474365
-best avg accuracy: 0.736529148336886
+best kernel: linear
+best C: 64.0
+best gamma: auto
+best avg accuracy: 0.5378679981102684
+best avg mcc: 0.26561903035773615
 
 
 ==================================
-final training accuracy: 0.98950233281493
-confusion matrix: 
-[1342    2]
-[  25 1203]
+Training Results	MCC: 0.7551087597319203
+	accuracy: 0.8740279937791602
+	precision: 0.8247126436781609
+	recall: 0.9348534201954397
+	f1: 0.8763358778625954
+	confusion matrix: 
+		[1100  244]
+		[  80 1148]
 
 
 ==================================
-final testing accuracy: 0.5278422273781903
-confusion matrix: 
-[384  61]
-[346  71]
-
-
-==================================
-final training accuracy: 0.9961119751166407
-confusion matrix: 
-[1344    0]
-[  10 1218]
-
-
-==================================
-final testing accuracy: 0.5336426914153132
-confusion matrix: 
-[423  22]
-[380  37]
+Test Results	MCC: 0.1857464597529788
+	accuracy: 0.5939675174013921
+	precision: 0.6030769230769231
+	recall: 0.47002398081534774
+	f1: 0.5283018867924528
+	confusion matrix: 
+		[316 129]
+		[221 196]
