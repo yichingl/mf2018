@@ -6,13 +6,15 @@ import numpy as np
 
 labels_train = np.loadtxt("labels.csv",dtype='float');
 
+name = 'allcat_bal.spec.16n_cl.133n_feats.TSNE'
+
 GMM=1;
 # 3d
 if GMM:
 	fig = plt.figure()
 	ax = fig.add_subplot(131,projection='3d');
 	
-	feat_embedded = np.loadtxt("gmm-3d-feat_embedded.csv",dtype='float',delimiter=",");
+	feat_embedded = np.loadtxt(name+".3D.csv",dtype='float',delimiter=",");
 
 	xs = np.asarray(feat_embedded[:,0]);
 	ys = np.asarray(feat_embedded[:,1]);
@@ -134,10 +136,10 @@ else:
 
 # 2d
 if GMM:
-	feat_embedded = np.loadtxt("gmm-2d-feat_embedded.csv",dtype='float',delimiter=",");
+	feat_embedded = np.loadtxt(name+".2D.csv",dtype='float',delimiter=",");
 	plt.scatter(feat_embedded[:, 0], feat_embedded[:, 1], c = labels_train);
 	plt.tight_layout();
-	plt.savefig('../vis/tsne-gmm-spec-2d.png');
+	plt.savefig(name+".2D.jpg");
 	plt.show();
 
 else:
