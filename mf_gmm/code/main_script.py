@@ -44,9 +44,9 @@ if TEST:
 ##############################
 TRAIN_GMM = 1;
 MAKE_SUPERVECTS = 1;  # run this every time new n-feats or ncl
-LEARN_PARAMS = 1; 
-TRAIN_SVM = 1; # must use learn_params together? for now
-CLASSIFY = 1;
+LEARN_PARAMS = 0; 
+TRAIN_SVM = 0; # must use learn_params together? for now
+CLASSIFY = 0;
 
 ##############################
 # AUDIO PARAMETERS
@@ -121,7 +121,7 @@ feat_out = '/home/yichingl/mf/feat_out/';
 # Writing supervect path
 supervect_out = '/home/yichingl/mf/supervect_out/';
 # Saving and reading GMM-UBM path
-gmm_hdf5_filepath = '/home/yichingl/mf/mf2018/mf_gmm/trained_gmms/'+full_name+'.GMM_UBM.hdf5';
+gmm_hdf5_filepath = '../../../trained_gmms/'+full_name+'.GMM_UBM.hdf5';
 # Saving and reading trained SVM
 trained_svm_filepath = '/home/yichingl/mf/mf2018/mf_gmm/trained_svm_gmm/'+full_name+'.GMM_SVM.sav';
 # Saving and reading trained SVM scaler object
