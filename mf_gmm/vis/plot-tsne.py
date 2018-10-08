@@ -24,7 +24,7 @@ if GMM:
 	ax.set_ylabel('Y Label')
 	ax.set_zlabel('Z Label')
 
-	rad_split = 13;
+	rad_split = 10;
 
 	#fig = plt.figure()
 	ax = fig.add_subplot(132,projection='3d');
