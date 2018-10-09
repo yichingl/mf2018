@@ -6,7 +6,24 @@ import numpy as np
 
 labels_train = np.loadtxt("labels.csv",dtype='float');
 
-name = 'allcat_bal.spec.16n_cl.133n_feats.TSNE'
+# Group name
+group_name = 'allcat_bal';
+feat_type = 'spec';
+n_clusters = 16;
+
+if feat_type == 'spec':
+	n_feats = 133;
+	n_timeframes = 669;
+
+elif feat_type == 'mel':
+	n_feats = 128;
+	n_timeframes = 173;
+
+elif feat_type == 'mod':
+	n_feats = 128;
+	n_timeframes = 320;
+full_name = group_name+'.'+feat_type+'.'+str(n_clusters)+'n_cl'+'.'+str(n_feats)+'n_feats';
+name = full_name+'.TSNE';
 
 GMM=1;
 # 3d
