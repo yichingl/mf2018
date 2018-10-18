@@ -132,7 +132,7 @@ sr = 44100; # sampling rate
 clip_duration = 2; # audio clips will split into segments of this duration (in seconds)
 
 # Which features to use (only pick one bc they store to same directory)
-processing_type = 'mod';
+processing_type = 'mel';
 ### EXTRACT FILENAMES CODE
 # Construct pathways
 train_paths = read_train_file(directory_list_filepath); # data input path

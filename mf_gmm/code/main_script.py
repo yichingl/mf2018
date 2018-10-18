@@ -65,7 +65,7 @@ covariance_type = 'diag';
 # SPECGRAM TYPE
 ##############################
 feat_types = ['mod','spec','mel','spec-pca','mel-pca','mod-pca'];
-feat_type = 'mod';
+feat_type = 'mel';
 
 if feat_type == 'spec':
 	#n_feats = 442;

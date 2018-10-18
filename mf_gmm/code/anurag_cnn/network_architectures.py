@@ -11,30 +11,40 @@ class weak_mxh64_1024(nn.Module):
     def __init__(self,nclass,glplfn):
         super(weak_mxh64_1024,self).__init__() 
         self.globalpool = glplfn
+
+        # B1
         self.layer1 = nn.Sequential(nn.Conv2d(1,16,kernel_size=3,padding=1),nn.BatchNorm2d(16),nn.ReLU())
         self.layer2 = nn.Sequential(nn.Conv2d(16,16,kernel_size=3,padding=1),nn.BatchNorm2d(16),nn.ReLU())
         self.layer3 = nn.MaxPool2d(2)
 
+        # B2
         self.layer4 = nn.Sequential(nn.Conv2d(16,32,kernel_size=3,padding=1),nn.BatchNorm2d(32),nn.ReLU())
         self.layer5 = nn.Sequential(nn.Conv2d(32,32,kernel_size=3,padding=1),nn.BatchNorm2d(32),nn.ReLU())
         self.layer6 = nn.MaxPool2d(2)
 
+        # B3
         self.layer7 = nn.Sequential(nn.Conv2d(32,64,kernel_size=3,padding=1),nn.BatchNorm2d(64),nn.ReLU())
         self.layer8 = nn.Sequential(nn.Conv2d(64,64,kernel_size=3,padding=1),nn.BatchNorm2d(64),nn.ReLU())
         self.layer9 = nn.MaxPool2d(2)
 
+        # B4
         self.layer10 = nn.Sequential(nn.Conv2d(64,128,kernel_size=3,padding=1),nn.BatchNorm2d(128),nn.ReLU())
         self.layer11 = nn.Sequential(nn.Conv2d(128,128,kernel_size=3,padding=1),nn.BatchNorm2d(128),nn.ReLU())
         self.layer12 = nn.MaxPool2d(2)
 
+        # B5
         self.layer13 = nn.Sequential(nn.Conv2d(128,256,kernel_size=3,padding=1),nn.BatchNorm2d(256),nn.ReLU())
         self.layer14 = nn.Sequential(nn.Conv2d(256,256,kernel_size=3,padding=1),nn.BatchNorm2d(256),nn.ReLU())
         self.layer15 = nn.MaxPool2d(2) #
 
+        # B6
         self.layer16 = nn.Sequential(nn.Conv2d(256,512,kernel_size=3,padding=1),nn.BatchNorm2d(512),nn.ReLU())
         self.layer17 = nn.MaxPool2d(2) # 
         
+        # F1
         self.layer18 = nn.Sequential(nn.Conv2d(512,1024,kernel_size=2),nn.BatchNorm2d(1024),nn.ReLU())
+        
+        # F2
         self.layer19 = nn.Sequential(nn.Conv2d(1024,nclass,kernel_size=1),nn.Sigmoid())
 
     def forward(self,x):
@@ -57,7 +67,7 @@ class weak_mxh64_1024(nn.Module):
         out = self.layer17(out)
         out = self.layer18(out)
         out1 = self.layer19(out)
-        out = self.globalpool(out1,kernel_size=out1.size()[2:])
+        out = self.globalpool(out1,kernel_size=out1.size()[2:]) # global pooling
         out = out.view(out.size(0),-1)
         return out #,out1
 
