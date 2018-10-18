@@ -8,7 +8,7 @@ labels_train = np.loadtxt("labels.csv",dtype='float');
 
 # Group name
 group_name = 'allcat_bal';
-feat_type = 'spec';
+feat_type = 'mel';
 n_clusters = 16;
 
 if feat_type == 'spec':
